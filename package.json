@@ -12,7 +12,8 @@
     "watch": "bsb -make-world -clean-world -w"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css,md}": ["prettier --write", "git add"],
+    "*.re": ["refmt --in-place", "git add"]
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.2.1",
