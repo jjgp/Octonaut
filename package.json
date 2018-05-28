@@ -6,7 +6,6 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "middleware": "node ./middleware/app.js",
     "precommit": "lint-staged",
     "test": "jest",
     "build": "bsb -make-world -clean-world",
@@ -15,7 +14,6 @@
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
-  "workspaces": ["middleware"],
   "dependencies": {
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
