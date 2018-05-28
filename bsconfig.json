@@ -2,18 +2,14 @@
   "name": "LostKitty",
   "reason": {
     "react-jsx": 2
-  },  
+  },
   "bsc-flags": ["-bs-super-errors"],
-  "bs-dependencies": [
-    "bs-react-native", 
-    "reason-react",
-    "reason-apollo"
+  "bs-dependencies": ["bs-react-native", "reason-react", "reason-apollo"],
+  "ppx-flags": ["graphql_ppx/ppx"],
+  "sources": [
+    {
+      "dir": "re"
+    }
   ],
-  "ppx-flags": [
-    "graphql_ppx/ppx"
-  ],
-  "sources": [{
-    "dir": "re"
-  }],
   "refmt": 3
 }
