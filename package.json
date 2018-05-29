@@ -7,12 +7,13 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "precommit": "lint-staged",
+    "prettier": "prettier --write './**/*.{js,json,jsx,md}'",
     "test": "jest",
     "build": "bsb -make-world -clean-world",
     "watch": "bsb -make-world -clean-world -w"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"],
+    "*.{js,json,jsx,md}": ["prettier --write", "git add"],
     "*.re": ["refmt --in-place", "git add"]
   },
   "dependencies": {
