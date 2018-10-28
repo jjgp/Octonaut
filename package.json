@@ -14,7 +14,11 @@
     "react-native": "0.57.4"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babel-jest": "23.6.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react-native": "^3.5.0",
     "husky": "^1.1.2",
     "jest": "23.6.0",
     "lint-staged": "^7.3.0",
@@ -26,7 +30,12 @@
     "preset": "react-native"
   },
   "lint-staged": {
-    "./**/*.{js,jsx,json}": [
+    "./**/*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "./**/*.{js,jsx}": [
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]

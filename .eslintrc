@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:react-native/all"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "rules": {
+    "react-native/no-color-literals": 1
+  }
+}
+
