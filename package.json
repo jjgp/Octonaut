@@ -6,25 +6,30 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "precommit": "lint-staged",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.4"
+    "react-native": "0.57.4",
+    "react-relay": "^1.6.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-jest": "23.6.0",
+    "babel-plugin-relay": "^1.6.2",
     "eslint": "^5.8.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.5.0",
+    "graphql": "^14.0.2",
     "husky": "^1.1.2",
     "jest": "23.6.0",
     "lint-staged": "^7.3.0",
     "metro-react-native-babel-preset": "0.48.2",
     "prettier": "^1.14.3",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "relay-compiler": "^1.6.2"
   },
   "jest": {
     "preset": "react-native"
