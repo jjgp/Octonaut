@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "LostKitty": {
+      "schemaPath": "schema.graphql",
+      "extensions": {
+        "endpoints": {
+          "default": {
+	    "url": "https://api.github.com/graphql",
+	    "headers": {
+	      "Authorization": "Bearer ${env:GH_ACCESS_TOKEN}"
+	    }
+	  }
+        }
+      }
+    }
+  }
+}
