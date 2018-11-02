@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import Login from "./components/Login";
+import { View } from "react-native";
+import * as Keychain from "react-native-keychain";
+import Authorization from "./containers/Authorization";
 
 export default class App extends Component {
-  render() {
-    return <Login />;
-  }
+  state = {};
+
+  componentDidMount = async () =>
+    this.setState({ hasToken: !!(await Keychain.getGenericPassword()) });
+
+  render = () => {
+    if (typeof this.state.hasToken === "undefined") return null;
+    return this.state.hasToken ? <View /> : <Authorization />;
+  };
 }
