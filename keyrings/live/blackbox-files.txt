@@ -1,1 +1,1 @@
-src/configuration/index.js
+src/common/configuration.js

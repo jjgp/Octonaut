@@ -1,10 +1,14 @@
 import { Buffer } from "buffer";
-import * as Configuration from "../configuration";
+import * as Configuration from "../common/configuration";
 
-export const basic = async (username, password, code) => {
+export const basicAuthorization = (username, password) => {
   let credentials = Buffer.from(`${username}:${password}`).toString("base64");
+  return `Basic ${credentials}`;
+};
+
+export const getOrCreateAuthorization = async (username, password, code) => {
   let headers = new Headers();
-  headers.append("Authorization", `Basic ${credentials}`);
+  headers.append("Authorization", basicAuthorization(username, password));
   headers.append("Content-Type", "application/json");
   code && headers.append("X-GitHub-OTP", code);
 
