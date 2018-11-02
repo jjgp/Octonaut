@@ -1,6 +1,12 @@
-import { basic } from "../";
+import { basicAuthorization, getOrCreateAuthorization } from "../";
 
-describe("basic authentication", () => {
+test("basic authorization", () => {
+  expect(basicAuthorization("username", "password")).toEqual(
+    "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+  );
+});
+
+describe("get or create authorization", () => {
   beforeEach(() => {
     global.Headers = jest.fn(() => ({
       append: jest.fn()
@@ -38,7 +44,11 @@ describe("basic authentication", () => {
       ok: true
     }));
 
-    const response = await basic("username", "password", "code");
+    const response = await getOrCreateAuthorization(
+      "username",
+      "password",
+      "code"
+    );
     assertFetch(fetch);
     expect(response).toEqual({ ok: true });
   });
@@ -48,7 +58,11 @@ describe("basic authentication", () => {
       ok: false
     }));
 
-    const response = await basic("username", "password", "code");
+    const response = await getOrCreateAuthorization(
+      "username",
+      "password",
+      "code"
+    );
     assertFetch(fetch);
     expect(response).toEqual({ ok: false });
   });

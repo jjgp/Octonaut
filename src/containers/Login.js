@@ -1,39 +1,42 @@
 import React from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
-import { basic } from "../authorization";
+import { Button, StyleSheet, View } from "react-native";
+import Input from "../components/Input";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 10
+  }
+});
 
 export default class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    code: "",
-    requires2FA: false
+    code: ""
   };
 
   onPress = () => {
     const { username, password, code } = this.state;
-    basic(username, password, code).then(response => {
-      if (!response.ok) this.setState({ requires2FA: true });
-    });
+    this.props.onSubmit(username, password, code);
   };
 
   render = () => (
     <View style={styles.container}>
-      <TextInput
-        style={styles.textInput}
+      <Input
         selectTextOnFocus={true}
         placeholder={"Username"}
         onChangeText={username => this.setState({ username })}
       />
-      <TextInput
-        style={styles.textInput}
+      <Input
         selectTextOnFocus={true}
         placeholder={"Password"}
         onChangeText={password => this.setState({ password })}
+        secureTextEntry
       />
-      {this.state.requires2FA && (
-        <TextInput
-          style={styles.textInput}
+      {this.props.requires2FA && (
+        <Input
           selectTextOnFocus={true}
           placeholder={"2FA Code"}
           onChangeText={code => this.setState({ code })}
@@ -43,20 +46,3 @@ export default class Login extends React.Component {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 10
-  },
-  textInput: {
-    alignSelf: "stretch",
-    borderWidth: 1,
-    flexDirection: "row",
-    height: 40,
-    justifyContent: "flex-start",
-    margin: 5,
-    paddingHorizontal: 10
-  }
-});
