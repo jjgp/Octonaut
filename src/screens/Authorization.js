@@ -1,7 +1,7 @@
 import React from "react";
 import * as Keychain from "react-native-keychain";
 import { getOrCreateAuthorization } from "../authorization";
-import Login from "./Login";
+import Login from "../components/Login";
 
 export default class Authorization extends React.Component {
   state = {
