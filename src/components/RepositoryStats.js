@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     tintColor: "#767C84"
   },
-  textItems: {
+  text: {
     color: "#767C84",
     fontFamily: "System",
     fontSize: 13,
@@ -48,13 +48,13 @@ const RepositoryStats = ({ stats }) => {
   return (
     <View style={styles.statsView}>
       {color && <View style={[styles.colorView, { backgroundColor: color }]} />}
-      {languageName && <Text style={styles.textItems}>{languageName}</Text>}
+      {languageName && <Text style={styles.text}>{languageName}</Text>}
       <Image style={styles.image} source={require("./img/star.png")} />
-      <Text style={styles.textItems}>{starCount}</Text>
+      <Text style={styles.text}>{starCount}</Text>
       <Image style={styles.image} source={require("./img/fork.png")} />
-      <Text style={styles.textItems}>{forkCount}</Text>
+      <Text style={styles.text}>{forkCount}</Text>
       <Image style={styles.image} source={require("./img/clock.png")} />
-      <Text style={styles.textItems}>{fromNow}</Text>
+      <Text style={styles.text}>{fromNow}</Text>
     </View>
   );
 };
