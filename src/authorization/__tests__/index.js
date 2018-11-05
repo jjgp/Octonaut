@@ -29,7 +29,7 @@ describe("get or create authorization", () => {
     expect(calls[0][1]).toEqual("Basic dXNlcm5hbWU6cGFzc3dvcmQ=");
     expect(calls[1][1]).toEqual("application/json");
     expect(calls[2][1]).toEqual("code");
-    const { scopes } = JSON.parse(configuration.body);
+    const { scopes, fingerprint } = JSON.parse(configuration.body);
     expect(scopes).toEqual([
       "user",
       "repo",
@@ -37,6 +37,7 @@ describe("get or create authorization", () => {
       "notifications",
       "read:org"
     ]);
+    expect(fingerprint).toEqual("1337");
   };
 
   it("succeeds", async () => {

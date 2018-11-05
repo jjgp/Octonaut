@@ -1,4 +1,5 @@
 import { Buffer } from "buffer";
+import DeviceInfo from "react-native-device-info";
 import * as Configuration from "../common/configuration";
 
 export const basicAuthorization = (username, password) => {
@@ -14,7 +15,8 @@ export const getOrCreateAuthorization = async (username, password, code) => {
 
   const body = {
     scopes: ["user", "repo", "gist", "notifications", "read:org"],
-    client_secret: Configuration.GH_CLIENT_SECRET
+    client_secret: Configuration.GH_CLIENT_SECRET,
+    fingerprint: DeviceInfo.getUniqueID()
   };
 
   const url = `https://api.github.com/authorizations/clients/${

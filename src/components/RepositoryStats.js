@@ -7,9 +7,7 @@ const styles = StyleSheet.create({
   statsView: {
     alignContent: "flex-start",
     alignItems: "center",
-    flex: 1,
-    flexDirection: "row",
-    marginBottom: 3
+    flexDirection: "row"
   },
   colorView: {
     borderRadius: 6,

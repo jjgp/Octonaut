@@ -15,16 +15,22 @@ const styles = StyleSheet.create({
     color: "#767C84",
     fontFamily: "System",
     fontSize: 13,
-    marginBottom: 3
+    marginBottom: 5
   },
   name: {
     color: "#1268D1",
     fontFamily: "System",
     fontSize: 16,
     fontWeight: "bold",
-    marginVertical: 3
+    marginBottom: 5
   },
-  repositoryView: { flex: 1, paddingRight: 10 },
+  repositoryView: {
+    flex: 1,
+    paddingBottom: 3,
+    paddingRight: 10,
+    paddingTop: 3,
+    justifyContent: "flex-start"
+  },
   touchable: {
     backgroundColor: "#FFFFFF",
     flex: 1,
@@ -44,7 +50,7 @@ const RepositoryItem = ({ repository }) => {
       <Image style={styles.avatar} source={{ uri: avatarUrl }} />
       <View style={styles.repositoryView}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.description}>{description}</Text>
+        {description && <Text style={styles.description}>{description}</Text>}
         <RepositoryStats stats={repository} />
       </View>
     </TouchableOpacity>
