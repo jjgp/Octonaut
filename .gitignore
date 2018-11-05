@@ -53,7 +53,15 @@ buck-out/
 */fastlane/screenshots
 
 # Bundle artifact
+#
 *.jsbundle
+
+# Relay
+#
+__generated__/
+
+# Blackbox
+#
 /keyrings/live/pubring.gpg~
 /keyrings/live/pubring.kbx~
 /keyrings/live/secring.gpg

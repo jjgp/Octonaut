@@ -1,7 +1,7 @@
 import React from "react";
 import * as Keychain from "react-native-keychain";
 import { getOrCreateAuthorization } from "../authorization";
-import Login from "./Login";
+import Login from "../components/Login";
 
 export default class Authorization extends React.Component {
   state = {
@@ -24,7 +24,7 @@ export default class Authorization extends React.Component {
       let { id, token } = await response.json();
       token
         ? await Authorization.createEntryInKeychain(id.toString(), token)
-        : await Authorization.setExistingInKeychain(id.toString());
+        : await Authorization.setExistingEntryInKeychain(id.toString());
       this.setState({ hasToken: true });
     } else if (response.headers.has("x-github-otp"))
       this.setState({ requires2FA: true });
