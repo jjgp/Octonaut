@@ -3,7 +3,7 @@ import { Button, StyleSheet, View } from "react-native";
 import Input from "../components/Input";
 
 const styles = StyleSheet.create({
-  container: {
+  inputView: {
     flex: 1,
     justifyContent: "center",
     padding: 10
@@ -23,7 +23,7 @@ export default class Login extends React.Component {
   };
 
   render = () => (
-    <View style={styles.container}>
+    <View style={styles.inputView}>
       <Input
         selectTextOnFocus={true}
         placeholder={"Username"}

@@ -5,7 +5,6 @@
   "scripts": {
     "android": "blackbox_postdeploy; react-native run-android",
     "ios": "blackbox_postdeploy; react-native run-ios",
-    "precommit": "lint-staged",
     "relay": "relay-compiler --src ./src --schema ./schema/github.graphql --client-schema ./schema/client.graphql --extensions js jsx",
     "relay-devtools": "relay-devtools",
     "start": "blackbox_postdeploy; node node_modules/react-native/local-cli/cli.js start",
@@ -13,9 +12,12 @@
   },
   "dependencies": {
     "buffer": "^5.2.1",
+    "moment": "^2.22.2",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
+    "react-native-device-info": "^0.24.3",
     "react-native-keychain": "^3.0.0",
+    "react-navigation": "^2.18.2",
     "react-relay": "^1.6.2"
   },
   "devDependencies": {
@@ -34,6 +36,12 @@
     "react-test-renderer": "16.6.0-alpha.8af6728",
     "relay-compiler": "^1.6.2",
     "relay-devtools": "^1.4.0"
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "lint-staged",
+      "pre-push": "yarn test"
+    }
   },
   "jest": {
     "preset": "react-native",
