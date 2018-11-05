@@ -2,6 +2,7 @@ import React from "react";
 import { Image, StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import RepositoryStats from "./RepositoryStats";
+import RepositoryTopics from "./RepositoryTopics";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -51,6 +52,7 @@ const RepositoryItem = ({ repository }) => {
       <View style={styles.repositoryView}>
         <Text style={styles.name}>{name}</Text>
         {description && <Text style={styles.description}>{description}</Text>}
+        <RepositoryTopics topics={repository} />
         <RepositoryStats stats={repository} />
       </View>
     </TouchableOpacity>
@@ -66,6 +68,7 @@ export default createFragmentContainer(
       owner {
         avatarUrl
       }
+      ...RepositoryTopics_topics
       ...RepositoryStats_stats
     }
   `

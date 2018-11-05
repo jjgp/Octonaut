@@ -23,7 +23,7 @@ const query = graphql`
 `;
 
 const styles = StyleSheet.create({
-  searchView: { flex: 1, backgroundColor: "#F6F8FA" }
+  searchView: { backgroundColor: "#F6F8FA", flex: 1, marginTop: 5 }
 });
 
 export default () => (
