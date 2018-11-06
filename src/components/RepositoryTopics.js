@@ -7,23 +7,27 @@ const styles = StyleSheet.create({
   topicsView: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap",
-    marginBottom: 5
+    flexWrap: "wrap"
   }
 });
 
-const RepositoryTopics = ({ topics }) => {
-  const {
-    repositoryTopics: { nodes }
-  } = topics;
-  return nodes.length > 0 ? (
-    <View style={styles.topicsView}>
-      {nodes.map(({ id, topic }) => (
-        <Topic key={id} topic={topic} />
-      ))}
-    </View>
-  ) : null;
-};
+class RepositoryTopics extends React.PureComponent {
+  render = () => {
+    const {
+      style,
+      topics: {
+        repositoryTopics: { nodes }
+      }
+    } = this.props;
+    return nodes.length > 0 ? (
+      <View style={[styles.topicsView, style]}>
+        {nodes.map(({ id, topic }) => (
+          <Topic key={id} topic={topic} />
+        ))}
+      </View>
+    ) : null;
+  };
+}
 
 export default createFragmentContainer(
   RepositoryTopics,

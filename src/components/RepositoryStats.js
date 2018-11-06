@@ -2,12 +2,14 @@ import moment from "moment";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
+import Colors from "../common/colors";
 
 const styles = StyleSheet.create({
   statsView: {
     alignContent: "flex-start",
     alignItems: "center",
-    flexDirection: "row"
+    flexDirection: "row",
+    flexWrap: "wrap"
   },
   colorView: {
     borderRadius: 6,
@@ -20,44 +22,74 @@ const styles = StyleSheet.create({
     marginRight: 3,
     width: 14,
     resizeMode: "contain",
-    tintColor: "#767C84"
+    tintColor: Colors.grey
+  },
+  pair: {
+    alignItems: "center",
+    borderColor: Colors.white,
+    borderBottomWidth: 1,
+    borderRightWidth: 2,
+    borderTopWidth: 1,
+    flexDirection: "row",
+    marginRight: 5
   },
   text: {
-    color: "#767C84",
+    color: Colors.grey,
     fontFamily: "System",
-    fontSize: 13,
-    marginRight: 12
+    fontSize: 13
   }
 });
 
-const RepositoryStats = ({ stats }) => {
-  const {
-    forkCount,
-    languages: {
-      nodes: [
-        language = {},
-        color = language.color,
-        languageName = language.name
-      ]
-    },
-    pushedAt,
-    stargazers: { totalCount: starCount }
-  } = stats;
-  const date = new Date(pushedAt);
-  const fromNow = moment(date).fromNow();
-  return (
-    <View style={styles.statsView}>
-      {color && <View style={[styles.colorView, { backgroundColor: color }]} />}
-      {languageName && <Text style={styles.text}>{languageName}</Text>}
-      <Image style={styles.image} source={require("./img/star.png")} />
-      <Text style={styles.text}>{starCount}</Text>
-      <Image style={styles.image} source={require("./img/fork.png")} />
-      <Text style={styles.text}>{forkCount}</Text>
-      <Image style={styles.image} source={require("./img/clock.png")} />
-      <Text style={styles.text}>{fromNow}</Text>
-    </View>
-  );
-};
+class Pair extends React.PureComponent {
+  render = () => {
+    const {
+      children: [a, b]
+    } = this.props;
+    if (!a && !b) return null;
+    return <View style={styles.pair} {...this.props} />;
+  };
+}
+
+class RepositoryStats extends React.PureComponent {
+  render = () => {
+    const {
+      forkCount,
+      languages: {
+        nodes: [
+          language = {},
+          color = language.color,
+          languageName = language.name
+        ]
+      },
+      pushedAt,
+      stargazers: { totalCount: starCount }
+    } = this.props.stats;
+    const date = new Date(pushedAt);
+    const fromNow = moment(date).fromNow();
+    return (
+      <View style={styles.statsView}>
+        <Pair>
+          {color && (
+            <View style={[styles.colorView, { backgroundColor: color }]} />
+          )}
+          {languageName && <Text style={styles.text}>{languageName}</Text>}
+        </Pair>
+        <Pair>
+          <Image style={styles.image} source={require("./img/star.png")} />
+          <Text style={styles.text}>{starCount}</Text>
+        </Pair>
+        <Pair>
+          <Image style={styles.image} source={require("./img/fork.png")} />
+          <Text style={styles.text}>{forkCount}</Text>
+        </Pair>
+        <Pair>
+          <Image style={styles.image} source={require("./img/clock.png")} />
+          <Text style={styles.text}>{fromNow}</Text>
+        </Pair>
+      </View>
+    );
+  };
+}
 
 export default createFragmentContainer(
   RepositoryStats,

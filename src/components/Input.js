@@ -13,6 +13,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default (Input = props => (
+export default props => (
   <TextInput style={[styles.input, props.styles]} {...props} />
-));
+);

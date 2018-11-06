@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
+import Colors from "../common/colors";
 import RepositoryStats from "./RepositoryStats";
 import RepositoryTopics from "./RepositoryTopics";
 
@@ -9,17 +10,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 5,
     height: 50,
-    margin: 10,
+    marginHorizontal: 10,
     width: 50
   },
   description: {
-    color: "#767C84",
+    color: Colors.grey,
     fontFamily: "System",
     fontSize: 13,
     marginBottom: 5
   },
   name: {
-    color: "#1268D1",
+    color: Colors.blue,
     fontFamily: "System",
     fontSize: 16,
     fontWeight: "bold",
@@ -27,44 +28,46 @@ const styles = StyleSheet.create({
   },
   repositoryView: {
     flex: 1,
-    paddingBottom: 3,
     paddingRight: 10,
-    paddingTop: 3,
     justifyContent: "flex-start"
   },
   touchable: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: Colors.white,
+    borderRadius: 5,
     flex: 1,
     flexDirection: "row",
-    marginBottom: 5
+    paddingVertical: 3
   }
 });
 
-const RepositoryItem = ({ repository }) => {
-  const {
-    description,
-    name,
-    owner: { avatarUrl }
-  } = repository;
-  return (
-    <TouchableOpacity style={styles.touchable}>
-      <Image style={styles.avatar} source={{ uri: avatarUrl }} />
-      <View style={styles.repositoryView}>
-        <Text style={styles.name}>{name}</Text>
-        {description && <Text style={styles.description}>{description}</Text>}
-        <RepositoryTopics topics={repository} />
-        <RepositoryStats stats={repository} />
-      </View>
-    </TouchableOpacity>
-  );
-};
+class RepositoryItem extends React.PureComponent {
+  render = () => {
+    const { repository, style } = this.props;
+    const {
+      description,
+      nameWithOwner,
+      owner: { avatarUrl }
+    } = repository;
+    return (
+      <TouchableOpacity style={[styles.touchable, style]}>
+        <Image style={styles.avatar} source={{ uri: avatarUrl }} />
+        <View style={styles.repositoryView}>
+          <Text style={styles.name}>{nameWithOwner}</Text>
+          {description && <Text style={styles.description}>{description}</Text>}
+          <RepositoryTopics style={{ marginBottom: 5 }} topics={repository} />
+          <RepositoryStats stats={repository} />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+}
 
 export default createFragmentContainer(
   RepositoryItem,
   graphql`
     fragment RepositoryItem_repository on Repository {
       description
-      name
+      nameWithOwner
       owner {
         avatarUrl
       }
