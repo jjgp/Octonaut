@@ -1,7 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { graphql, QueryRenderer } from "react-relay";
+import Colors from "../common/colors";
 import RepositoryItem from "../components/RepositoryItem";
+import SearchBar from "../components/SearchBar";
+import UserBadge from "../components/UserBadge";
 import environment from "../relay/environment";
 
 const query = graphql`
@@ -23,25 +26,52 @@ const query = graphql`
 `;
 
 const styles = StyleSheet.create({
-  searchView: { backgroundColor: "#F6F8FA", flex: 1, marginTop: 5 }
+  barView: { flexDirection: "row", height: 45 },
+  searchView: {
+    backgroundColor: Colors.lightGrey,
+    flex: 1,
+    marginTop: 2
+  }
 });
 
-export default () => (
-  <View style={styles.searchView}>
-    <QueryRenderer
-      environment={environment}
-      query={query}
-      variables={{ search: "felix" }}
-      render={({ error, props }) => {
-        if (!props || error) return null;
-        return (
-          <FlatList
-            data={props.search.nodes}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => <RepositoryItem repository={item} />}
+export default class Search extends React.Component {
+  state = {
+    search: "react"
+  };
+
+  onSubmit = search => this.setState({ search });
+
+  render = () => (
+    <>
+      <View style={styles.barView}>
+        <SearchBar style={{ marginRight: 2 }} onSubmit={this.onSubmit} />
+        <UserBadge />
+      </View>
+      {this.state.search ? (
+        <View style={styles.searchView}>
+          <QueryRenderer
+            environment={environment}
+            query={query}
+            variables={{ search: this.state.search }}
+            render={({ error, props }) => {
+              if (!props || error) return null;
+              return (
+                <FlatList
+                  data={props.search.nodes}
+                  initialNumToRender={20}
+                  keyExtractor={item => item.id}
+                  renderItem={({ item }) => (
+                    <RepositoryItem
+                      style={{ marginBottom: 2 }}
+                      repository={item}
+                    />
+                  )}
+                />
+              );
+            }}
           />
-        );
-      }}
-    />
-  </View>
-);
+        </View>
+      ) : null}
+    </>
+  );
+}

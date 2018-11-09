@@ -1,44 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
+import Topic from "./Topic";
 
 const styles = StyleSheet.create({
-  text: {
-    color: "#1268D1",
-    fontFamily: "System",
-    fontSize: 13
-  },
   topicsView: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap",
-    marginBottom: 5
-  },
-  touchable: {
-    alignContent: "center",
-    backgroundColor: "#F1F8FF",
-    borderWidth: 2,
-    borderColor: "white",
-    borderRadius: 3,
-    flexDirection: "row",
-    padding: 7
+    flexWrap: "wrap"
   }
 });
 
-const RepositoryTopics = ({ topics }) => {
-  const {
-    repositoryTopics: { nodes }
-  } = topics;
-  return nodes.length > 0 ? (
-    <View style={styles.topicsView}>
-      {nodes.map(({ id, topic: { name } }) => (
-        <TouchableOpacity style={styles.touchable} key={id}>
-          <Text style={styles.text}>{name}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  ) : null;
-};
+class RepositoryTopics extends React.PureComponent {
+  render = () => {
+    const {
+      style,
+      topics: {
+        repositoryTopics: { nodes }
+      }
+    } = this.props;
+    return nodes.length > 0 ? (
+      <View style={[styles.topicsView, style]}>
+        {nodes.map(({ id, topic }) => (
+          <Topic key={id} topic={topic} />
+        ))}
+      </View>
+    ) : null;
+  };
+}
 
 export default createFragmentContainer(
   RepositoryTopics,
@@ -48,7 +37,7 @@ export default createFragmentContainer(
         nodes {
           id
           topic {
-            name
+            ...Topic_topic
           }
         }
       }
