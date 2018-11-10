@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import FastImage from "react-native-fast-image";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
 import RepositoryStats from "./RepositoryStats";
@@ -50,7 +51,7 @@ class RepositoryItem extends React.PureComponent {
     } = repository;
     return (
       <TouchableOpacity style={[styles.touchable, style]}>
-        <Image style={styles.avatar} source={{ uri: avatarUrl }} />
+        <FastImage style={styles.avatar} source={{ uri: avatarUrl }} />
         <View style={styles.repositoryView}>
           <Text style={styles.name}>{nameWithOwner}</Text>
           {description && <Text style={styles.description}>{description}</Text>}

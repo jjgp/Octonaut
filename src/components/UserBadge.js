@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import FastImage from "react-native-fast-image";
 import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
 import environment from "../relay/environment";
@@ -15,8 +16,7 @@ const query = graphql`
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: 5,
-    flex: 1,
-    resizeMode: "cover"
+    flex: 1
   },
   view: {
     alignContent: "center",
@@ -35,8 +35,9 @@ export default () => (
       render={({ error, props }) => {
         if (!props || error) return null;
         return (
-          <Image
+          <FastImage
             style={styles.avatar}
+            resizeMode={FastImage.resizeMode.cover}
             source={{ uri: props.viewer.avatarUrl }}
           />
         );

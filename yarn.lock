@@ -6140,6 +6140,11 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-fast-image@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-5.1.0.tgz#df48a638fec71b6226ceff2d78e460aaa8008f4b"
+  integrity sha512-sP1a1nux/8T/wf0vlHfnXlVO5bOiApqHArCycxFt6YbOTToT7I58ibJVxwO66oMzLFrwtfMvinEKJLTLND3vdA==
+
 react-native-keychain@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.0.0.tgz#29da1dfa43c2581f76bf9420914fd38a1558cf18"

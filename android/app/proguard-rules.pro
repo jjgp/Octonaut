@@ -16,6 +16,6 @@
 #   public *;
 #}
 
--keep class com.facebook.crypto.** {
-   *;
-}
+-keep class com.facebook.crypto.** {*;}
+-keep public class com.dylanvann.fastimage.* {*;}
+-keep public class com.dylanvann.fastimage.** {*;}
