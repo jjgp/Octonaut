@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Colors from "../common/colors";
 import Input from "../components/Input";
 
 const styles = StyleSheet.create({
@@ -7,6 +8,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 10
+  },
+  text: {
+    alignSelf: "center",
+    color: Colors.white,
+    fontFamily: "System",
+    fontSize: 16
+  },
+  touchable: {
+    backgroundColor: Colors.blue,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    margin: 5
   }
 });
 
@@ -42,7 +56,9 @@ export default class Login extends React.Component {
           onChangeText={code => this.setState({ code })}
         />
       )}
-      <Button title={"Submit"} onPress={this.onPress} />
+      <TouchableOpacity style={styles.touchable} onPress={this.onPress}>
+        <Text style={styles.text}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 }

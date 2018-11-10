@@ -58,7 +58,6 @@ export default class Search extends React.Component {
               return (
                 <FlatList
                   data={props.search.nodes}
-                  initialNumToRender={20}
                   keyExtractor={item => item.id}
                   renderItem={({ item }) => (
                     <RepositoryItem
