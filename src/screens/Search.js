@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
 import RepositoryItem from "../components/RepositoryItem";
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightGrey,
     flex: 1,
     marginTop: 2
+  },
+  indicatorView: {
+    flex: 1,
+    justifyContent: "center"
   }
 });
 
@@ -54,7 +58,13 @@ export default class Search extends React.Component {
             query={query}
             variables={{ search: this.state.search }}
             render={({ error, props }) => {
-              if (!props || error) return null;
+              if (!props)
+                return (
+                  <View style={styles.indicatorView}>
+                    <ActivityIndicator size="large" />
+                  </View>
+                );
+              if (error) return null;
               return (
                 <FlatList
                   data={props.search.nodes}
