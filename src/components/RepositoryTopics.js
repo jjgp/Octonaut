@@ -33,7 +33,7 @@ export default createFragmentContainer(
   RepositoryTopics,
   graphql`
     fragment RepositoryTopics_topics on Repository {
-      repositoryTopics(first: 5) {
+      repositoryTopics(first: 3) {
         nodes {
           id
           topic {

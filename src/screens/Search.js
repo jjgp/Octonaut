@@ -44,8 +44,8 @@ export default class Search extends React.Component {
   render = () => (
     <>
       <View style={styles.barView}>
-        <SearchBar style={{ marginRight: 2 }} onSubmit={this.onSubmit} />
         <UserBadge />
+        <SearchBar style={{ marginRight: 2 }} onSubmit={this.onSubmit} />
       </View>
       {this.state.search ? (
         <View style={styles.searchView}>

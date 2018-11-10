@@ -15,7 +15,8 @@ const query = graphql`
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: 5,
-    flex: 1
+    flex: 1,
+    resizeMode: "cover"
   },
   view: {
     alignContent: "center",
@@ -35,7 +36,6 @@ export default () => (
         if (!props || error) return null;
         return (
           <Image
-            resizeMode="cover"
             style={styles.avatar}
             source={{ uri: props.viewer.avatarUrl }}
           />

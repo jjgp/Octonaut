@@ -1,8 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../common/colors";
+import Input from "../components/Input";
 
 const styles = StyleSheet.create({
+  input: {
+    flex: 1
+  },
   image: {
     height: 20,
     marginVertical: 5,
@@ -10,20 +14,13 @@ const styles = StyleSheet.create({
     tintColor: Colors.blue,
     width: 20
   },
-  input: {
-    alignSelf: "stretch",
-    color: Colors.grey,
-    flex: 1,
-    fontFamily: "System",
-    fontSize: 16,
-    marginLeft: 10
-  },
   view: {
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
     backgroundColor: Colors.white,
     borderRadius: 5,
+    justifyContent: "center",
     paddingHorizontal: 5
   }
 });
@@ -31,7 +28,7 @@ const styles = StyleSheet.create({
 export default ({ style, onSubmit }) => (
   <View style={[styles.view, style]}>
     <Image style={styles.image} source={require("./img/search.png")} />
-    <TextInput
+    <Input
       style={styles.input}
       onSubmitEditing={event => onSubmit(event.nativeEvent.text)}
     />

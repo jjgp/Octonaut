@@ -10,13 +10,12 @@ const styles = StyleSheet.create({
     color: Colors.grey,
     fontFamily: "System",
     fontSize: 16,
-    height: 40,
     justifyContent: "flex-start",
-    margin: 5,
     paddingHorizontal: 10
   }
 });
 
-export default props => (
-  <TextInput style={[styles.input, props.styles]} {...props} />
-);
+export default props => {
+  const { style, ...rest } = props;
+  return <TextInput style={[styles.input, style]} {...rest} />;
+};

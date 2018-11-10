@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10
   },
+  input: {
+    height: 45,
+    marginVertical: 5
+  },
   text: {
     alignSelf: "center",
     color: Colors.white,
@@ -39,11 +43,13 @@ export default class Login extends React.Component {
   render = () => (
     <View style={styles.inputView}>
       <Input
+        style={styles.input}
         selectTextOnFocus={true}
         placeholder={"Username"}
         onChangeText={username => this.setState({ username })}
       />
       <Input
+        style={styles.input}
         selectTextOnFocus={true}
         placeholder={"Password"}
         onChangeText={password => this.setState({ password })}
@@ -51,6 +57,7 @@ export default class Login extends React.Component {
       />
       {this.props.requires2FA && (
         <Input
+          style={styles.input}
           selectTextOnFocus={true}
           placeholder={"2FA Code"}
           onChangeText={code => this.setState({ code })}
