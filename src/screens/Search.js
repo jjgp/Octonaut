@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Search extends React.Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  };
+
   state = {
     search: "react"
   };
@@ -48,8 +52,8 @@ export default class Search extends React.Component {
   render = () => (
     <>
       <View style={styles.barView}>
-        <UserBadge />
-        <SearchBar style={{ marginRight: 2 }} onSubmit={this.onSubmit} />
+        <UserBadge {...this.props} />
+        <SearchBar style={{ marginLeft: 2 }} onSubmit={this.onSubmit} />
       </View>
       {this.state.search ? (
         <View style={styles.searchView}>
@@ -69,6 +73,7 @@ export default class Search extends React.Component {
                 <FlatList
                   data={props.search.nodes}
                   keyExtractor={item => item.id}
+                  initialNumToRender={50}
                   renderItem={({ item }) => (
                     <RepositoryItem
                       style={{ marginBottom: 2 }}

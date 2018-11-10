@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 40,
     justifyContent: "center",
-    margin: 5
+    marginVertical: 5
   }
 });
 

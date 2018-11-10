@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
 import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flex: 1
   },
-  view: {
+  touchable: {
     alignContent: "center",
     aspectRatio: 1,
     backgroundColor: Colors.white,
@@ -27,8 +27,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default () => (
-  <View style={styles.view}>
+export default ({ navigation }) => (
+  <TouchableOpacity
+    style={styles.touchable}
+    onPress={() => navigation.toggleDrawer()}
+  >
     <QueryRenderer
       environment={environment}
       query={query}
@@ -43,5 +46,5 @@ export default () => (
         );
       }}
     />
-  </View>
+  </TouchableOpacity>
 );
