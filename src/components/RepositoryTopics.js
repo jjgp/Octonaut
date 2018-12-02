@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   topicsView: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    height: 32
   }
 });
 
