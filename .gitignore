@@ -59,10 +59,3 @@ buck-out/
 # Relay
 #
 __generated__/
-
-# Blackbox
-#
-/keyrings/live/pubring.gpg~
-/keyrings/live/pubring.kbx~
-/keyrings/live/secring.gpg
-/src/common/configuration.js
