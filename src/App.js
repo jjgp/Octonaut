@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { SafeAreaView } from "react-native";
 import * as Keychain from "react-native-keychain";
-import { createDrawerNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 import Colors from "./common/colors";
 import Authorization from "./screens/Authorization";
 import Search from "./screens/Search";
@@ -24,7 +24,8 @@ export default class App extends Component {
   render = () => {
     const { hasToken } = this.state;
     if (typeof hasToken === "undefined") return null;
-    const Navigator = createDrawerNavigator(this.screens(), {
+    const Navigator = createStackNavigator(this.screens(), {
+      headerMode: 'none',
       initialRouteName: hasToken ? "search" : "authorization"
     });
 
