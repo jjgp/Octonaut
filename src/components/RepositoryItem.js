@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   rowView: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   touchable: {
     backgroundColor: Colors.white,

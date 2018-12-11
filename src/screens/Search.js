@@ -78,11 +78,15 @@ const query = graphql`
 `;
 
 const styles = StyleSheet.create({
-  barView: { flexDirection: "row", height: 45 },
+  barView: {
+    backgroundColor: Colors.lightGrey,
+    flexDirection: "row",
+    height: 45
+  },
   searchView: {
     backgroundColor: Colors.lightGrey,
     flex: 1,
-    marginTop: 2
+    paddingTop: 2
   },
   indicatorView: {
     flex: 1,

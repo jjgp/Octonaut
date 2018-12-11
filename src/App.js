@@ -25,7 +25,7 @@ export default class App extends Component {
     const { hasToken } = this.state;
     if (typeof hasToken === "undefined") return null;
     const Navigator = createStackNavigator(this.screens(), {
-      headerMode: 'none',
+      headerMode: "none",
       initialRouteName: hasToken ? "search" : "authorization"
     });
 
