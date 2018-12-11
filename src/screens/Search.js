@@ -42,7 +42,7 @@ export default class Search extends React.Component {
                 <FlatList
                   data={props.search.nodes}
                   keyExtractor={item => item.id}
-                  initialNumToRender={50}
+                  initialNumToRender={25}
                   renderItem={({ item }) => (
                     <RepositoryItem
                       style={{ marginBottom: 2 }}
@@ -61,7 +61,7 @@ export default class Search extends React.Component {
 
 const query = graphql`
   query SearchQuery($search: String!, $before: String) {
-    search(first: 50, query: $search, type: REPOSITORY, before: $before) {
+    search(first: 25, query: $search, type: REPOSITORY, before: $before) {
       nodes {
         ... on Repository {
           id
