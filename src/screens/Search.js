@@ -7,37 +7,6 @@ import SearchBar from "../components/SearchBar";
 import UserBadge from "../components/UserBadge";
 import environment from "../relay/environment";
 
-const query = graphql`
-  query SearchQuery($search: String!, $before: String) {
-    search(first: 50, query: $search, type: REPOSITORY, before: $before) {
-      nodes {
-        ... on Repository {
-          id
-          ...RepositoryItem_repository
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-      repositoryCount
-    }
-  }
-`;
-
-const styles = StyleSheet.create({
-  barView: { flexDirection: "row", height: 45 },
-  searchView: {
-    backgroundColor: Colors.lightGrey,
-    flex: 1,
-    marginTop: 2
-  },
-  indicatorView: {
-    flex: 1,
-    justifyContent: "center"
-  }
-});
-
 export default class Search extends React.Component {
   static navigationOptions = {
     drawerLabel: () => null
@@ -89,3 +58,34 @@ export default class Search extends React.Component {
     </>
   );
 }
+
+const query = graphql`
+  query SearchQuery($search: String!, $before: String) {
+    search(first: 50, query: $search, type: REPOSITORY, before: $before) {
+      nodes {
+        ... on Repository {
+          id
+          ...RepositoryItem_repository
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      repositoryCount
+    }
+  }
+`;
+
+const styles = StyleSheet.create({
+  barView: { flexDirection: "row", height: 45 },
+  searchView: {
+    backgroundColor: Colors.lightGrey,
+    flex: 1,
+    marginTop: 2
+  },
+  indicatorView: {
+    flex: 1,
+    justifyContent: "center"
+  }
+});

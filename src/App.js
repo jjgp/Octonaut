@@ -27,6 +27,7 @@ export default class App extends Component {
     const Navigator = createDrawerNavigator(this.screens(), {
       initialRouteName: hasToken ? "search" : "authorization"
     });
+
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGrey }}>
         <Navigator />

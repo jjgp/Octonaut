@@ -3,31 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../common/colors";
 import Input from "../components/Input";
 
-const styles = StyleSheet.create({
-  inputView: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 10
-  },
-  input: {
-    height: 45,
-    marginVertical: 5
-  },
-  text: {
-    alignSelf: "center",
-    color: Colors.white,
-    fontFamily: "System",
-    fontSize: 16
-  },
-  touchable: {
-    backgroundColor: Colors.blue,
-    borderRadius: 5,
-    height: 40,
-    justifyContent: "center",
-    marginVertical: 5
-  }
-});
-
 export default class Login extends React.Component {
   state = {
     username: "",
@@ -69,3 +44,28 @@ export default class Login extends React.Component {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  inputView: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 10
+  },
+  input: {
+    height: 45,
+    marginVertical: 5
+  },
+  text: {
+    alignSelf: "center",
+    color: Colors.white,
+    fontFamily: "System",
+    fontSize: 16
+  },
+  touchable: {
+    backgroundColor: Colors.blue,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginVertical: 5
+  }
+});

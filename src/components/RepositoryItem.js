@@ -6,6 +6,47 @@ import Colors from "../common/colors";
 import RepositoryStats from "./RepositoryStats";
 import RepositoryTopics from "./RepositoryTopics";
 
+class RepositoryItem extends React.PureComponent {
+  render = () => {
+    const { repository, style } = this.props;
+    const {
+      description,
+      nameWithOwner,
+      owner: { avatarUrl }
+    } = repository;
+    return (
+      <TouchableOpacity style={[styles.touchable, style]}>
+        <View style={styles.rowView}>
+          <FastImage style={styles.avatar} source={{ uri: avatarUrl }} />
+          <View style={styles.repositoryView}>
+            <Text style={styles.name}>{nameWithOwner}</Text>
+            {description && (
+              <Text style={styles.description}>{description}</Text>
+            )}
+            <RepositoryTopics style={{ marginBottom: 5 }} topics={repository} />
+            <RepositoryStats stats={repository} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+}
+
+export default createFragmentContainer(
+  RepositoryItem,
+  graphql`
+    fragment RepositoryItem_repository on Repository {
+      description
+      nameWithOwner
+      owner {
+        avatarUrl
+      }
+      ...RepositoryTopics_topics
+      ...RepositoryStats_stats
+    }
+  `
+);
+
 const styles = StyleSheet.create({
   avatar: {
     alignSelf: "center",
@@ -32,48 +73,12 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     justifyContent: "flex-start"
   },
+  rowView: {
+    flexDirection: "row",
+  },
   touchable: {
     backgroundColor: Colors.white,
     borderRadius: 5,
-    flex: 1,
-    flexDirection: "row",
     paddingVertical: 3
   }
 });
-
-class RepositoryItem extends React.PureComponent {
-  render = () => {
-    const { repository, style } = this.props;
-    const {
-      description,
-      nameWithOwner,
-      owner: { avatarUrl }
-    } = repository;
-    return (
-      <TouchableOpacity style={[styles.touchable, style]}>
-        <FastImage style={styles.avatar} source={{ uri: avatarUrl }} />
-        <View style={styles.repositoryView}>
-          <Text style={styles.name}>{nameWithOwner}</Text>
-          {description && <Text style={styles.description}>{description}</Text>}
-          <RepositoryTopics style={{ marginBottom: 5 }} topics={repository} />
-          <RepositoryStats stats={repository} />
-        </View>
-      </TouchableOpacity>
-    );
-  };
-}
-
-export default createFragmentContainer(
-  RepositoryItem,
-  graphql`
-    fragment RepositoryItem_repository on Repository {
-      description
-      nameWithOwner
-      owner {
-        avatarUrl
-      }
-      ...RepositoryTopics_topics
-      ...RepositoryStats_stats
-    }
-  `
-);

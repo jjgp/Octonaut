@@ -2,6 +2,11 @@ import React from "react";
 import { StyleSheet, TextInput } from "react-native";
 import Colors from "../common/colors";
 
+export default props => {
+  const { style, ...rest } = props;
+  return <TextInput style={[styles.input, style]} {...rest} />;
+};
+
 const styles = StyleSheet.create({
   input: {
     alignSelf: "stretch",
@@ -14,8 +19,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   }
 });
-
-export default props => {
-  const { style, ...rest } = props;
-  return <TextInput style={[styles.input, style]} {...rest} />;
-};

@@ -3,15 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Topic from "./Topic";
 
-const styles = StyleSheet.create({
-  topicsView: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    height: 32
-  }
-});
-
 class RepositoryTopics extends React.PureComponent {
   render = () => {
     const {
@@ -29,6 +20,15 @@ class RepositoryTopics extends React.PureComponent {
     ) : null;
   };
 }
+
+const styles = StyleSheet.create({
+  topicsView: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    height: 32
+  }
+});
 
 export default createFragmentContainer(
   RepositoryTopics,

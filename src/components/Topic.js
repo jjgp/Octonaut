@@ -3,6 +3,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
 
+class Topic extends React.PureComponent {
+  render = () => (
+    <TouchableOpacity style={styles.touchable}>
+      <Text style={styles.text}>{this.props.topic.name}</Text>
+    </TouchableOpacity>
+  );
+}
+
 const styles = StyleSheet.create({
   text: {
     color: Colors.blue,
@@ -21,14 +29,6 @@ const styles = StyleSheet.create({
     padding: 7
   }
 });
-
-class Topic extends React.PureComponent {
-  render = () => (
-    <TouchableOpacity style={styles.touchable}>
-      <Text style={styles.text}>{this.props.topic.name}</Text>
-    </TouchableOpacity>
-  );
-}
 
 export default createFragmentContainer(
   Topic,

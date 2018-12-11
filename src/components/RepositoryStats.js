@@ -4,52 +4,6 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
 
-const styles = StyleSheet.create({
-  statsView: {
-    alignContent: "flex-start",
-    alignItems: "center",
-    flexDirection: "row",
-    flexWrap: "wrap"
-  },
-  colorView: {
-    borderRadius: 6,
-    height: 12,
-    marginRight: 3,
-    width: 12
-  },
-  image: {
-    height: 14,
-    marginRight: 3,
-    width: 14,
-    resizeMode: "contain",
-    tintColor: Colors.grey
-  },
-  pair: {
-    alignItems: "center",
-    borderColor: Colors.white,
-    borderBottomWidth: 1,
-    borderRightWidth: 2,
-    borderTopWidth: 1,
-    flexDirection: "row",
-    marginRight: 5
-  },
-  text: {
-    color: Colors.grey,
-    fontFamily: "System",
-    fontSize: 13
-  }
-});
-
-class Pair extends React.PureComponent {
-  render = () => {
-    const {
-      children: [a, b]
-    } = this.props;
-    if (!a && !b) return null;
-    return <View style={styles.pair} {...this.props} />;
-  };
-}
-
 class RepositoryStats extends React.PureComponent {
   render = () => {
     const {
@@ -90,6 +44,52 @@ class RepositoryStats extends React.PureComponent {
     );
   };
 }
+
+class Pair extends React.PureComponent {
+  render = () => {
+    const {
+      children: [a, b]
+    } = this.props;
+    if (!a && !b) return null;
+    return <View style={styles.pair} {...this.props} />;
+  };
+}
+
+const styles = StyleSheet.create({
+  statsView: {
+    alignContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  colorView: {
+    borderRadius: 6,
+    height: 12,
+    marginRight: 3,
+    width: 12
+  },
+  image: {
+    height: 14,
+    marginRight: 3,
+    width: 14,
+    resizeMode: "contain",
+    tintColor: Colors.grey
+  },
+  pair: {
+    alignItems: "center",
+    borderColor: Colors.white,
+    borderBottomWidth: 1,
+    borderRightWidth: 2,
+    borderTopWidth: 1,
+    flexDirection: "row",
+    marginRight: 5
+  },
+  text: {
+    color: Colors.grey,
+    fontFamily: "System",
+    fontSize: 13
+  }
+});
 
 export default createFragmentContainer(
   RepositoryStats,
