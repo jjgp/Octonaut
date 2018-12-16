@@ -8,7 +8,7 @@ import environment from "../relay/environment";
 export default ({ navigation }) => (
   <TouchableOpacity
     style={styles.touchable}
-    onPress={() => navigation.toggleDrawer()}
+    onPress={() => {}}
   >
     <QueryRenderer
       environment={environment}
