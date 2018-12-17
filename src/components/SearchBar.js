@@ -3,8 +3,8 @@ import { Image, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../common/colors";
 import Input from "../components/Input";
 
-export default ({ style, onSubmit }) => (
-  <View style={[styles.view, style]}>
+export default ({ onSubmit }) => (
+  <View style={styles.view}>
     <Image style={styles.image} source={require("./img/search.png")} />
     <Input
       style={styles.input}

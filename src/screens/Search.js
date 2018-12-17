@@ -23,23 +23,22 @@ export default class Search extends React.Component {
   renderBarView = () => (
     <View style={styles.barView}>
       <UserBadge {...this.props} />
-      <SearchBar style={{ marginLeft: 2 }} onSubmit={this.onSubmit} />
+      <View style={{ width: 2 }} />
+      <SearchBar onSubmit={this.onSubmit} />
     </View>
   );
 
-  renderRepositoryItems = (props) => (
+  renderRepositoryItems = props => (
     <FlatList
       data={props.search.nodes}
       keyExtractor={item => item.id}
       initialNumToRender={25}
-      renderItem={({ item }) => (
-        <RepositoryItem
-          style={{ marginBottom: 2 }}
-          repository={item}
-        />
-      )}
+      renderItem={({ item }) => <RepositoryItem repository={item} />}
+      ItemSeparatorComponent={this.renderSeparatorComponent}
     />
   );
+
+  renderSeparatorComponent = () => <View style={{ height: 2 }} />;
 
   render = () => (
     <>

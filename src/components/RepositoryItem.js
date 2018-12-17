@@ -8,13 +8,10 @@ import RepositoryTopics from "./RepositoryTopics";
 
 class RepositoryItem extends React.PureComponent {
   render = () => {
-    const { repository, style } = this.props;
-    const {
-      description,
-      nameWithOwner
-    } = repository;
+    const { repository } = this.props;
+    const { description, nameWithOwner } = repository;
     return (
-      <TouchableOpacity style={[styles.touchable, style]}>
+      <TouchableOpacity style={styles.touchable}>
         <View style={styles.rowView}>
           <View style={styles.repositoryView}>
             <Text style={styles.name}>{nameWithOwner}</Text>
