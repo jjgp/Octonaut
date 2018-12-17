@@ -6,13 +6,12 @@ import Topic from "./Topic";
 class RepositoryTopics extends React.PureComponent {
   render = () => {
     const {
-      style,
       topics: {
         repositoryTopics: { nodes }
       }
     } = this.props;
     return nodes.length > 0 ? (
-      <View style={[styles.topicsView, style]}>
+      <View style={styles.topicsView}>
         {nodes.map(({ id, topic }) => (
           <Topic key={id} topic={topic} />
         ))}
@@ -23,10 +22,8 @@ class RepositoryTopics extends React.PureComponent {
 
 const styles = StyleSheet.create({
   topicsView: {
-    flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap",
-    height: 32
+    flexWrap: "wrap"
   }
 });
 

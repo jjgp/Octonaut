@@ -12,15 +12,12 @@ class RepositoryItem extends React.PureComponent {
     const { description, nameWithOwner } = repository;
     return (
       <TouchableOpacity style={styles.touchable}>
-        <View style={styles.rowView}>
-          <View style={styles.repositoryView}>
-            <Text style={styles.name}>{nameWithOwner}</Text>
-            {description && (
-              <Text style={styles.description}>{description}</Text>
-            )}
-            <RepositoryTopics style={{ marginBottom: 5 }} topics={repository} />
-            <RepositoryStats stats={repository} />
-          </View>
+        <View style={styles.repositoryView}>
+          <Text style={styles.name}>{nameWithOwner}</Text>
+          {description && <Text style={styles.description}>{description}</Text>}
+          <RepositoryTopics topics={repository} />
+          <View style={{ height: 5 }} />
+          <RepositoryStats stats={repository} />
         </View>
       </TouchableOpacity>
     );
@@ -54,12 +51,8 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   repositoryView: {
-    flex: 1,
     paddingHorizontal: 10,
     justifyContent: "flex-start"
-  },
-  rowView: {
-    flexDirection: "row"
   },
   touchable: {
     backgroundColor: Colors.white,
