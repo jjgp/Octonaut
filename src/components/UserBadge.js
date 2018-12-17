@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
 import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
-import environment from "../relay/environment";
+import environment from "../api/v4/environment";
 
 export default () => (
   <TouchableOpacity style={styles.touchable} onPress={() => {}}>

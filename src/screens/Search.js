@@ -5,7 +5,7 @@ import Colors from "../common/colors";
 import RepositoryItem from "../components/RepositoryItem";
 import SearchBar from "../components/SearchBar";
 import UserBadge from "../components/UserBadge";
-import environment from "../relay/environment";
+import environment from "../api/v4/environment";
 
 export default class Search extends React.Component {
   state = {
