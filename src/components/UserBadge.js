@@ -30,6 +30,7 @@ export default ({ navigation }) => (
 const query = graphql`
   query UserBadgeQuery {
     viewer {
+      id
       avatarUrl
     }
   }

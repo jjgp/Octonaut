@@ -11,13 +11,11 @@ class RepositoryItem extends React.PureComponent {
     const { repository, style } = this.props;
     const {
       description,
-      nameWithOwner,
-      owner: { avatarUrl }
+      nameWithOwner
     } = repository;
     return (
       <TouchableOpacity style={[styles.touchable, style]}>
         <View style={styles.rowView}>
-          <FastImage style={styles.avatar} source={{ uri: avatarUrl }} />
           <View style={styles.repositoryView}>
             <Text style={styles.name}>{nameWithOwner}</Text>
             {description && (
@@ -38,9 +36,6 @@ export default createFragmentContainer(
     fragment RepositoryItem_repository on Repository {
       description
       nameWithOwner
-      owner {
-        avatarUrl
-      }
       ...RepositoryTopics_topics
       ...RepositoryStats_stats
     }
@@ -48,13 +43,6 @@ export default createFragmentContainer(
 );
 
 const styles = StyleSheet.create({
-  avatar: {
-    alignSelf: "center",
-    borderRadius: 5,
-    height: 50,
-    marginHorizontal: 10,
-    width: 50
-  },
   description: {
     color: Colors.grey,
     fontFamily: "System",
@@ -70,7 +58,7 @@ const styles = StyleSheet.create({
   },
   repositoryView: {
     flex: 1,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     justifyContent: "flex-start"
   },
   rowView: {

@@ -8,22 +8,42 @@ import UserBadge from "../components/UserBadge";
 import environment from "../relay/environment";
 
 export default class Search extends React.Component {
-  static navigationOptions = {
-    drawerLabel: () => null
-  };
-
   state = {
     search: "react"
   };
 
   onSubmit = search => this.setState({ search });
 
+  renderActivityIndicator = () => (
+    <View style={styles.indicatorView}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+
+  renderBarView = () => (
+    <View style={styles.barView}>
+      <UserBadge {...this.props} />
+      <SearchBar style={{ marginLeft: 2 }} onSubmit={this.onSubmit} />
+    </View>
+  );
+
+  renderRepositoryItems = (props) => (
+    <FlatList
+      data={props.search.nodes}
+      keyExtractor={item => item.id}
+      initialNumToRender={25}
+      renderItem={({ item }) => (
+        <RepositoryItem
+          style={{ marginBottom: 2 }}
+          repository={item}
+        />
+      )}
+    />
+  );
+
   render = () => (
     <>
-      <View style={styles.barView}>
-        <UserBadge {...this.props} />
-        <SearchBar style={{ marginLeft: 2 }} onSubmit={this.onSubmit} />
-      </View>
+      {this.renderBarView()}
       {this.state.search ? (
         <View style={styles.searchView}>
           <QueryRenderer
@@ -31,26 +51,9 @@ export default class Search extends React.Component {
             query={query}
             variables={{ search: this.state.search }}
             render={({ error, props }) => {
-              if (!props)
-                return (
-                  <View style={styles.indicatorView}>
-                    <ActivityIndicator size="large" />
-                  </View>
-                );
+              if (!props) return this.renderActivityIndicator();
               if (error) return null;
-              return (
-                <FlatList
-                  data={props.search.nodes}
-                  keyExtractor={item => item.id}
-                  initialNumToRender={25}
-                  renderItem={({ item }) => (
-                    <RepositoryItem
-                      style={{ marginBottom: 2 }}
-                      repository={item}
-                    />
-                  )}
-                />
-              );
+              return this.renderRepositoryItems(props);
             }}
           />
         </View>
