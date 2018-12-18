@@ -4,10 +4,6 @@ import { getOrCreateAuthorization } from "../api/authorization";
 import Login from "../components/Login";
 
 export default class Authorization extends React.Component {
-  static navigationOptions = {
-    drawerLabel: () => "Logout"
-  };
-
   state = {
     requires2FA: false
   };
