@@ -1,3 +1,4 @@
+import * as Keychain from "react-native-keychain";
 import { Buffer } from "buffer";
 import DeviceInfo from "react-native-device-info";
 import * as Configuration from "../../common/configuration";
@@ -28,4 +29,11 @@ export const getOrCreateAuthorization = async (username, password, code) => {
     headers: headers,
     body: JSON.stringify(body)
   });
+};
+
+export const hasToken = async () => !!(await Keychain.getGenericPassword());
+
+export const tokenAuthorization = async () => {
+  const { password } = await Keychain.getGenericPassword();
+  return basicAuthorization(password, "x-oauth-basic");
 };

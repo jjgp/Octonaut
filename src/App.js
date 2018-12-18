@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { SafeAreaView } from "react-native";
-import * as Keychain from "react-native-keychain";
 import { createStackNavigator } from "react-navigation";
+import { hasToken } from "./api/authorization";
 import Colors from "./common/colors";
 import Authorization from "./screens/Authorization";
 import Search from "./screens/Search";
@@ -9,8 +9,7 @@ import Search from "./screens/Search";
 export default class App extends Component {
   state = {};
 
-  componentDidMount = async () =>
-    this.setState({ hasToken: !!(await Keychain.getGenericPassword()) });
+  componentDidMount = async () => this.setState({ hasToken: await hasToken() });
 
   screens = () => ({
     authorization: {
