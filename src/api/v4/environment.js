@@ -1,14 +1,12 @@
-import * as Keychain from "react-native-keychain";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 import { installRelayDevTools } from "relay-devtools";
-import { basicAuthorization } from "../authorization";
+import { tokenAuthorization } from "../authorization";
 
 const fetchQuery = async (operation, variables) => {
-  const { password } = await Keychain.getGenericPassword();
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
-      Authorization: basicAuthorization(password, "x-oauth-basic"),
+      Authorization: await tokenAuthorization(),
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -16,6 +14,7 @@ const fetchQuery = async (operation, variables) => {
       variables
     })
   });
+
   return response.json();
 };
 
