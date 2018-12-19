@@ -55,6 +55,25 @@ class Pair extends React.PureComponent {
   };
 }
 
+export default createFragmentContainer(
+  RepositoryStats,
+  graphql`
+    fragment RepositoryStats_stats on Repository {
+      forkCount
+      languages(first: 1, orderBy: { field: SIZE, direction: DESC }) {
+        nodes {
+          color
+          name
+        }
+      }
+      pushedAt
+      stargazers {
+        totalCount
+      }
+    }
+  `
+);
+
 const styles = StyleSheet.create({
   statsView: {
     alignContent: "flex-start",
@@ -90,22 +109,3 @@ const styles = StyleSheet.create({
     fontSize: 13
   }
 });
-
-export default createFragmentContainer(
-  RepositoryStats,
-  graphql`
-    fragment RepositoryStats_stats on Repository {
-      forkCount
-      languages(first: 1, orderBy: { field: SIZE, direction: DESC }) {
-        nodes {
-          color
-          name
-        }
-      }
-      pushedAt
-      stargazers {
-        totalCount
-      }
-    }
-  `
-);
