@@ -76,10 +76,9 @@ export default createFragmentContainer(
 
 const styles = StyleSheet.create({
   statsView: {
-    alignContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   colorView: {
     borderRadius: 6,

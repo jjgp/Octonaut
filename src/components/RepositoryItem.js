@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
-import FastImage from "react-native-fast-image";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
 import RepositoryContributors from "./RepositoryContributors";
@@ -14,10 +13,8 @@ class RepositoryItem extends React.PureComponent {
     return (
       <TouchableOpacity style={styles.touchable}>
         <View style={styles.repositoryView}>
-          <Text style={styles.name}>{nameWithOwner}</Text>
-          {description && <Text style={styles.description}>{description}</Text>}
-          <RepositoryContributors nameWithOwner={nameWithOwner} />
-          <RepositoryTopics topics={repository} />
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>{nameWithOwner}</Text>
+          {description && <Text style={styles.description} numberOfLines={1}>{description}</Text>}
           <RepositoryStats stats={repository} />
         </View>
       </TouchableOpacity>

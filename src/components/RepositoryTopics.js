@@ -24,7 +24,7 @@ export default createFragmentContainer(
   RepositoryTopics,
   graphql`
     fragment RepositoryTopics_topics on Repository {
-      repositoryTopics(first: 3) {
+      repositoryTopics(first: 5) {
         nodes {
           id
           topic {
