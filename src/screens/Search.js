@@ -22,9 +22,9 @@ export default class Search extends React.Component {
 
   renderBarView = () => (
     <View style={styles.barView}>
-      <UserBadge {...this.props} />
-      <View style={{ width: 2 }} />
       <SearchBar onSubmit={this.onSubmit} />
+      <View style={{ width: 2 }} />
+      <UserBadge {...this.props} />
     </View>
   );
 

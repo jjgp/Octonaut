@@ -18,7 +18,6 @@ class RepositoryItem extends React.PureComponent {
           {description && <Text style={styles.description}>{description}</Text>}
           <RepositoryContributors nameWithOwner={nameWithOwner} />
           <RepositoryTopics topics={repository} />
-          <View style={{ height: 5 }} />
           <RepositoryStats stats={repository} />
         </View>
       </TouchableOpacity>

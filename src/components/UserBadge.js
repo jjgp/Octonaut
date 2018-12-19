@@ -15,7 +15,7 @@ export default () => (
         return (
           <FastImage
             style={styles.avatar}
-            resizeMode={FastImage.resizeMode.cover}
+            resizeMode={FastImage.resizeMode.contain}
             source={{ uri: props.viewer.avatarUrl }}
           />
         );
@@ -36,13 +36,14 @@ const query = graphql`
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: 5,
-    flex: 1
+    height: 32,
+    width: 32
   },
   touchable: {
-    alignContent: "center",
+    alignItems: "center",
     aspectRatio: 1,
+    justifyContent: "center",
     backgroundColor: Colors.white,
-    borderRadius: 5,
-    padding: 5
+    borderRadius: 5
   }
 });

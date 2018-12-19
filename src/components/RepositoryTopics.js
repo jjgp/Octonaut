@@ -20,13 +20,6 @@ class RepositoryTopics extends React.PureComponent {
   };
 }
 
-const styles = StyleSheet.create({
-  topicsView: {
-    flexDirection: "row",
-    flexWrap: "wrap"
-  }
-});
-
 export default createFragmentContainer(
   RepositoryTopics,
   graphql`
@@ -42,3 +35,10 @@ export default createFragmentContainer(
     }
   `
 );
+
+const styles = StyleSheet.create({
+  topicsView: {
+    flexDirection: "row",
+    flexWrap: "wrap"
+  }
+});

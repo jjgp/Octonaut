@@ -1,34 +1,39 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { fetchContributors } from "../api/v3/statistics";
 
 export default class RepositoryContributors extends React.PureComponent {
   state = {
-    avatarUrls: null
+    contributors: []
   };
 
   componentDidMount = async () => {
     const contributors = await fetchContributors(this.props.nameWithOwner);
-    // TODO: package id too
-    this.setState({ avatarUrls: contributors.slice(0, 5).map(c => c.author.avatar_url) });
-  }
+    if (Array.isArray(contributors))
+      this.setState({
+        contributors: contributors
+          .slice(0, 5)
+          .map(c => ({ id: c.author.id, uri: c.author.avatar_url }))
+      });
+  };
 
   render = () => {
-    const { avatarUrls } = this.state;
+    const { contributors } = this.state;
     return (
       <View style={styles.contributorsView}>
-      {avatarUrls && avatarUrls.map((uri, index) =>
-          <FastImage
-            key={index}
-            style={styles.avatar}
-            resizeMode={FastImage.resizeMode.cover}
-            source={{ uri }}
-          />
-      )}
-      </ View>
+        {contributors.map(({ id, uri }) => (
+          <TouchableOpacity key={id}>
+            <FastImage
+              style={styles.avatar}
+              resizeMode={FastImage.resizeMode.cover}
+              source={{ uri }}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
     );
-  } 
+  };
 }
 
 const styles = StyleSheet.create({
