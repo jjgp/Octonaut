@@ -5,8 +5,8 @@ import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
 import environment from "../api/v4/environment";
 
-export default () => (
-  <TouchableOpacity style={styles.touchable} onPress={() => {}}>
+export default (props) => (
+  <TouchableOpacity style={styles.touchable} onPress={props.onPress}>
     <QueryRenderer
       environment={environment}
       query={query}

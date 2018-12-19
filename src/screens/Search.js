@@ -8,6 +8,10 @@ import UserBadge from "../components/UserBadge";
 import environment from "../api/v4/environment";
 
 export default class Search extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };  
+
   state = {
     search: "react"
   };
@@ -24,7 +28,7 @@ export default class Search extends React.Component {
     <View style={styles.barView}>
       <SearchBar onSubmit={this.onSubmit} />
       <View style={{ width: 2 }} />
-      <UserBadge {...this.props} />
+      <UserBadge {...this.props} onPress={() => this.props.navigation.navigate('Settings')} />
     </View>
   );
 
@@ -33,7 +37,8 @@ export default class Search extends React.Component {
       data={props.search.nodes}
       keyExtractor={item => item.id}
       initialNumToRender={25}
-      renderItem={({ item }) => <RepositoryItem repository={item} />}
+      renderItem={({ item }) => <RepositoryItem repository={item} onPress={title => this.props.navigation.navigate('Repository', {
+        title})}/>}
       ItemSeparatorComponent={this.renderSeparatorComponent}
     />
   );

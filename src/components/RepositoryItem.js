@@ -11,7 +11,7 @@ class RepositoryItem extends React.PureComponent {
     const { repository } = this.props;
     const { description, nameWithOwner } = repository;
     return (
-      <TouchableOpacity style={styles.touchable}>
+      <TouchableOpacity style={styles.touchable} onPress={() => this.props.onPress(nameWithOwner)}>
         <View style={styles.repositoryView}>
           <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>{nameWithOwner}</Text>
           {description && <Text style={styles.description} numberOfLines={1}>{description}</Text>}

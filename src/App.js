@@ -3,30 +3,21 @@ import { SafeAreaView } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import { hasToken } from "./api/authorization";
 import Colors from "./common/colors";
-import Authorization from "./screens/Authorization";
-import Search from "./screens/Search";
+import screens from "./screens";
 
 export default class App extends Component {
-  state = {};
+  state = {
+    hasToken: false
+  };
 
   componentDidMount = async () => this.setState({ hasToken: await hasToken() });
 
-  screens = () => ({
-    authorization: {
-      screen: Authorization
-    },
-    search: {
-      screen: Search
-    }
-  });
-
   render = () => {
     const { hasToken } = this.state;
-    if (typeof hasToken === "undefined") return null;
+    if (!hasToken) return null;
 
-    const Navigator = createStackNavigator(this.screens(), {
-      headerMode: "none",
-      initialRouteName: hasToken ? "search" : "authorization"
+    const Navigator = createStackNavigator(screens(), {
+      initialRouteName: hasToken ? "Search" : "Authorization"
     });
 
     return (
