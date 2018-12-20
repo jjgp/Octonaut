@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { createPaginationContainer, graphql } from "react-relay";
 import RepositoryItem from "./RepositoryItem";
 
@@ -14,14 +14,21 @@ class SearchResults extends React.PureComponent {
     });
   };
 
+  renderActivityIndicator = () =>
+    this.props.relay.isLoading() ? (
+      <View style={styles.indicatorView}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : null;
+
   renderSeparatorComponent = () => <View style={{ height: 2 }} />;
 
   render = () => (
     <FlatList
       data={this.props.results.search.edges}
       keyExtractor={item => item.node.id}
-      initialNumToRender={25}
       onEndReached={this.onEndReached}
+      onEndReachedThreshold={0}
       renderItem={({ item: { node } }) => (
         <RepositoryItem
           repository={node}
@@ -33,6 +40,7 @@ class SearchResults extends React.PureComponent {
         />
       )}
       ItemSeparatorComponent={this.renderSeparatorComponent}
+      ListFooterComponent={this.renderActivityIndicator}
     />
   );
 }
@@ -92,3 +100,10 @@ export default createPaginationContainer(
     `
   }
 );
+
+const styles = StyleSheet.create({
+  indicatorView: {
+    flex: 1,
+    justifyContent: "center"
+  }
+});
