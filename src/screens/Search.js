@@ -1,22 +1,27 @@
 import React from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  View
+} from "react-native";
 import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
-import RepositoryItem from "../components/RepositoryItem";
+import SearchResults from "../components/SearchResults";
 import SearchBar from "../components/SearchBar";
 import UserBadge from "../components/UserBadge";
 import environment from "../api/v4/environment";
 
 export default class Search extends React.Component {
   static navigationOptions = {
-    header: null,
-  };  
-
-  state = {
-    search: "react"
+    header: null
   };
 
-  onSubmit = search => this.setState({ search });
+  state = {
+    query: "react"
+  };
+
+  onSubmit = query => this.setState({ query });
 
   renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
@@ -27,68 +32,52 @@ export default class Search extends React.Component {
   renderBarView = () => (
     <View style={styles.barView}>
       <SearchBar onSubmit={this.onSubmit} />
-      <View style={{ width: 2 }} />
-      <UserBadge {...this.props} onPress={() => this.props.navigation.navigate('Settings')} />
+      <View style={{ width: 10 }} />
+      <UserBadge
+        {...this.props}
+        onPress={() => this.props.navigation.navigate("Settings")}
+      />
     </View>
   );
 
-  renderRepositoryItems = props => (
-    <FlatList
-      data={props.search.nodes}
-      keyExtractor={item => item.id}
-      initialNumToRender={25}
-      renderItem={({ item }) => <RepositoryItem repository={item} onPress={title => this.props.navigation.navigate('Repository', {
-        title})}/>}
-      ItemSeparatorComponent={this.renderSeparatorComponent}
-    />
-  );
-
-  renderSeparatorComponent = () => <View style={{ height: 2 }} />;
-
   render = () => (
-    <>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGrey }}>
       {this.renderBarView()}
-      {this.state.search ? (
+      {this.state.query ? (
         <View style={styles.searchView}>
           <QueryRenderer
             environment={environment}
             query={query}
-            variables={{ search: this.state.search }}
+            variables={{ query: this.state.query, type: "REPOSITORY" }}
             render={({ error, props }) => {
               if (!props) return this.renderActivityIndicator();
               if (error) return null;
-              return this.renderRepositoryItems(props);
+              return (
+                <SearchResults
+                  navigation={this.props.navigation}
+                  results={props}
+                />
+              );
             }}
           />
         </View>
       ) : null}
-    </>
+    </SafeAreaView>
   );
 }
 
 const query = graphql`
-  query SearchQuery($search: String!, $before: String) {
-    search(first: 25, query: $search, type: REPOSITORY, before: $before) {
-      nodes {
-        ... on Repository {
-          id
-          ...RepositoryItem_repository
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-      repositoryCount
-    }
+  query SearchQuery($cursor: String, $query: String!, $type: SearchType!) {
+    ...SearchResults_results @arguments(query: $query, type: $type)
   }
 `;
 
 const styles = StyleSheet.create({
   barView: {
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.white,
     flexDirection: "row",
-    height: 45
+    height: 55,
+    padding: 10
   },
   searchView: {
     backgroundColor: Colors.lightGrey,

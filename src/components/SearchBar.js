@@ -15,6 +15,7 @@ export default ({ onSubmit }) => (
 
 const styles = StyleSheet.create({
   input: {
+    backgroundColor: Colors.lightGrey,
     flex: 1
   },
   image: {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.lightGrey,
     borderRadius: 5,
     justifyContent: "center",
     paddingHorizontal: 5

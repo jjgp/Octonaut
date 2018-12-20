@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   statsView: {
     alignItems: "center",
     flexDirection: "row",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   colorView: {
     borderRadius: 6,

@@ -5,7 +5,7 @@ import { graphql, QueryRenderer } from "react-relay";
 import Colors from "../common/colors";
 import environment from "../api/v4/environment";
 
-export default (props) => (
+export default props => (
   <TouchableOpacity style={styles.touchable} onPress={props.onPress}>
     <QueryRenderer
       environment={environment}
@@ -36,14 +36,12 @@ const query = graphql`
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: 5,
-    height: 32,
-    width: 32
+    flex: 1
   },
   touchable: {
-    alignItems: "center",
+    alignContent: "center",
     aspectRatio: 1,
     justifyContent: "center",
-    backgroundColor: Colors.white,
     borderRadius: 5
   }
 });

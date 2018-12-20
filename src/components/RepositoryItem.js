@@ -2,19 +2,26 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
-import RepositoryContributors from "./RepositoryContributors";
 import RepositoryStats from "./RepositoryStats";
-import RepositoryTopics from "./RepositoryTopics";
 
 class RepositoryItem extends React.PureComponent {
   render = () => {
     const { repository } = this.props;
     const { description, nameWithOwner } = repository;
     return (
-      <TouchableOpacity style={styles.touchable} onPress={() => this.props.onPress(nameWithOwner)}>
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() => this.props.onPress(nameWithOwner)}
+      >
         <View style={styles.repositoryView}>
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>{nameWithOwner}</Text>
-          {description && <Text style={styles.description} numberOfLines={1}>{description}</Text>}
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>
+            {nameWithOwner}
+          </Text>
+          {description && (
+            <Text style={styles.description} numberOfLines={1}>
+              {description}
+            </Text>
+          )}
           <RepositoryStats stats={repository} />
         </View>
       </TouchableOpacity>
