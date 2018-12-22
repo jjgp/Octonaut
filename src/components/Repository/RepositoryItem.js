@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableHighlight, Text } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
-import Colors from "../common/colors";
+import Colors from "../../common/colors";
 import RepositoryStats from "./RepositoryStats";
 
 class RepositoryItem extends React.PureComponent {
@@ -11,8 +11,7 @@ class RepositoryItem extends React.PureComponent {
     const { repository } = this.props;
     const { description, nameWithOwner } = repository;
     return (
-      <TouchableOpacity style={styles.touchable} onPress={this.onPress}>
-        <View style={styles.repositoryView}>
+      <TouchableHighlight style={styles.touchable} onPress={this.onPress}>
           <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>
             {nameWithOwner}
           </Text>
@@ -22,8 +21,7 @@ class RepositoryItem extends React.PureComponent {
             </Text>
           )}
           <RepositoryStats stats={repository} />
-        </View>
-      </TouchableOpacity>
+      </TouchableHighlight>
     );
   };
 }
@@ -54,13 +52,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 5
   },
-  repositoryView: {
-    paddingHorizontal: 10,
-    justifyContent: "flex-start"
-  },
   touchable: {
     backgroundColor: Colors.white,
     borderRadius: 5,
+    justifyContent: "flex-start",
+    paddingHorizontal: 10,
     paddingVertical: 3
   }
 });

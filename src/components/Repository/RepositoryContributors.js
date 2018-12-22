@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
-import { fetchContributors } from "../api/v3/statistics";
+import { fetchContributors } from "../../api/v3/statistics";
 
 export default class RepositoryContributors extends React.PureComponent {
   state = {

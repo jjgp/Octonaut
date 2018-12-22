@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
-import Topic from "./Topic";
+import Topic from "../Topic";
 
 class RepositoryTopics extends React.PureComponent {
   render = () => {

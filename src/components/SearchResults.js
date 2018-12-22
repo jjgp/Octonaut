@@ -1,7 +1,7 @@
 import React from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, Platform, View } from "react-native";
 import { createPaginationContainer, graphql } from "react-relay";
-import RepositoryItem from "./RepositoryItem";
+import RepositoryItem from "./Repository/RepositoryItem";
 
 class SearchResults extends React.PureComponent {
   onEndReached = () => {
@@ -32,8 +32,9 @@ class SearchResults extends React.PureComponent {
       keyExtractor={item => item.node.id}
       initialNumToRender={25}
       onEndReached={this.onEndReached}
-      onEndReachedThreshold={0.0}
+      onEndReachedThreshold={0.1}
       renderItem={this.renderItem}
+      removeClippedSubviews={Platform.OS === 'android'}
       ItemSeparatorComponent={this.renderSeparatorComponent}
     />
   );

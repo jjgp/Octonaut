@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
-import Colors from "../common/colors";
+import Colors from "../../common/colors";
 
 class RepositoryStats extends React.PureComponent {
   render = () => {
