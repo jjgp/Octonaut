@@ -4,18 +4,15 @@ import { hasToken } from "./api/authorization";
 import screens from "./screens";
 
 export default class App extends Component {
-  state = {
-    hasToken: false
-  };
-
+  state = {};
+  
   componentDidMount = async () => this.setState({ hasToken: await hasToken() });
 
   render = () => {
-    const { hasToken } = this.state;
-    if (!hasToken) return null;
+    if (typeof this.state.hasToken === 'undefined') return null;
 
     const Navigator = createStackNavigator(screens(), {
-      initialRouteName: hasToken ? "Search" : "Authorization"
+      initialRouteName: this.state.hasToken ? "Search" : "Authorization"
     });
 
     return <Navigator />;

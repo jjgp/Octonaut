@@ -53,7 +53,7 @@ export default class Search extends React.Component {
               if (!props) return this.renderActivityIndicator();
               if (error) {
                 console.log(error);
-                return null;
+                return <Text>{error}</Text>;
               }
               return (
                 <SearchResults
