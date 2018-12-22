@@ -5,14 +5,13 @@ import Colors from "../common/colors";
 import RepositoryStats from "./RepositoryStats";
 
 class RepositoryItem extends React.PureComponent {
+  onPress = () => this.props.onPress(this.props.repository.nameWithOwner);
+
   render = () => {
     const { repository } = this.props;
     const { description, nameWithOwner } = repository;
     return (
-      <TouchableOpacity
-        style={styles.touchable}
-        onPress={() => this.props.onPress(nameWithOwner)}
-      >
+      <TouchableOpacity style={styles.touchable} onPress={this.onPress}>
         <View style={styles.repositoryView}>
           <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>
             {nameWithOwner}

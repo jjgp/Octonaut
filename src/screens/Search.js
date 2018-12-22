@@ -51,7 +51,10 @@ export default class Search extends React.Component {
             variables={{ query: this.state.query, type: "REPOSITORY" }}
             render={({ error, props }) => {
               if (!props) return this.renderActivityIndicator();
-              if (error) return null;
+              if (error) {
+                console.log(error);
+                return null;
+              }
               return (
                 <SearchResults
                   navigation={this.props.navigation}

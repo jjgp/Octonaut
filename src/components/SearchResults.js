@@ -14,12 +14,15 @@ class SearchResults extends React.PureComponent {
     });
   };
 
-  renderActivityIndicator = () =>
-    this.props.relay.isLoading() ? (
-      <View style={styles.indicatorView}>
-        <ActivityIndicator size="large" />
-      </View>
-    ) : null;
+  onPress = title => {
+    this.props.navigation.navigate("Repository", {
+      title
+    });
+  };
+
+  renderItem = ({ item: { node } }) => (
+    <RepositoryItem repository={node} onPress={this.onPress} />
+  );
 
   renderSeparatorComponent = () => <View style={{ height: 2 }} />;
 
@@ -27,20 +30,11 @@ class SearchResults extends React.PureComponent {
     <FlatList
       data={this.props.results.search.edges}
       keyExtractor={item => item.node.id}
+      initialNumToRender={25}
       onEndReached={this.onEndReached}
-      onEndReachedThreshold={0}
-      renderItem={({ item: { node } }) => (
-        <RepositoryItem
-          repository={node}
-          onPress={title =>
-            this.props.navigation.navigate("Repository", {
-              title
-            })
-          }
-        />
-      )}
+      onEndReachedThreshold={0.0}
+      renderItem={this.renderItem}
       ItemSeparatorComponent={this.renderSeparatorComponent}
-      ListFooterComponent={this.renderActivityIndicator}
     />
   );
 }
@@ -100,10 +94,3 @@ export default createPaginationContainer(
     `
   }
 );
-
-const styles = StyleSheet.create({
-  indicatorView: {
-    flex: 1,
-    justifyContent: "center"
-  }
-});
