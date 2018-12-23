@@ -10,7 +10,7 @@ export default class Login extends React.Component {
     code: ""
   };
 
-  onPress = () => {
+  _onPress = () => {
     const { username, password, code } = this.state;
     this.props.onSubmit(username, password, code);
   };
@@ -38,7 +38,7 @@ export default class Login extends React.Component {
           onChangeText={code => this.setState({ code })}
         />
       )}
-      <TouchableOpacity style={styles.touchable} onPress={this.onPress}>
+      <TouchableOpacity style={styles.touchable} onPress={this._onPress}>
         <Text style={styles.text}>Submit</Text>
       </TouchableOpacity>
     </View>

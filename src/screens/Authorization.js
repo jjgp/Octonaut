@@ -8,29 +8,29 @@ export default class Authorization extends React.Component {
     requires2FA: false
   };
 
-  static createEntryInKeychain = async (id, token) => {
+  static _createEntryInKeychain = async (id, token) => {
     await Keychain.setGenericPassword(id, token);
     await Keychain.setInternetCredentials(id, id, token);
   };
 
-  static setExistingEntryInKeychain = async id => {
+  static _setExistingEntryInKeychain = async id => {
     const { username, password } = await Keychain.getInternetCredentials(id);
     await Keychain.setGenericPassword(username, password);
   };
 
-  onSubmit = async (username, password, code) => {
+  _onSubmit = async (username, password, code) => {
     const response = await getOrCreateAuthorization(username, password, code);
     if (response.ok) {
       let { id, token } = await response.json();
       token
-        ? await Authorization.createEntryInKeychain(id.toString(), token)
-        : await Authorization.setExistingEntryInKeychain(id.toString());
+        ? await Authorization._createEntryInKeychain(id.toString(), token)
+        : await Authorization._setExistingEntryInKeychain(id.toString());
       this.setState({ hasToken: true });
     } else if (response.headers.has("x-github-otp"))
       this.setState({ requires2FA: true });
   };
 
   render = () => (
-    <Login requires2FA={this.state.requires2FA} onSubmit={this.onSubmit} />
+    <Login requires2FA={this.state.requires2FA} onSubmit={this._onSubmit} />
   );
 }

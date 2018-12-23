@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../common/colors";
 

@@ -21,17 +21,17 @@ export default class Search extends React.Component {
     query: "react"
   };
 
-  onSubmit = query => this.setState({ query });
+  _onSubmit = query => this.setState({ query });
 
-  renderActivityIndicator = () => (
+  _renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
       <ActivityIndicator size="large" />
     </View>
   );
 
-  renderBarView = () => (
+  _renderBarView = () => (
     <View style={styles.barView}>
-      <SearchBar onSubmit={this.onSubmit} />
+      <SearchBar onSubmit={this._onSubmit} />
       <View style={{ width: 10 }} />
       <UserBadge
         {...this.props}
@@ -42,7 +42,7 @@ export default class Search extends React.Component {
 
   render = () => (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGrey }}>
-      {this.renderBarView()}
+      {this._renderBarView()}
       {this.state.query ? (
         <View style={styles.searchView}>
           <QueryRenderer
@@ -50,7 +50,7 @@ export default class Search extends React.Component {
             query={query}
             variables={{ query: this.state.query, type: "REPOSITORY" }}
             render={({ error, props }) => {
-              if (!props) return this.renderActivityIndicator();
+              if (!props) return this._renderActivityIndicator();
               if (error) {
                 console.log(error);
                 return <Text>{error}</Text>;

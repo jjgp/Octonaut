@@ -4,6 +4,16 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { createFragmentContainer, graphql } from "react-relay";
 import Colors from "../../common/colors";
 
+class Pair extends React.PureComponent {
+  render = () => {
+    const {
+      children: [a, b]
+    } = this.props;
+    if (!a && !b) return null;
+    return <View style={styles.pair} {...this.props} />;
+  };
+}
+
 class RepositoryStats extends React.PureComponent {
   render = () => {
     const {
@@ -42,16 +52,6 @@ class RepositoryStats extends React.PureComponent {
         </Pair>
       </View>
     );
-  };
-}
-
-class Pair extends React.PureComponent {
-  render = () => {
-    const {
-      children: [a, b]
-    } = this.props;
-    if (!a && !b) return null;
-    return <View style={styles.pair} {...this.props} />;
   };
 }
 
