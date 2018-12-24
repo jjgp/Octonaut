@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   },
   touchable: {
     backgroundColor: Colors.white,
+    height: 74,
     justifyContent: "flex-start",
     paddingBottom: 5,
     paddingHorizontal: 10,

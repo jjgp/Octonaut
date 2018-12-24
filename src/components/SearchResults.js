@@ -4,40 +4,41 @@ import { createPaginationContainer, graphql } from "react-relay";
 import RepositoryItem from "./Repository/RepositoryItem";
 
 class SearchResults extends React.PureComponent {
-  onEndReached = () => {
+  _onEndReached = () => {
     if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
       return;
     }
 
     this.props.relay.loadMore(25, error => {
-      console.log(error);
+      error && console.log(error);
     });
   };
 
-  onPress = title => {
+  _onPress = title => {
     this.props.navigation.navigate("Repository", {
       title
     });
   };
 
-  renderItem = ({ item: { node } }) => (
-    <RepositoryItem repository={node} onPress={this.onPress} />
+  _renderItem = ({ item: { node } }) => (
+    <RepositoryItem repository={node} onPress={this._onPress} />
   );
 
-  renderSeparatorComponent = () => <View style={{ height: 2 }} />;
+  _renderSeparatorComponent = () => <View style={{ height: 2 }} />;
 
-  render = () => (
-    <FlatList
-      data={this.props.results.search.edges}
-      keyExtractor={item => item.node.id}
-      initialNumToRender={25}
-      onEndReached={this.onEndReached}
-      onEndReachedThreshold={0.1}
-      renderItem={this.renderItem}
-      removeClippedSubviews={Platform.OS === 'android'}
-      ItemSeparatorComponent={this.renderSeparatorComponent}
-    />
-  );
+  render = () => {
+    return (
+      <FlatList
+        data={this.props.results.search.edges}
+        keyExtractor={item => item.node.id}
+        onEndReached={this._onEndReached}
+        onEndReachedThreshold={0.1}
+        renderItem={this._renderItem}
+        removeClippedSubviews={Platform.OS === 'android'}
+        ItemSeparatorComponent={this._renderSeparatorComponent}
+      />
+    )
+  };
 }
 
 export default createPaginationContainer(
