@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Platform, View } from "react-native";
+import { ActivityIndicator, FlatList, Platform, StyleSheet, View } from "react-native";
 import { createPaginationContainer, graphql } from "react-relay";
 import RepositoryItem from "./Repository/RepositoryItem";
 
@@ -9,7 +9,7 @@ class SearchResults extends React.PureComponent {
       return;
     }
 
-    this.props.relay.loadMore(25, error => {
+    this.props.relay.loadMore(50, error => {
       error && console.log(error);
     });
   };
@@ -20,22 +20,32 @@ class SearchResults extends React.PureComponent {
     });
   };
 
+  _renderFooterView = () =>
+    this.props.relay.hasMore() ? (
+      <View style={styles.indicatorView}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : null;
+
   _renderItem = ({ item: { node } }) => (
     <RepositoryItem repository={node} onPress={this._onPress} />
   );
 
-  _renderSeparatorComponent = () => <View style={{ height: 2 }} />;
+  _renderSeparatorComponent = () => <View style={{ height: 1 }} />;
 
   render = () => {
+    data = {}
     return (
       <FlatList
         data={this.props.results.search.edges}
+        initialNumToRender={50}
         keyExtractor={item => item.node.id}
         onEndReached={this._onEndReached}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.2}
         renderItem={this._renderItem}
         removeClippedSubviews={Platform.OS === 'android'}
         ItemSeparatorComponent={this._renderSeparatorComponent}
+        ListFooterComponent={this._renderFooterView}
       />
     )
   };
@@ -47,7 +57,7 @@ export default createPaginationContainer(
     results: graphql`
       fragment SearchResults_results on Query
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 25 }
+          count: { type: "Int", defaultValue: 50 }
           query: { type: "String!" }
           cursor: { type: "String" }
           type: { type: "SearchType!" }
@@ -96,3 +106,11 @@ export default createPaginationContainer(
     `
   }
 );
+
+const styles = StyleSheet.create({
+  indicatorView: {
+    alignContent: "center",
+    height: 55,
+    justifyContent: "center"
+  }
+});
