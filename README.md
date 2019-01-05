@@ -1,3 +1,1 @@
 ### LostKitty
-
-![screenshot](screenshot.png)
