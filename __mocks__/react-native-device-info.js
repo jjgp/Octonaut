@@ -1,3 +1,3 @@
 export default {
-  getUniqueID: () => "1337"
+  getUniqueID: () => '1337',
 };

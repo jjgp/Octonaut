@@ -43,6 +43,7 @@ describe('get or create authorization', () => {
   it('succeeds', async () => {
     global.fetch = jest.fn(() => ({
       ok: true,
+      json: async () => ({ id: 'id', token: 'token' }),
     }));
 
     const response = await getOrCreateAuthorization(
@@ -51,7 +52,7 @@ describe('get or create authorization', () => {
       'code',
     );
     assertFetch(fetch);
-    expect(response).toEqual({ ok: true });
+    expect(response).toEqual({ json: expect.any(Function), ok: true });
   });
 
   test('fails', async () => {
