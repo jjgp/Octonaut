@@ -1,11 +1,11 @@
-import React from "react";
-import * as Keychain from "react-native-keychain";
-import { getOrCreateAuthorization } from "../api/authorization";
-import Login from "../components/Login";
+import React from 'react';
+import * as Keychain from 'react-native-keychain';
+import { getOrCreateAuthorization } from '../api/authorization';
+import Login from '../components/Login';
 
 export default class Authorization extends React.Component {
   state = {
-    requires2FA: false
+    requires2FA: false,
   };
 
   static _createEntryInKeychain = async (id, token) => {
@@ -26,7 +26,7 @@ export default class Authorization extends React.Component {
         ? await Authorization._createEntryInKeychain(id.toString(), token)
         : await Authorization._setExistingEntryInKeychain(id.toString());
       this.setState({ hasToken: true });
-    } else if (response.headers.has("x-github-otp"))
+    } else if (response.headers.has('x-github-otp'))
       this.setState({ requires2FA: true });
   };
 

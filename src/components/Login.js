@@ -1,13 +1,13 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Colors from "../common/colors";
-import Input from "../components/Input";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Colors from '../common/colors';
+import Input from '../components/Input';
 
 export default class Login extends React.Component {
   state = {
-    username: "",
-    password: "",
-    code: ""
+    username: '',
+    password: '',
+    code: '',
   };
 
   _onPress = () => {
@@ -20,13 +20,13 @@ export default class Login extends React.Component {
       <Input
         style={styles.input}
         selectTextOnFocus={true}
-        placeholder={"Username"}
+        placeholder={'Username'}
         onChangeText={username => this.setState({ username })}
       />
       <Input
         style={styles.input}
         selectTextOnFocus={true}
-        placeholder={"Password"}
+        placeholder={'Password'}
         onChangeText={password => this.setState({ password })}
         secureTextEntry
       />
@@ -34,7 +34,7 @@ export default class Login extends React.Component {
         <Input
           style={styles.input}
           selectTextOnFocus={true}
-          placeholder={"2FA Code"}
+          placeholder={'2FA Code'}
           onChangeText={code => this.setState({ code })}
         />
       )}
@@ -48,24 +48,24 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   inputView: {
     flex: 1,
-    justifyContent: "center",
-    padding: 10
+    justifyContent: 'center',
+    padding: 10,
   },
   input: {
     height: 45,
-    marginVertical: 5
+    marginVertical: 5,
   },
   text: {
-    alignSelf: "center",
+    alignSelf: 'center',
     color: Colors.white,
-    fontFamily: "System",
-    fontSize: 16
+    fontFamily: 'System',
+    fontSize: 16,
   },
   touchable: {
     backgroundColor: Colors.blue,
     borderRadius: 5,
     height: 40,
-    justifyContent: "center",
-    marginVertical: 5
-  }
+    justifyContent: 'center',
+    marginVertical: 5,
+  },
 });

@@ -1,14 +1,14 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { createFragmentContainer, graphql } from "react-relay";
-import Topic from "../Topic";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { createFragmentContainer, graphql } from 'react-relay';
+import Topic from '../Topic';
 
 class RepositoryTopics extends React.PureComponent {
   render = () => {
     const {
       topics: {
-        repositoryTopics: { nodes }
-      }
+        repositoryTopics: { nodes },
+      },
     } = this.props;
     return nodes.length > 0 ? (
       <View style={styles.topicsView}>
@@ -33,12 +33,12 @@ export default createFragmentContainer(
         }
       }
     }
-  `
+  `,
 );
 
 const styles = StyleSheet.create({
   topicsView: {
-    flexDirection: "row",
-    flexWrap: "wrap"
-  }
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
 });

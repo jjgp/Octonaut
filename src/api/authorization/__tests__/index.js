@@ -1,68 +1,68 @@
-import { basicAuthorization, getOrCreateAuthorization } from "../";
+import { basicAuthorization, getOrCreateAuthorization } from '../';
 
-test("basic authorization", () => {
-  expect(basicAuthorization("username", "password")).toEqual(
-    "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+test('basic authorization', () => {
+  expect(basicAuthorization('username', 'password')).toEqual(
+    'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
   );
 });
 
-describe("get or create authorization", () => {
+describe('get or create authorization', () => {
   beforeEach(() => {
     global.Headers = jest.fn(() => ({
-      append: jest.fn()
+      append: jest.fn(),
     }));
   });
 
   const assertFetch = ({
     mock: {
-      calls: [first]
-    }
+      calls: [first],
+    },
   }) => {
     const [url, configuration] = first;
     expect(
-      url.startsWith("https://api.github.com/authorizations/clients/")
+      url.startsWith('https://api.github.com/authorizations/clients/'),
     ).toBe(true);
-    expect(configuration.method).toEqual("PUT");
+    expect(configuration.method).toEqual('PUT');
     const {
-      mock: { calls }
+      mock: { calls },
     } = configuration.headers.append;
-    expect(calls[0][1]).toEqual("Basic dXNlcm5hbWU6cGFzc3dvcmQ=");
-    expect(calls[1][1]).toEqual("application/json");
-    expect(calls[2][1]).toEqual("code");
+    expect(calls[0][1]).toEqual('Basic dXNlcm5hbWU6cGFzc3dvcmQ=');
+    expect(calls[1][1]).toEqual('application/json');
+    expect(calls[2][1]).toEqual('code');
     const { scopes, fingerprint } = JSON.parse(configuration.body);
     expect(scopes).toEqual([
-      "user",
-      "repo",
-      "gist",
-      "notifications",
-      "read:org"
+      'user',
+      'repo',
+      'gist',
+      'notifications',
+      'read:org',
     ]);
-    expect(fingerprint).toEqual("1337");
+    expect(fingerprint).toEqual('1337');
   };
 
-  it("succeeds", async () => {
+  it('succeeds', async () => {
     global.fetch = jest.fn(() => ({
-      ok: true
+      ok: true,
     }));
 
     const response = await getOrCreateAuthorization(
-      "username",
-      "password",
-      "code"
+      'username',
+      'password',
+      'code',
     );
     assertFetch(fetch);
     expect(response).toEqual({ ok: true });
   });
 
-  test("fails", async () => {
+  test('fails', async () => {
     global.fetch = jest.fn(() => ({
-      ok: false
+      ok: false,
     }));
 
     const response = await getOrCreateAuthorization(
-      "username",
-      "password",
-      "code"
+      'username',
+      'password',
+      'code',
     );
     assertFetch(fetch);
     expect(response).toEqual({ ok: false });

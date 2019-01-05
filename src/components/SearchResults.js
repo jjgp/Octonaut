@@ -1,7 +1,13 @@
-import React from "react";
-import { ActivityIndicator, FlatList, Platform, StyleSheet, View } from "react-native";
-import { createPaginationContainer, graphql } from "react-relay";
-import RepositoryItem from "./Repository/RepositoryItem";
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
+import { createPaginationContainer, graphql } from 'react-relay';
+import RepositoryItem from './Repository/RepositoryItem';
 
 class SearchResults extends React.PureComponent {
   _onEndReached = () => {
@@ -15,8 +21,8 @@ class SearchResults extends React.PureComponent {
   };
 
   _onPress = title => {
-    this.props.navigation.navigate("Repository", {
-      title
+    this.props.navigation.navigate('Repository', {
+      title,
     });
   };
 
@@ -34,7 +40,7 @@ class SearchResults extends React.PureComponent {
   _renderSeparatorComponent = () => <View style={{ height: 1 }} />;
 
   render = () => {
-    data = {}
+    data = {};
     return (
       <FlatList
         data={this.props.results.search.edges}
@@ -47,7 +53,7 @@ class SearchResults extends React.PureComponent {
         ItemSeparatorComponent={this._renderSeparatorComponent}
         ListFooterComponent={this._renderFooterView}
       />
-    )
+    );
   };
 }
 
@@ -78,10 +84,10 @@ export default createPaginationContainer(
           }
         }
       }
-    `
+    `,
   },
   {
-    direction: "forward",
+    direction: 'forward',
     getConnectionFromProps(props) {
       return props.results && props.results.search;
     },
@@ -90,7 +96,7 @@ export default createPaginationContainer(
         count,
         cursor,
         query,
-        type
+        type,
       };
     },
     query: graphql`
@@ -103,14 +109,14 @@ export default createPaginationContainer(
         ...SearchResults_results
           @arguments(count: $count, cursor: $cursor, query: $query, type: $type)
       }
-    `
-  }
+    `,
+  },
 );
 
 const styles = StyleSheet.create({
   indicatorView: {
-    alignContent: "center",
+    alignContent: 'center',
     height: 55,
-    justifyContent: "center"
-  }
+    justifyContent: 'center',
+  },
 });

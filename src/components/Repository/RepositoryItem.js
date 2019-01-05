@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, TouchableHighlight, Text } from "react-native";
-import { createFragmentContainer, graphql } from "react-relay";
-import Colors from "../../common/colors";
-import RepositoryStats from "./RepositoryStats";
+import React from 'react';
+import { StyleSheet, TouchableHighlight, Text } from 'react-native';
+import { createFragmentContainer, graphql } from 'react-relay';
+import Colors from '../../common/colors';
+import RepositoryStats from './RepositoryStats';
 
 class RepositoryItem extends React.PureComponent {
   _onPress = () => this.props.onPress(this.props.repository.nameWithOwner);
@@ -13,7 +13,7 @@ class RepositoryItem extends React.PureComponent {
     return (
       <TouchableHighlight style={styles.touchable} onPress={this._onPress}>
         <>
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode={"middle"}>
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode={'middle'}>
             {nameWithOwner}
           </Text>
           {description && (
@@ -37,29 +37,29 @@ export default createFragmentContainer(
       ...RepositoryTopics_topics
       ...RepositoryStats_stats
     }
-  `
+  `,
 );
 
 const styles = StyleSheet.create({
   description: {
     color: Colors.grey,
-    fontFamily: "System",
+    fontFamily: 'System',
     fontSize: 13,
-    marginBottom: 5
+    marginBottom: 5,
   },
   name: {
     color: Colors.blue,
-    fontFamily: "System",
+    fontFamily: 'System',
     fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5
+    fontWeight: 'bold',
+    marginBottom: 5,
   },
   touchable: {
     backgroundColor: Colors.white,
     height: 74,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     paddingBottom: 5,
     paddingHorizontal: 10,
-    paddingTop: 3
-  }
+    paddingTop: 3,
+  },
 });

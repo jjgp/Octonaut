@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { createFragmentContainer, graphql } from "react-relay";
-import Colors from "../common/colors";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { createFragmentContainer, graphql } from 'react-relay';
+import Colors from '../common/colors';
 
 class Topic extends React.PureComponent {
   render = () => (
@@ -14,20 +14,20 @@ class Topic extends React.PureComponent {
 const styles = StyleSheet.create({
   text: {
     color: Colors.blue,
-    fontFamily: "System",
-    fontSize: 13
+    fontFamily: 'System',
+    fontSize: 13,
   },
   touchable: {
-    alignContent: "center",
+    alignContent: 'center',
     backgroundColor: Colors.lightBlue,
     borderBottomWidth: 1,
     borderColor: Colors.white,
     borderRightWidth: 2,
     borderTopWidth: 1,
     borderRadius: 5,
-    flexDirection: "row",
-    padding: 7
-  }
+    flexDirection: 'row',
+    padding: 7,
+  },
 });
 
 export default createFragmentContainer(
@@ -36,5 +36,5 @@ export default createFragmentContainer(
     fragment Topic_topic on Topic {
       name
     }
-  `
+  `,
 );

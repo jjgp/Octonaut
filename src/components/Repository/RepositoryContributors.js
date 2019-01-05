@@ -1,11 +1,11 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import FastImage from "react-native-fast-image";
-import { fetchContributors } from "../../api/v3/statistics";
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { fetchContributors } from '../../api/v3/statistics';
 
 export default class RepositoryContributors extends React.PureComponent {
   state = {
-    contributors: []
+    contributors: [],
   };
 
   componentDidMount = async () => {
@@ -14,7 +14,7 @@ export default class RepositoryContributors extends React.PureComponent {
       this.setState({
         contributors: contributors
           .slice(0, 5)
-          .map(c => ({ id: c.author.id, uri: c.author.avatar_url }))
+          .map(c => ({ id: c.author.id, uri: c.author.avatar_url })),
       });
   };
 
@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 32,
     marginRight: 2,
-    width: 32
+    width: 32,
   },
   contributorsView: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginBottom: 3
-  }
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 3,
+  },
 });

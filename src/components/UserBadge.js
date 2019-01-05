@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import FastImage from "react-native-fast-image";
-import { graphql, QueryRenderer } from "react-relay";
-import environment from "../api/v4/environment";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { graphql, QueryRenderer } from 'react-relay';
+import environment from '../api/v4/environment';
 
 export default props => (
   <TouchableOpacity style={styles.touchable} onPress={props.onPress}>
@@ -35,12 +35,12 @@ const query = graphql`
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: 5,
-    flex: 1
+    flex: 1,
   },
   touchable: {
-    alignContent: "center",
+    alignContent: 'center',
     aspectRatio: 1,
-    justifyContent: "center",
-    borderRadius: 5
-  }
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
 });

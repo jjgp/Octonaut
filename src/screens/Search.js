@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 import {
   ActivityIndicator,
   SafeAreaView,
   StyleSheet,
-  View
-} from "react-native";
-import { graphql, QueryRenderer } from "react-relay";
-import Colors from "../common/colors";
-import SearchResults from "../components/SearchResults";
-import SearchBar from "../components/SearchBar";
-import UserBadge from "../components/UserBadge";
-import environment from "../api/v4/environment";
+  View,
+} from 'react-native';
+import { graphql, QueryRenderer } from 'react-relay';
+import Colors from '../common/colors';
+import SearchResults from '../components/SearchResults';
+import SearchBar from '../components/SearchBar';
+import UserBadge from '../components/UserBadge';
+import environment from '../api/v4/environment';
 
 export default class Search extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   state = {
-    query: "react"
+    query: 'react',
   };
 
   _onSubmit = query => this.setState({ query });
@@ -35,7 +35,7 @@ export default class Search extends React.Component {
       <View style={{ width: 10 }} />
       <UserBadge
         {...this.props}
-        onPress={() => this.props.navigation.navigate("Settings")}
+        onPress={() => this.props.navigation.navigate('Settings')}
       />
     </View>
   );
@@ -48,7 +48,7 @@ export default class Search extends React.Component {
           <QueryRenderer
             environment={environment}
             query={query}
-            variables={{ query: this.state.query, type: "REPOSITORY" }}
+            variables={{ query: this.state.query, type: 'REPOSITORY' }}
             render={({ error, props }) => {
               if (!props) return this._renderActivityIndicator();
               if (error) {
@@ -78,17 +78,17 @@ const query = graphql`
 const styles = StyleSheet.create({
   barView: {
     backgroundColor: Colors.white,
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 55,
-    padding: 10
+    padding: 10,
   },
   searchView: {
     backgroundColor: Colors.lightGrey,
     flex: 1,
-    paddingTop: 2
+    paddingTop: 2,
   },
   indicatorView: {
     flex: 1,
-    justifyContent: "center"
-  }
+    justifyContent: 'center',
+  },
 });
