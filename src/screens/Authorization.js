@@ -25,7 +25,7 @@ export default class Authorization extends React.Component {
       token
         ? await Authorization._createEntryInKeychain(id.toString(), token)
         : await Authorization._setExistingEntryInKeychain(id.toString());
-      this.setState({ hasToken: true });
+      this.props.navigation.navigate('App');
     } else if (response.headers.has('x-github-otp'))
       this.setState({ requires2FA: true });
   };
