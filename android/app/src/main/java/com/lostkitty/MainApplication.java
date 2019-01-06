@@ -3,6 +3,7 @@ package com.lostkitty;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.keychain.KeychainPackage;
@@ -27,8 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new FastImageViewPackage(),
+          new KeychainPackage(),
           new RNDeviceInfo(),
-          new KeychainPackage()
+          new RNGestureHandlerPackage()
       );
     }
 
