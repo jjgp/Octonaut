@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import { createPaginationContainer, graphql } from 'react-relay';
+import Colors from '../common/colors';
 import RepositoryItem from './Repository/RepositoryItem';
 
 class SearchResults extends React.PureComponent {
@@ -37,7 +38,10 @@ class SearchResults extends React.PureComponent {
     <RepositoryItem repository={node} onPress={this._onPress} />
   );
 
-  _renderSeparatorComponent = () => <View style={{ height: 1 }} />;
+  _renderSeparatorComponent = () => (
+    <View style={styles.separatorContainer}>
+      <View style={styles.separatorView} />
+    </View>);
 
   render = () => {
     data = {};
@@ -119,4 +123,14 @@ const styles = StyleSheet.create({
     height: 55,
     justifyContent: 'center',
   },
+  separatorContainer: {
+    backgroundColor: Colors.white,
+    height: 1,
+  },
+  separatorView: {
+    alignSelf: 'center',
+    backgroundColor: Colors.lightGrey,
+    height: 1,
+    width: '95%',
+  }
 });
