@@ -10,13 +10,15 @@ import { createPaginationContainer, graphql } from 'react-relay';
 import Colors from '../common/colors';
 import RepositoryItem from './Repository/RepositoryItem';
 
+const NUM_REPOSITORIES = 50;
+
 class SearchResults extends React.PureComponent {
   _onEndReached = () => {
     if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
       return;
     }
 
-    this.props.relay.loadMore(50, error => {
+    this.props.relay.loadMore(NUM_REPOSITORIES, error => {
       error && console.log(error);
     });
   };
@@ -49,7 +51,7 @@ class SearchResults extends React.PureComponent {
     return (
       <FlatList
         data={this.props.results.search.edges}
-        initialNumToRender={50}
+        initialNumToRender={NUM_REPOSITORIES}
         keyExtractor={item => item.node.id}
         onEndReached={this._onEndReached}
         onEndReachedThreshold={0.2}
