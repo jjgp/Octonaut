@@ -41,7 +41,8 @@ class SearchResults extends React.PureComponent {
   _renderSeparatorComponent = () => (
     <View style={styles.separatorContainer}>
       <View style={styles.separatorView} />
-    </View>);
+    </View>
+  );
 
   render = () => {
     data = {};
@@ -132,5 +133,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightGrey,
     height: 1,
     width: '95%',
-  }
+  },
 });

@@ -11,7 +11,11 @@ class RepositoryItem extends React.PureComponent {
     const { repository } = this.props;
     const { description, nameWithOwner } = repository;
     return (
-      <TouchableHighlight style={styles.touchable} onPress={this._onPress} underlayColor={Colors.lightGrey}>
+      <TouchableHighlight
+        style={styles.touchable}
+        onPress={this._onPress}
+        underlayColor={Colors.lightGrey}
+      >
         <>
           <Text style={styles.name} numberOfLines={1} ellipsizeMode={'middle'}>
             {nameWithOwner}
