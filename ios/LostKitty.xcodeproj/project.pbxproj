@@ -585,6 +585,7 @@
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				26D47370ECE94D05B6D846BB /* libRNDeviceInfo-tvOS.a */,
 				8D51B75C423B478EA6B0AB34 /* libRNDeviceInfo.a */,
+				4A1432CBD37449908A8A49DD /* libRNGestureHandler.a */,
 				F60427A600494DE0B66550E4 /* libRNKeychain.a */,
 			);
 			name = Frameworks;
@@ -648,7 +649,6 @@
 				00E356EF1AD99517003FC87E /* LostKittyTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				D283AC0421E28D6000D8D74E /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -691,14 +691,6 @@
 				B78F3BDC218FEAC00028748C /* libRNDeviceInfo-tvOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D283AC0421E28D6000D8D74E /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				4A1432CBD37449908A8A49DD /* libRNGestureHandler.a */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		D283AC2F21E28D6200D8D74E /* Products */ = {
