@@ -20,9 +20,8 @@ class RepositoryTopics extends React.PureComponent {
   };
 }
 
-export default createFragmentContainer(
-  RepositoryTopics,
-  graphql`
+export default createFragmentContainer(RepositoryTopics, {
+  topics: graphql`
     fragment RepositoryTopics_topics on Repository {
       repositoryTopics(first: 5) {
         nodes {
@@ -34,7 +33,7 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});
 
 const styles = StyleSheet.create({
   topicsView: {

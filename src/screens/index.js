@@ -9,7 +9,7 @@ export default (screens = () => ({
   Authorization,
   Landing: createStackNavigator(
     { Search, Repository, Settings },
-    { initialRouteName: 'Search' },
+    { initialRouteName: 'Search' }
   ),
   Loading,
 }));

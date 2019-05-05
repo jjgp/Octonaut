@@ -22,19 +22,18 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightBlue,
     borderBottomWidth: 1,
     borderColor: Colors.white,
+    borderRadius: 5,
     borderRightWidth: 2,
     borderTopWidth: 1,
-    borderRadius: 5,
     flexDirection: 'row',
     padding: 7,
   },
 });
 
-export default createFragmentContainer(
-  Topic,
-  graphql`
+export default createFragmentContainer(Topic, {
+  topic: graphql`
     fragment Topic_topic on Topic {
       name
     }
   `,
-);
+});

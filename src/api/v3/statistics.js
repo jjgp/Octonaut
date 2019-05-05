@@ -8,7 +8,7 @@ export const fetchContributors = async nameWithOwner => {
       headers: {
         Authorization: await tokenAuthorization(),
       },
-    },
+    }
   );
 
   return response.json();

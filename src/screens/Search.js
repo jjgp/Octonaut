@@ -48,7 +48,6 @@ export default class Search extends React.Component {
           <QueryRenderer
             environment={environment}
             query={query}
-            variables={{ query: this.state.query, type: 'REPOSITORY' }}
             render={({ error, props }) => {
               if (!props) return this._renderActivityIndicator();
               if (error) {
@@ -62,6 +61,8 @@ export default class Search extends React.Component {
                 />
               );
             }}
+            variables={{ query: this.state.query, type: 'REPOSITORY' }}
+            variables={{ query: this.state.query, type: 'REPOSITORY' }}
           />
         </View>
       ) : null}
@@ -82,13 +83,13 @@ const styles = StyleSheet.create({
     height: 55,
     padding: 10,
   },
+  indicatorView: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   searchView: {
     backgroundColor: Colors.lightGrey,
     flex: 1,
     paddingTop: 2,
-  },
-  indicatorView: {
-    flex: 1,
-    justifyContent: 'center',
   },
 });

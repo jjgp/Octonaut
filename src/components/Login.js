@@ -18,27 +18,27 @@ export default class Login extends React.Component {
   render = () => (
     <View style={styles.inputView}>
       <Input
-        style={styles.input}
-        selectTextOnFocus={true}
-        placeholder={'Username'}
         onChangeText={username => this.setState({ username })}
+        placeholder={'Username'}
+        selectTextOnFocus={true}
+        style={styles.input}
       />
       <Input
-        style={styles.input}
-        selectTextOnFocus={true}
-        placeholder={'Password'}
         onChangeText={password => this.setState({ password })}
+        placeholder={'Password'}
         secureTextEntry
+        selectTextOnFocus={true}
+        style={styles.input}
       />
       {this.props.requires2FA && (
         <Input
-          style={styles.input}
-          selectTextOnFocus={true}
-          placeholder={'2FA Code'}
           onChangeText={code => this.setState({ code })}
+          placeholder={'2FA Code'}
+          selectTextOnFocus={true}
+          style={styles.input}
         />
       )}
-      <TouchableOpacity style={styles.touchable} onPress={this._onPress}>
+      <TouchableOpacity onPress={this._onPress} style={styles.touchable}>
         <Text style={styles.text}>Submit</Text>
       </TouchableOpacity>
     </View>
@@ -46,14 +46,14 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    height: 45,
+    marginVertical: 5,
+  },
   inputView: {
     flex: 1,
     justifyContent: 'center',
     padding: 10,
-  },
-  input: {
-    height: 45,
-    marginVertical: 5,
   },
   text: {
     alignSelf: 'center',

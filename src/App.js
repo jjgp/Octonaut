@@ -4,5 +4,5 @@ import screens from './screens';
 export default createAppContainer(
   createSwitchNavigator(screens(), {
     initialRouteName: 'Loading',
-  }),
+  })
 );

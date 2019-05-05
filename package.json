@@ -3,43 +3,48 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "adb:reverse": "adb reverse tcp:8081 tcp:8081",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "relay": "relay-compiler --src ./src --schema ./schema/github.graphql --client-schema ./schema/client.graphql --extensions js jsx",
-    "relay-devtools": "relay-devtools",
+    "prettier": "prettier --write '{,!(node_modules)/**/}*.{js,json}'",
+    "relay": "relay-compiler --src ./src --schema ./schema/github.graphql",
+    "relay:devtools": "relay-devtools",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
     "buffer": "^5.2.1",
-    "moment": "^2.22.2",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
     "react": "16.8.3",
-    "react-native": "0.59.0",
-    "react-native-device-info": "^0.24.3",
-    "react-native-fast-image": "^5.1.0",
-    "react-native-keychain": "^3.0.0",
-    "react-navigation": "^3.0.0",
-    "react-relay": "^1.6.2"
+    "react-native": "0.59.5",
+    "react-native-device-info": "^1.6.1",
+    "react-native-fast-image": "^5.4.2",
+    "react-native-gesture-handler": "^1.2.1",
+    "react-native-keychain": "^3.1.2",
+    "react-native-screens": "^1.0.0-alpha.22",
+    "react-navigation": "^3.9.1",
+    "react-relay": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/runtime": "^7.3.4",
+    "@babel/core": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.4.0",
-    "babel-plugin-relay": "^1.6.2",
-    "jest": "^24.4.0",
-    "eslint": "^5.8.0",
-    "eslint-config-prettier": "^3.3.0",
+    "babel-jest": "^24.7.1",
+    "babel-plugin-relay": "^4.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-react-native": "^3.5.0",
-    "graphql": "^14.0.2",
-    "husky": "^1.1.2",
-    "lint-staged": "^7.3.0",
-    "metro-react-native-babel-preset": "^0.53.0",
-    "prettier": "^1.14.3",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-native": "^3.7.0",
+    "graphql": "^14.2.1",
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "prettier": "^1.17.0",
     "react-test-renderer": "16.8.3",
-    "relay-compiler": "^1.6.2",
+    "relay-compiler": "^4.0.0",
     "relay-devtools": "^1.4.0"
   },
   "husky": {
@@ -47,6 +52,16 @@
       "precommit": "lint-staged",
       "pre-push": "yarn test"
     }
+  },
+  "lint-staged": {
+    "./**/*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "./**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "jest": {
     "preset": "react-native",
@@ -58,16 +73,6 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
-    ]
-  },
-  "lint-staged": {
-    "./**/*.json": [
-      "prettier --write",
-      "git add"
-    ],
-    "./**/*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
     ]
   }
 }

@@ -2,7 +2,7 @@ import { basicAuthorization, getOrCreateAuthorization } from '../';
 
 test('basic authorization', () => {
   expect(basicAuthorization('username', 'password')).toEqual(
-    'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
+    'Basic dXNlcm5hbWU6cGFzc3dvcmQ='
   );
 });
 
@@ -20,7 +20,7 @@ describe('get or create authorization', () => {
   }) => {
     const [url, configuration] = first;
     expect(
-      url.startsWith('https://api.github.com/authorizations/clients/'),
+      url.startsWith('https://api.github.com/authorizations/clients/')
     ).toBe(true);
     expect(configuration.method).toEqual('PUT');
     const {
@@ -49,7 +49,7 @@ describe('get or create authorization', () => {
     const response = await getOrCreateAuthorization(
       'username',
       'password',
-      'code',
+      'code'
     );
     assertFetch(fetch);
     expect(response).toEqual({ json: expect.any(Function), ok: true });
@@ -63,7 +63,7 @@ describe('get or create authorization', () => {
     const response = await getOrCreateAuthorization(
       'username',
       'password',
-      'code',
+      'code'
     );
     assertFetch(fetch);
     expect(response).toEqual({ ok: false });

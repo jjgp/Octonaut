@@ -5,25 +5,25 @@ import Input from '../components/Input';
 
 export default ({ onSubmit }) => (
   <View style={styles.view}>
-    <Image style={styles.image} source={require('./img/search.png')} />
+    <Image source={require('./img/search.png')} style={styles.image} />
     <Input
-      style={styles.input}
       onSubmitEditing={event => onSubmit(event.nativeEvent.text)}
+      style={styles.input}
     />
   </View>
 );
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: Colors.lightGrey,
-    flex: 1,
-  },
   image: {
     height: 20,
     marginVertical: 5,
     resizeMode: 'contain',
     tintColor: Colors.blue,
     width: 20,
+  },
+  input: {
+    backgroundColor: Colors.lightGrey,
+    flex: 1,
   },
   view: {
     alignItems: 'center',

@@ -37,7 +37,7 @@ class SearchResults extends React.PureComponent {
     ) : null;
 
   _renderItem = ({ item: { node } }) => (
-    <RepositoryItem repository={node} onPress={this._onPress} />
+    <RepositoryItem onPress={this._onPress} repository={node} />
   );
 
   _renderSeparatorComponent = () => (
@@ -52,13 +52,13 @@ class SearchResults extends React.PureComponent {
       <FlatList
         data={this.props.results.search.edges}
         initialNumToRender={NUM_REPOSITORIES}
+        ItemSeparatorComponent={this._renderSeparatorComponent}
         keyExtractor={item => item.node.id}
+        ListFooterComponent={this._renderFooterView}
         onEndReached={this._onEndReached}
         onEndReachedThreshold={0.2}
-        renderItem={this._renderItem}
         removeClippedSubviews={Platform.OS === 'android'}
-        ItemSeparatorComponent={this._renderSeparatorComponent}
-        ListFooterComponent={this._renderFooterView}
+        renderItem={this._renderItem}
       />
     );
   };
@@ -117,7 +117,7 @@ export default createPaginationContainer(
           @arguments(count: $count, cursor: $cursor, query: $query, type: $type)
       }
     `,
-  },
+  }
 );
 
 const styles = StyleSheet.create({

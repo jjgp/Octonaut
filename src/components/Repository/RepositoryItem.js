@@ -12,16 +12,16 @@ class RepositoryItem extends React.PureComponent {
     const { description, nameWithOwner } = repository;
     return (
       <TouchableHighlight
-        style={styles.touchable}
         onPress={this._onPress}
+        style={styles.touchable}
         underlayColor={Colors.lightGrey}
       >
         <>
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode={'middle'}>
+          <Text ellipsizeMode={'middle'} numberOfLines={1} style={styles.name}>
             {nameWithOwner}
           </Text>
           {description && (
-            <Text style={styles.description} numberOfLines={1}>
+            <Text numberOfLines={1} style={styles.description}>
               {description}
             </Text>
           )}
@@ -32,9 +32,8 @@ class RepositoryItem extends React.PureComponent {
   };
 }
 
-export default createFragmentContainer(
-  RepositoryItem,
-  graphql`
+export default createFragmentContainer(RepositoryItem, {
+  repository: graphql`
     fragment RepositoryItem_repository on Repository {
       description
       nameWithOwner
@@ -42,7 +41,7 @@ export default createFragmentContainer(
       ...RepositoryStats_stats
     }
   `,
-);
+});
 
 const styles = StyleSheet.create({
   description: {

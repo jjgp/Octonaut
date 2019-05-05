@@ -5,7 +5,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../api/v4/environment';
 
 export default props => (
-  <TouchableOpacity style={styles.touchable} onPress={props.onPress}>
+  <TouchableOpacity onPress={props.onPress} style={styles.touchable}>
     <QueryRenderer
       environment={environment}
       query={query}
@@ -13,9 +13,9 @@ export default props => (
         if (!props || error) return null;
         return (
           <FastImage
-            style={styles.avatar}
             resizeMode={FastImage.resizeMode.contain}
             source={{ uri: props.viewer.avatarUrl }}
+            style={styles.avatar}
           />
         );
       }}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   touchable: {
     alignContent: 'center',
     aspectRatio: 1,
-    justifyContent: 'center',
     borderRadius: 5,
+    justifyContent: 'center',
   },
 });

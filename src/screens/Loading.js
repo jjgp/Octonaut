@@ -10,7 +10,7 @@ export default class Loading extends React.Component {
 
   _bootstrapAsync = async () => {
     this.props.navigation.navigate(
-      (await hasToken()) ? 'Landing' : 'Authorization',
+      (await hasToken()) ? 'Landing' : 'Authorization'
     );
   };
 

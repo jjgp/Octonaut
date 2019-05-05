@@ -25,9 +25,9 @@ export default class RepositoryContributors extends React.PureComponent {
         {contributors.map(({ id, uri }) => (
           <TouchableOpacity key={id}>
             <FastImage
-              style={styles.avatar}
               resizeMode={FastImage.resizeMode.cover}
               source={{ uri }}
+              style={styles.avatar}
             />
           </TouchableOpacity>
         ))}
