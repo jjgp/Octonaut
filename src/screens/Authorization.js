@@ -1,21 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import { getOrCreateAuthorization } from '../api/authorization';
-import Login from '../components/Login';
+import BasicLogin from '../components/BasicLogin';
+import InProgress from '../components/InProgress';
 
-export default class Authorization extends React.Component {
-  state = {
-    requires2FA: false,
+const Authorization = props => {
+  const [inProgress, setInProgress] = useState(false);
+  const [requires2FA, setRequires2FA] = useState(false);
+  const onSubmit = async (username, password, code) => {
+    setInProgress(true);
+    let response;
+    try {
+      response = await getOrCreateAuthorization(username, password, code);
+    } catch (error) {
+    } finally {
+      setInProgress(false);
+    }
+    if (response && response.ok) {
+      props.navigation.navigate('Search');
+    } else if (response.headers.has('x-github-otp')) {
+      setRequires2FA(true);
+    }
   };
 
-  _onSubmit = async (username, password, code) => {
-    const response = await getOrCreateAuthorization(username, password, code);
-    if (response.ok) {
-      this.props.navigation.navigate('Search');
-    } else if (response.headers.has('x-github-otp'))
-      this.setState({ requires2FA: true });
-  };
-
-  render = () => (
-    <Login requires2FA={this.state.requires2FA} onSubmit={this._onSubmit} />
+  return (
+    <ScrollView
+      contentContainerStyle={styles.basicLoginContainer}
+      keyboardShouldPersistTaps="handled"
+    >
+      <KeyboardAvoidingView
+        {...Platform.select({
+          android: {
+            enabled: false,
+          },
+          ios: {
+            behavior: 'padding',
+          },
+        })}
+      >
+        <BasicLogin onSubmit={onSubmit} requires2FA={requires2FA} />
+      </KeyboardAvoidingView>
+      {inProgress && <InProgress />}
+    </ScrollView>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  basicLoginContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+});
+
+export default Authorization;

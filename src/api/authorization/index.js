@@ -1,7 +1,7 @@
 import * as Keychain from 'react-native-keychain';
 import { Buffer } from 'buffer';
 import DeviceInfo from 'react-native-device-info';
-import * as Configuration from '../../common/configuration';
+import Configuration from '../../common/configuration';
 
 export const basicAuthorization = (username, password) => {
   let credentials = Buffer.from(`${username}:${password}`).toString('base64');
