@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -12,63 +12,48 @@ import SearchBar from '../components/SearchBar';
 import UserBadge from '../components/UserBadge';
 import environment from '../api/v4/environment';
 
-export default class Search extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-
-  state = {
-    query: 'react',
-  };
-
-  _onSubmit = query => this.setState({ query });
-
-  _renderActivityIndicator = () => (
+const Search = props => {
+  let [search, setSearch] = useState('react');
+  const { navigation } = props;
+  const onPress = () => navigation.navigate('Settings');
+  const onSubmit = search => setSearch(search);
+  const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
       <ActivityIndicator size="large" />
     </View>
   );
-
-  _renderBarView = () => (
+  const renderBarView = () => (
     <View style={styles.barView}>
-      <SearchBar onSubmit={this._onSubmit} />
+      <SearchBar onSubmit={onSubmit} />
       <View style={{ width: 10 }} />
-      <UserBadge
-        {...this.props}
-        onPress={() => this.props.navigation.navigate('Settings')}
-      />
+      <UserBadge {...props} onPress={onPress} />
     </View>
   );
 
-  render = () => (
+  return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGrey }}>
-      {this._renderBarView()}
-      {this.state.query ? (
+      {renderBarView()}
+      {search ? (
         <View style={styles.searchView}>
           <QueryRenderer
             environment={environment}
             query={query}
             render={({ error, props }) => {
-              if (!props) return this._renderActivityIndicator();
-              if (error) {
-                console.log(error);
-                return <Text>{error}</Text>;
-              }
-              return (
-                <SearchResults
-                  navigation={this.props.navigation}
-                  results={props}
-                />
-              );
+              if (!props) return renderActivityIndicator();
+              if (error) return <Text>{error}</Text>;
+              return <SearchResults navigation={navigation} results={props} />;
             }}
-            variables={{ query: this.state.query, type: 'REPOSITORY' }}
-            variables={{ query: this.state.query, type: 'REPOSITORY' }}
+            variables={{ query: search, type: 'REPOSITORY' }}
           />
         </View>
       ) : null}
     </SafeAreaView>
   );
-}
+};
+
+Search.navigationOptions = {
+  header: null,
+};
 
 const query = graphql`
   query SearchQuery($cursor: String, $query: String!, $type: SearchType!) {
@@ -93,3 +78,5 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
 });
+
+export default Search;

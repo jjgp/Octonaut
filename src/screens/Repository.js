@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default class Repository extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('title'),
-  });
+const Repository = () => <></>;
 
-  render = () => <></>;
-}
+Repository.navigationOptions = ({ navigation }) => ({
+  title: navigation.getParam('title'),
+});
+
+export default Repository;

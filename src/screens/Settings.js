@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default class Settings extends React.Component {
-  static navigationOptions = {
-    title: 'Settings',
-  };
+const Settings = () => <></>;
 
-  render = () => <></>;
-}
+Settings.navigationOptions = {
+  title: 'Settings',
+};
+
+export default Settings;
