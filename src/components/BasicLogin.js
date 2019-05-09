@@ -17,6 +17,7 @@ const BasicLogin = props => {
 
   return (
     <View style={styles.loginContainer}>
+      <Text style={styles.signinText}>Sign in into your GitHub account</Text>
       <Input
         autoCapitalize={'none'}
         autoCorrect={false}
@@ -68,9 +69,14 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     padding: 10,
   },
+  signinText: {
+    alignSelf: 'center',
+    color: Colors.grey,
+    marginBottom: 10,
+  },
   touchable: {
     backgroundColor: Colors.blue,
-    borderRadius: 5,
+    borderRadius: 22.5,
     height: 45,
     justifyContent: 'center',
   },
