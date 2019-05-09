@@ -63,16 +63,16 @@ const BasicLogin = props => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
   loginContainer: {
-    marginVertical: 5,
+    marginVertical: 10,
     padding: 10,
   },
   signinText: {
     alignSelf: 'center',
-    color: Colors.grey,
-    marginBottom: 10,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   touchable: {
     backgroundColor: Colors.blue,
