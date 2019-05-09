@@ -29,8 +29,9 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BD0359C919C147808E0647E9 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F60427A600494DE0B66550E4 /* libRNKeychain.a */; };
 		D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2424FFA22836C75007FAC4D /* SearchListManager.m */; };
-		D2424FFE22837182007FAC4D /* SearchList.m in Sources */ = {isa = PBXBuildFile; fileRef = D2424FFD22837182007FAC4D /* SearchList.m */; };
 		D28402AF227DFAAE00977A43 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */; };
+		D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */; };
+		D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F9B2284CF210092B9B5 /* SearchList.swift */; };
 		E9ECA73D79284399BE749A3F /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1432CBD37449908A8A49DD /* libRNGestureHandler.a */; };
 /* End PBXBuildFile section */
 
@@ -386,11 +387,11 @@
 		97C3A3645D69449DBAF6B9C0 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B7811B84218E49F0007CCF01 /* LostKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LostKitty.entitlements; path = LostKitty/LostKitty.entitlements; sourceTree = "<group>"; };
-		D2424FF922836C75007FAC4D /* SearchListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchListManager.h; sourceTree = "<group>"; };
 		D2424FFA22836C75007FAC4D /* SearchListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchListManager.m; sourceTree = "<group>"; };
-		D2424FFC22837182007FAC4D /* SearchList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchList.h; sourceTree = "<group>"; };
-		D2424FFD22837182007FAC4D /* SearchList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchList.m; sourceTree = "<group>"; };
 		D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		D2E33F6C2284CC810092B9B5 /* LostKitty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LostKitty-Bridging-Header.h"; path = "LostKitty/LostKitty-Bridging-Header.h"; sourceTree = "<group>"; };
+		D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListManager.swift; sourceTree = "<group>"; };
+		D2E33F9B2284CF210092B9B5 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		F60427A600494DE0B66550E4 /* libRNKeychain.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNKeychain.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -517,6 +518,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				D2E33F6C2284CC810092B9B5 /* LostKitty-Bridging-Header.h */,
 				B7811B84218E49F0007CCF01 /* LostKitty.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -665,12 +667,12 @@
 		D2424FF822836C62007FAC4D /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				D2424FF922836C75007FAC4D /* SearchListManager.h */,
+				D2E33F9B2284CF210092B9B5 /* SearchList.swift */,
 				D2424FFA22836C75007FAC4D /* SearchListManager.m */,
-				D2424FFC22837182007FAC4D /* SearchList.h */,
-				D2424FFD22837182007FAC4D /* SearchList.m */,
+				D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */,
 			);
-			path = Search;
+			name = Search;
+			path = LostKitty/Search;
 			sourceTree = "<group>";
 		};
 		D283AC2F21E28D6200D8D74E /* Products */ = {
@@ -744,6 +746,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = SZBVKVY4W2;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1198,10 +1201,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */,
 				D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */,
-				D2424FFE22837182007FAC4D /* SearchList.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1235,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1267,6 +1272,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1301,6 +1307,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LostKitty/LostKitty.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1321,6 +1328,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LostKitty;
+				SWIFT_OBJC_BRIDGING_HEADER = "LostKitty/LostKitty-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1330,6 +1340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LostKitty/LostKitty.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SZBVKVY4W2;
@@ -1349,6 +1360,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LostKitty;
+				SWIFT_OBJC_BRIDGING_HEADER = "LostKitty/LostKitty-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
