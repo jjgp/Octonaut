@@ -1,5 +1,5 @@
 //
-//  SearchListViewManager.h
+//  SearchListManager.h
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/8/19.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchListViewManager : RCTViewManager
+@interface SearchListManager : RCTViewManager
 
 @end
 

@@ -1,5 +1,5 @@
 //
-//  SearchListView.h
+//  SearchList.h
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/8/19.
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchListView : UITableView
+@interface SearchList : UITableView
 @end
 
 NS_ASSUME_NONNULL_END
