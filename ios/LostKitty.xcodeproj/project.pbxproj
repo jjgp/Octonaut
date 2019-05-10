@@ -30,6 +30,8 @@
 		BD0359C919C147808E0647E9 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F60427A600494DE0B66550E4 /* libRNKeychain.a */; };
 		D2213E14228525A000BE187F /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2213E13228525A000BE187F /* JSON.swift */; };
 		D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2424FFA22836C75007FAC4D /* SearchListManager.m */; };
+		D24312EE2285F74600017C66 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24312EC2285F74600017C66 /* SearchListCell.swift */; };
+		D24312EF2285F74600017C66 /* SearchListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24312ED2285F74600017C66 /* SearchListCell.xib */; };
 		D28402AF227DFAAE00977A43 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */; };
 		D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */; };
 		D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F9B2284CF210092B9B5 /* SearchList.swift */; };
@@ -390,6 +392,8 @@
 		B7811B84218E49F0007CCF01 /* LostKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LostKitty.entitlements; path = LostKitty/LostKitty.entitlements; sourceTree = "<group>"; };
 		D2213E13228525A000BE187F /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		D2424FFA22836C75007FAC4D /* SearchListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchListManager.m; sourceTree = "<group>"; };
+		D24312EC2285F74600017C66 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
+		D24312ED2285F74600017C66 /* SearchListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchListCell.xib; sourceTree = "<group>"; };
 		D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D2E33F6C2284CC810092B9B5 /* LostKitty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LostKitty-Bridging-Header.h"; path = "LostKitty/LostKitty-Bridging-Header.h"; sourceTree = "<group>"; };
 		D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListManager.swift; sourceTree = "<group>"; };
@@ -680,6 +684,8 @@
 			isa = PBXGroup;
 			children = (
 				D2E33F9B2284CF210092B9B5 /* SearchList.swift */,
+				D24312EC2285F74600017C66 /* SearchListCell.swift */,
+				D24312ED2285F74600017C66 /* SearchListCell.xib */,
 				D2424FFA22836C75007FAC4D /* SearchListManager.m */,
 				D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */,
 			);
@@ -1176,6 +1182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24312EF2285F74600017C66 /* SearchListCell.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -1218,6 +1225,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				D2213E14228525A000BE187F /* JSON.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				D24312EE2285F74600017C66 /* SearchListCell.swift in Sources */,
 				D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
