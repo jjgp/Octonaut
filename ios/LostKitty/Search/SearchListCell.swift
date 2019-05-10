@@ -9,16 +9,20 @@
 import UIKit
 
 class SearchListCell: UITableViewCell {
+  
+    @IBOutlet var title: UILabel!
+    @IBOutlet  var summary: UILabel!
+  
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+// MARK:- Reuse & Nib
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+extension SearchListCell {
+  
+  static let reuseIdentifier = "SearchListCell"
+  
+  static func nib() -> UINib {
+    return UINib(nibName: reuseIdentifier, bundle: nil)
+  }
+  
 }

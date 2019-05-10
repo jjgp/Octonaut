@@ -49,24 +49,20 @@ class SearchList: UITableView {
     self.results = nodes.compactMap { SearchListNode(json: $0) }
   }
   
-}
-
-// MARK:- Lifecycle
-
-extension SearchList {
+  override init(frame: CGRect, style: UITableView.Style) {
+    super.init(frame: frame, style: style)
+    dataSource = self
+    delegate = self
+    refreshControl = UIRefreshControl()
+    refreshControl?.addTarget(self,
+                              action: #selector(onRefresh),
+                              for: .valueChanged)
+    register(SearchListCell.nib(), forCellReuseIdentifier: SearchListCell.reuseIdentifier)
+    tableFooterView = UIView(frame: .zero)
+  }
   
-  override func willMove(toSuperview newSuperview: UIView?) {
-    if newSuperview != nil {
-      dataSource = self
-      delegate = self
-      refreshControl = UIRefreshControl()
-      refreshControl?.addTarget(self,
-                                action: #selector(onRefresh),
-                                for: .valueChanged)
-      tableFooterView = UIView(frame: .zero)
-    }
-    
-    super.willMove(toSuperview: newSuperview)
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
 }
@@ -85,13 +81,19 @@ extension SearchList {
 
 extension SearchList: UITableViewDataSource {
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 75
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return results.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: UITableViewCell = .init()
-    cell.textLabel?.text = results[indexPath.row].nameWithOwner
+    let cell = tableView.dequeueReusableCell(withIdentifier: SearchListCell.reuseIdentifier) as! SearchListCell
+    let result = results[indexPath.row]
+    cell.title.text = result.nameWithOwner
+    cell.summary.text = result.description
     return cell
   }
   
