@@ -28,6 +28,7 @@
 		85C89291B8E64F04833411CC /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D51B75C423B478EA6B0AB34 /* libRNDeviceInfo.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BD0359C919C147808E0647E9 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F60427A600494DE0B66550E4 /* libRNKeychain.a */; };
+		D2213E14228525A000BE187F /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2213E13228525A000BE187F /* JSON.swift */; };
 		D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2424FFA22836C75007FAC4D /* SearchListManager.m */; };
 		D28402AF227DFAAE00977A43 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */; };
 		D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */; };
@@ -387,6 +388,7 @@
 		97C3A3645D69449DBAF6B9C0 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B7811B84218E49F0007CCF01 /* LostKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LostKitty.entitlements; path = LostKitty/LostKitty.entitlements; sourceTree = "<group>"; };
+		D2213E13228525A000BE187F /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		D2424FFA22836C75007FAC4D /* SearchListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchListManager.m; sourceTree = "<group>"; };
 		D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D2E33F6C2284CC810092B9B5 /* LostKitty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LostKitty-Bridging-Header.h"; path = "LostKitty/LostKitty-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				B7811B84218E49F0007CCF01 /* LostKitty.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				D2213DE62285258B00BE187F /* Utility */,
 				D2424FF822836C62007FAC4D /* Search */,
 			);
 			name = LostKitty;
@@ -662,6 +665,14 @@
 				B78F3BDC218FEAC00028748C /* libRNDeviceInfo-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D2213DE62285258B00BE187F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D2213E13228525A000BE187F /* JSON.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		D2424FF822836C62007FAC4D /* Search */ = {
@@ -1204,6 +1215,7 @@
 				D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */,
 				D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				D2213E14228525A000BE187F /* JSON.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */,
 			);
