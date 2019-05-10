@@ -8,10 +8,12 @@
 
 import UIKit
 
-fileprivate struct SearchListResults {
+fileprivate struct SearchListNode {
   
-  init?(json: JSON) {
-    return nil
+  let nameWithOwner: String?
+  
+  init(json: JSON) {
+    nameWithOwner = json.nameWithOwner?.stringValue
   }
   
 }
@@ -19,7 +21,7 @@ fileprivate struct SearchListResults {
 @objc(SearchList)
 class SearchList: UITableView {
   
-  private var results = [SearchListResults]() {
+  private var results = [SearchListNode]() {
     didSet {
       reloadData()
     }
@@ -30,7 +32,7 @@ class SearchList: UITableView {
       return
     }
     
-    self.results = nodes.compactMap { SearchListResults(json: $0) }
+    self.results = nodes.compactMap { SearchListNode(json: $0) }
   }
   
 }
@@ -74,7 +76,9 @@ extension SearchList: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return .init()
+    let cell: UITableViewCell = .init()
+    cell.textLabel?.text = results[indexPath.row].nameWithOwner
+    return cell
   }
   
 }
