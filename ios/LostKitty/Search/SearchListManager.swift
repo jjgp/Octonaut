@@ -3,7 +3,7 @@
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/9/19.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 Jason Prasad. All rights reserved.
 //
 
 import UIKit

@@ -672,7 +672,8 @@
 			children = (
 				D2213E13228525A000BE187F /* JSON.swift */,
 			);
-			path = Utility;
+			name = Utility;
+			path = LostKitty/Utility;
 			sourceTree = "<group>";
 		};
 		D2424FF822836C62007FAC4D /* Search */ = {
@@ -749,7 +750,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 940;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = "Jason Prasad";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
