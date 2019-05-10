@@ -14,7 +14,7 @@ const Search = props => {
   let [search, setSearch] = useState('react');
   const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
-      <ActivityIndicator size="large" />
+      <ActivityIndicator />
     </View>
   );
 

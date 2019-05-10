@@ -10,10 +10,24 @@ import UIKit
 
 fileprivate struct SearchListNode {
   
+  let description: String?
+  let forkCount: Int?
+  let id: String?
+  let language: (name: String, color: String)?
   let nameWithOwner: String?
+  let pushedAt: String?
+  let stargazers: Int?
+  let topics: [String]?
   
   init(json: JSON) {
+    description = json.description?.stringValue
+    forkCount = json.forkCount?.intValue
+    id = json.id?.stringValue
+    language = json.languages?.nodes?.arrayOfJSON?.first.flatMap { ($0.name?.stringValue, $0.color?.stringValue) as? (String, String) }
     nameWithOwner = json.nameWithOwner?.stringValue
+    pushedAt = json.pushedAt?.stringValue
+    stargazers = json.stargazers?.totalCount?.intValue
+    topics = json.repositoryTopics?.nodes?.arrayOfJSON?.compactMap { $0.topic?.stringValue }
   }
   
 }
