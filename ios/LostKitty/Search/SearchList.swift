@@ -35,6 +35,7 @@ fileprivate struct SearchListNode {
 @objc(SearchList)
 class SearchList: UITableView {
   
+  @objc var onRefresh: RCTDirectEventBlock?
   private var results = [SearchListNode]() {
     didSet {
       reloadData()
@@ -55,7 +56,7 @@ class SearchList: UITableView {
     delegate = self
     refreshControl = UIRefreshControl()
     refreshControl?.addTarget(self,
-                              action: #selector(onRefresh),
+                              action: #selector(refreshValueChanged),
                               for: .valueChanged)
     register(SearchListCell.nib(), forCellReuseIdentifier: SearchListCell.reuseIdentifier)
     tableFooterView = UIView(frame: .zero)
@@ -71,8 +72,8 @@ class SearchList: UITableView {
 
 extension SearchList {
   
-  @objc func onRefresh() {
-    // TODO: bubble event
+  @objc func refreshValueChanged() {
+    self.onRefresh?([:])
   }
   
 }

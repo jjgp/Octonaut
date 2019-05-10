@@ -10,6 +10,7 @@
 
 @interface RCT_EXTERN_MODULE(SearchListManager, RCTViewManager)
 
+RCT_EXPORT_VIEW_PROPERTY(onRefresh, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(results, NSDictionary)
 
 @end

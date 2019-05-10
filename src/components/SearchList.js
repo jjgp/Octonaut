@@ -5,11 +5,28 @@ import { createPaginationContainer, graphql } from 'react-relay';
 
 const NativeSearchList = requireNativeComponent('SearchList', null);
 
-const SearchList = props => (
-  <View style={[{ flex: 1 }, props.style]}>
-    <NativeSearchList results={props.results} style={{ flex: 1 }} />
-  </View>
-);
+const SearchList = props => {
+  const onRefresh = () => {
+    props.relay.loadMore(50, error => {
+      error && console.log(error);
+    });
+  };
+
+  return (
+    <View style={[{ flex: 1 }, props.style]}>
+      <NativeSearchList
+        onRefresh={onRefresh}
+        results={props.results}
+        style={{ flex: 1 }}
+      />
+    </View>
+  );
+};
+
+SearchList.propTypes = {
+  onRefresh: PropTypes.func,
+  results: PropTypes.object,
+};
 
 export default createPaginationContainer(
   SearchList,
