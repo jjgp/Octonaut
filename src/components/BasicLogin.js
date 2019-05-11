@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../common/colors';
 import Input from './Input';
@@ -8,12 +8,15 @@ const BasicLogin = props => {
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
   const isValid = username.length > 0 && password.length > 0;
-  const onChangeUsername = username => setUsername(username);
-  const onChangePassword = password => setPassword(password);
-  const onChangeCode = code => setCode(code);
+  const onChangeUsername = useCallback(username => setUsername(username), []);
+  const onChangePassword = useCallback(password => setPassword(password), []);
+  const onChangeCode = useCallback(code => setCode(code), []);
   const onPress = () => props.onSubmit(username, password, code);
-  const passwordInputRef = React.createRef();
-  const onUsernameSubmitEditting = () => passwordInputRef.current.focus();
+  const passwordInputRef = useRef();
+  const onUsernameSubmitEditting = useCallback(
+    () => passwordInputRef.current.focus(),
+    [passwordInputRef]
+  );
 
   return (
     <View style={styles.loginContainer}>
@@ -22,6 +25,7 @@ const BasicLogin = props => {
         autoCapitalize={'none'}
         autoCorrect={false}
         blurOnSubmit={false}
+        containerStyle={{ marginBottom: 20 }}
         editable={!props.requires2FA}
         onChangeText={onChangeUsername}
         onSubmitEditing={onUsernameSubmitEditting}
@@ -30,7 +34,7 @@ const BasicLogin = props => {
         selectTextOnFocus={true}
       />
       <Input
-        containerStyle={styles.inputContainer}
+        containerStyle={{ marginBottom: 20 }}
         editable={!props.requires2FA}
         onChangeText={onChangePassword}
         placeholder={'Password'}
@@ -41,7 +45,7 @@ const BasicLogin = props => {
       />
       {props.requires2FA && (
         <Input
-          containerStyle={styles.inputContainer}
+          containerStyle={{ marginBottom: 20 }}
           onChangeText={onChangeCode}
           placeholder={'2FA Code'}
           ref={passwordInputRef}
@@ -62,9 +66,6 @@ const BasicLogin = props => {
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    marginVertical: 20,
-  },
   loginContainer: {
     marginVertical: 10,
     padding: 10,

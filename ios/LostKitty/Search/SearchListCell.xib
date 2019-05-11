@@ -31,20 +31,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujZ-p9-HeO" userLabel="Language">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="language" translatesAutoresizingMaskIntoConstraints="NO" id="uHD-qx-a76" userLabel="Language">
                         <rect key="frame" x="16" y="60.5" width="14" height="14"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="14" id="Ywo-Lp-vqg"/>
-                            <constraint firstAttribute="height" constant="14" id="j4U-LI-SPQ"/>
+                            <constraint firstAttribute="width" constant="14" id="Blq-lk-j1E"/>
+                            <constraint firstAttribute="height" constant="14" id="Qtp-8p-xJp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="eTb-Ya-N28"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="7"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
+                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="AFK-8u-dnj" userLabel="Star">
                         <rect key="frame" x="30" y="60.5" width="14" height="14"/>
                         <constraints>
@@ -68,15 +61,15 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="AFK-8u-dnj" firstAttribute="leading" secondItem="ujZ-p9-HeO" secondAttribute="trailing" id="5qM-qr-fKG"/>
                     <constraint firstAttribute="bottom" secondItem="hJI-WA-LzS" secondAttribute="bottom" id="5tq-Jh-OQ0"/>
                     <constraint firstItem="anG-OO-Bcf" firstAttribute="leading" secondItem="AFK-8u-dnj" secondAttribute="trailing" id="6TX-5j-EFz"/>
                     <constraint firstItem="uzD-N1-6hU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9o6-uA-J2B"/>
                     <constraint firstItem="HT2-Mv-MTZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="CZN-7M-ZR9"/>
+                    <constraint firstItem="uHD-qx-a76" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="GHf-zf-KbA"/>
+                    <constraint firstAttribute="bottom" secondItem="uHD-qx-a76" secondAttribute="bottom" id="GvQ-Jd-Ic2"/>
+                    <constraint firstItem="AFK-8u-dnj" firstAttribute="leading" secondItem="uHD-qx-a76" secondAttribute="trailing" id="H7M-AV-R1q"/>
                     <constraint firstAttribute="bottom" secondItem="AFK-8u-dnj" secondAttribute="bottom" id="KWK-Rd-7bC"/>
-                    <constraint firstItem="ujZ-p9-HeO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ggM-DE-GjZ"/>
                     <constraint firstItem="uzD-N1-6hU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="hez-ZL-SdI"/>
-                    <constraint firstAttribute="bottom" secondItem="ujZ-p9-HeO" secondAttribute="bottom" id="inT-v9-a2y"/>
                     <constraint firstAttribute="bottom" secondItem="anG-OO-Bcf" secondAttribute="bottom" id="nm3-I9-D5X"/>
                     <constraint firstItem="hJI-WA-LzS" firstAttribute="leading" secondItem="anG-OO-Bcf" secondAttribute="trailing" id="qTp-gA-7bf"/>
                     <constraint firstItem="HT2-Mv-MTZ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="rqv-wz-nwH"/>
@@ -94,6 +87,7 @@
     <resources>
         <image name="clock" width="22" height="25"/>
         <image name="fork" width="15.5" height="25"/>
+        <image name="language" width="27" height="27"/>
         <image name="star" width="22" height="25"/>
     </resources>
 </document>

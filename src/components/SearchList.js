@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   findNodeHandle,
@@ -60,8 +60,8 @@ export default createPaginationContainer(
       fragment SearchList_results on Query
         @argumentDefinitions(
           count: { type: "Int" }
-          query: { type: "String!" }
           cursor: { type: "String" }
+          query: { type: "String!" }
           type: { type: "SearchType!" }
         ) {
         search(first: $count, after: $cursor, query: $query, type: $type)

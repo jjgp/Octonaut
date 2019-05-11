@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -12,21 +12,26 @@ import InProgress from '../components/InProgress';
 const Authorization = props => {
   const [inProgress, setInProgress] = useState(false);
   const [requires2FA, setRequires2FA] = useState(false);
-  const onSubmit = async (username, password, code) => {
-    setInProgress(true);
-    let response;
-    try {
-      response = await getOrCreateAuthorization(username, password, code);
-    } catch (error) {
-    } finally {
-      setInProgress(false);
-    }
-    if (response && response.ok) {
-      props.navigation.navigate('Search');
-    } else if (response.headers.has('x-github-otp')) {
-      setRequires2FA(true);
-    }
-  };
+  const onSubmit = useCallback(
+    (username, password, code) => {
+      (async () => {
+        setInProgress(true);
+        let response;
+        try {
+          response = await getOrCreateAuthorization(username, password, code);
+        } catch (error) {
+        } finally {
+          setInProgress(false);
+        }
+        if (response && response.ok) {
+          props.navigation.navigate('Search');
+        } else if (response.headers.has('x-github-otp')) {
+          setRequires2FA(true);
+        }
+      })();
+    },
+    [props.navigation]
+  );
 
   return (
     <ScrollView

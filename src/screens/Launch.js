@@ -9,7 +9,7 @@ const Launch = props => {
         (await hasToken()) ? 'Landing' : 'Authorization'
       );
     })();
-  }, []);
+  }, [props.navigation]);
 
   return (
     <View style={styles.container}>

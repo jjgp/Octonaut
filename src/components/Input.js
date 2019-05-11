@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { StyleSheet, TextInput } from 'react-native';
 import Colors from '../common/colors';
@@ -6,8 +6,8 @@ import Colors from '../common/colors';
 const Input = React.forwardRef((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const { containerStyle, inputStyle, ...rest } = props;
-  const onBlur = () => setIsFocused(false);
-  const onFocus = () => setIsFocused(true);
+  const onBlur = useCallback(() => setIsFocused(false), []);
+  const onFocus = useCallback(() => setIsFocused(true), []);
 
   return (
     <View
