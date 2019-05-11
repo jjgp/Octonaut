@@ -12,6 +12,7 @@ const NATIVE_COMPONENT_NAME = 'SearchList';
 const NativeSearchList = requireNativeComponent(NATIVE_COMPONENT_NAME);
 
 const SearchList = props => {
+  // TODO: likely can refactor this to useEffect with cancelation.
   const nativeComponentRef = useRef();
   const endRefreshing = useCallback(() => {
     UIManager.dispatchViewManagerCommand(

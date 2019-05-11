@@ -35,6 +35,7 @@ fileprivate struct SearchListNode {
 @objc(SearchList)
 class SearchList: UITableView {
   
+  @objc var onDidSelect: RCTDirectEventBlock?
   @objc var onEndReached: RCTDirectEventBlock?
   @objc var onRefresh: RCTDirectEventBlock?
   private var results = [SearchListNode]() {
@@ -116,8 +117,11 @@ extension SearchList: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     defer { tableView.deselectRow(at: indexPath, animated: true) }
-    
-    // TODO: bubble event
+    let row = indexPath.row
+    onDidSelect?([
+      "id": results[indexPath.row].id ?? "",
+      "row": row
+      ])
   }
   
 }
