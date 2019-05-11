@@ -10,6 +10,8 @@ import environment from '../api/v4/environment';
 import Colors from '../common/colors';
 import SearchList from '../components/SearchList';
 
+const COUNT = 50;
+
 const Search = props => {
   let [search, setSearch] = useState('react');
   const renderActivityIndicator = () => (
@@ -28,9 +30,9 @@ const Search = props => {
             render={({ error, props }) => {
               if (!props) return renderActivityIndicator();
               if (error) return <Text>{error}</Text>;
-              return <SearchList results={props} />;
+              return <SearchList count={COUNT} results={props} />;
             }}
-            variables={{ query: search, type: 'REPOSITORY' }}
+            variables={{ count: COUNT, query: search, type: 'REPOSITORY' }}
           />
         </View>
       ) : null}
@@ -43,8 +45,8 @@ Search.navigationOptions = {
 };
 
 const query = graphql`
-  query SearchQuery($cursor: String, $query: String!, $type: SearchType!) {
-    ...SearchList_results @arguments(query: $query, type: $type)
+  query SearchQuery($count: Int!, $query: String!, $type: SearchType!) {
+    ...SearchList_results @arguments(count: $count, query: $query, type: $type)
   }
 `;
 

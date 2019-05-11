@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { requireNativeComponent, View } from 'react-native';
+import {
+  findNodeHandle,
+  requireNativeComponent,
+  UIManager,
+  View,
+} from 'react-native';
 import { createPaginationContainer, graphql } from 'react-relay';
 
-const NativeSearchList = requireNativeComponent('SearchList', null);
+const NATIVE_COMPONENT_NAME = 'SearchList';
+const NativeSearchList = requireNativeComponent(NATIVE_COMPONENT_NAME);
 
 const SearchList = props => {
-  const onRefresh = () => {
-    props.relay.loadMore(50, error => {
+  const nativeComponentRef = useRef();
+  const endRefreshing = useCallback(() => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(nativeComponentRef.current),
+      UIManager.getViewManagerConfig(NATIVE_COMPONENT_NAME).Commands
+        .endRefreshing,
+      []
+    );
+  }, [nativeComponentRef]);
+  const { count, relay } = props;
+  const onEndReached = useCallback(() => {
+    relay.loadMore(count, error => {
       error && console.log(error);
     });
-  };
+  }, [count, relay]);
+  const onRefresh = useCallback(() => {
+    relay.loadMore(count, error => {
+      endRefreshing();
+      error && console.log(error);
+    });
+  }, [count, endRefreshing, relay]);
 
   return (
     <View style={[{ flex: 1 }, props.style]}>
       <NativeSearchList
+        onEndReached={onEndReached}
         onRefresh={onRefresh}
+        ref={nativeComponentRef}
         results={props.results}
         style={{ flex: 1 }}
       />
@@ -24,6 +48,7 @@ const SearchList = props => {
 };
 
 SearchList.propTypes = {
+  onEndReached: PropTypes.func,
   onRefresh: PropTypes.func,
   results: PropTypes.object,
 };
@@ -34,7 +59,7 @@ export default createPaginationContainer(
     results: graphql`
       fragment SearchList_results on Query
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 50 }
+          count: { type: "Int" }
           query: { type: "String!" }
           cursor: { type: "String" }
           type: { type: "SearchType!" }

@@ -9,14 +9,26 @@
 import UIKit
 
 @objc(SearchListManager)
-class SearchListManager: RCTViewManager {
+class SearchListManager: RCTViewManager {}
+
+extension SearchListManager {
+  
+  static override func requiresMainQueueSetup() -> Bool {
+    return true
+  }
   
   override func view() -> UIView! {
     return SearchList()
   }
   
-  static override func requiresMainQueueSetup() -> Bool {
-    return true
+}
+
+extension SearchListManager {
+  
+  @objc func endRefreshing(_ reactTag: NSNumber) {
+    bridge.uiManager.addUIBlock { uiManager, viewRegistry  in
+      (viewRegistry?[reactTag] as? SearchList)?.endRefreshing()
+    }
   }
   
 }

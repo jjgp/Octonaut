@@ -15,8 +15,6 @@ class SearchListCell: UITableViewCell {
   
 }
 
-// MARK:- Reuse & Nib
-
 extension SearchListCell {
   
   static let reuseIdentifier = "SearchListCell"

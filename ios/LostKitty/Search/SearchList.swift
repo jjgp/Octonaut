@@ -35,19 +35,12 @@ fileprivate struct SearchListNode {
 @objc(SearchList)
 class SearchList: UITableView {
   
+  @objc var onEndReached: RCTDirectEventBlock?
   @objc var onRefresh: RCTDirectEventBlock?
   private var results = [SearchListNode]() {
     didSet {
       reloadData()
     }
-  }
-  
-  @objc func setResults(_ results: [String: Any]?) {
-    guard let nodes = JSON(results)?.search?.edges?.arrayOfJSON?.compactMap({ $0.node }) else {
-      return
-    }
-    
-    self.results = nodes.compactMap { SearchListNode(json: $0) }
   }
   
   override init(frame: CGRect, style: UITableView.Style) {
@@ -68,17 +61,28 @@ class SearchList: UITableView {
   
 }
 
-// MARK:- Refresh
-
 extension SearchList {
   
-  @objc func refreshValueChanged() {
-    self.onRefresh?([:])
+  func endRefreshing() {
+    refreshControl?.endRefreshing()
+  }
+  
+  @objc func setResults(_ results: [String: Any]?) {
+    guard let nodes = JSON(results)?.search?.edges?.arrayOfJSON?.compactMap({ $0.node }) else {
+      return
+    }
+    self.results = nodes.compactMap { SearchListNode(json: $0) }
   }
   
 }
 
-// MARK:- UITableViewDataSource
+extension SearchList {
+  
+  @objc func refreshValueChanged() {
+    onRefresh?([:])
+  }
+  
+}
 
 extension SearchList: UITableViewDataSource {
   
@@ -100,15 +104,13 @@ extension SearchList: UITableViewDataSource {
   
 }
 
-// MARK:- UITableViewDelegate
-
 extension SearchList: UITableViewDelegate {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     // Attribution: https://stackoverflow.com/a/31454471
     let offset = scrollView.contentOffset.y + scrollView.frame.size.height
     if (offset >= scrollView.contentSize.height - 1) {
-      // TODO: bubble event
+      onEndReached?([:])
     }
   }
   
