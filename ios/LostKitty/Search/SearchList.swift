@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 @objc(SearchList)
 class SearchList: UITableView {
   
