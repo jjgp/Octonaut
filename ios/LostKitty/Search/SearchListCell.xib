@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mIu-sw-hNC" userLabel="Stats">
-                                <rect key="frame" x="0.0" y="46.5" width="221.5" height="18"/>
+                                <rect key="frame" x="0.0" y="46.5" width="222.5" height="18"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YlU-Aw-Ucv" userLabel="Language">
                                         <rect key="frame" x="0.0" y="0.0" width="77" height="18"/>
@@ -74,8 +74,8 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="g0s-wk-c1G" userLabel="Time ago">
-                                        <rect key="frame" x="144" y="0.0" width="77.5" height="18"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="g0s-wk-c1G" userLabel="From Now">
+                                        <rect key="frame" x="144" y="0.0" width="78.5" height="18"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="hJI-WA-LzS" userLabel="Clock">
                                                 <rect key="frame" x="0.0" y="3" width="12" height="12"/>
@@ -84,8 +84,8 @@
                                                     <constraint firstAttribute="height" constant="12" id="Wmk-Kq-JzL"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-PK-aBT" userLabel="Time ago">
-                                                <rect key="frame" x="14" y="0.0" width="63.5" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-PK-aBT" userLabel="From Now">
+                                                <rect key="frame" x="14" y="0.0" width="64.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.46274509800000002" green="0.48627450979999998" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -106,6 +106,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="fromNowImageView" destination="hJI-WA-LzS" id="mvy-YO-Wtz"/>
+                <outlet property="fromNowLabel" destination="tfB-PK-aBT" id="klW-gg-mq8"/>
+                <outlet property="fromNowStackView" destination="g0s-wk-c1G" id="pfF-oO-pDY"/>
                 <outlet property="languageImageView" destination="uHD-qx-a76" id="ajg-CC-u4k"/>
                 <outlet property="languageLabel" destination="hfc-Oy-f1Q" id="HiV-cd-xEx"/>
                 <outlet property="languageStackView" destination="YlU-Aw-Ucv" id="WI1-Fa-bed"/>
@@ -113,9 +116,6 @@
                 <outlet property="starsLabel" destination="xY3-N9-Tu9" id="rKX-Ku-nl6"/>
                 <outlet property="starsStackView" destination="9F4-c0-cOi" id="iow-DP-tOc"/>
                 <outlet property="summaryLabel" destination="HT2-Mv-MTZ" id="4dB-o1-6NE"/>
-                <outlet property="timeAgoImageView" destination="hJI-WA-LzS" id="jhB-NW-JO5"/>
-                <outlet property="timeAgoLabel" destination="tfB-PK-aBT" id="hC3-vZ-S4A"/>
-                <outlet property="timeAgoStackView" destination="g0s-wk-c1G" id="6Vm-kb-xdy"/>
                 <outlet property="titleLabel" destination="uzD-N1-6hU" id="RFD-IC-dI3"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="167.07589285714286"/>

@@ -12,20 +12,20 @@ struct SearchListCellModel {
   
   let description: String?
   let forkCount: Int?
+  let fromNow: String?
   let id: String?
   let language: (name: String, color: String)?
   let nameWithOwner: String?
-  let pushedAt: String?
   let stargazers: Int?
   let topics: [String]?
   
   init(json: JSON) {
     description = json.description?.stringValue
     forkCount = json.forkCount?.intValue
+    fromNow = json.fromNow?.stringValue
     id = json.id?.stringValue
     language = json.languages?.nodes?.arrayOfJSON?.first.flatMap { ($0.name?.stringValue, $0.color?.stringValue) as? (String, String) }
     nameWithOwner = json.nameWithOwner?.stringValue
-    pushedAt = json.pushedAt?.stringValue
     stargazers = json.stargazers?.totalCount?.intValue
     topics = json.repositoryTopics?.nodes?.arrayOfJSON?.compactMap { $0.topic?.stringValue }
   }
@@ -34,8 +34,6 @@ struct SearchListCellModel {
 
 class SearchListCell: UITableViewCell {
   
-  @IBOutlet var titleLabel: UILabel!
-  @IBOutlet var summaryLabel: UILabel!
   @IBOutlet var languageStackView: UIStackView!
   @IBOutlet var languageImageView: UIImageView!
   @IBOutlet var languageLabel: UILabel!
@@ -52,15 +50,17 @@ class SearchListCell: UITableViewCell {
   @IBOutlet var starsStackView: UIStackView!
   @IBOutlet var starsImageView: UIImageView!
   @IBOutlet var starsLabel: UILabel!
-  @IBOutlet var timeAgoStackView: UIStackView!
-  @IBOutlet var timeAgoImageView: UIImageView!
-  @IBOutlet var timeAgoLabel: UILabel!
+  @IBOutlet var summaryLabel: UILabel!
+  @IBOutlet var fromNowStackView: UIStackView!
+  @IBOutlet var fromNowImageView: UIImageView!
+  @IBOutlet var fromNowLabel: UILabel!
+  @IBOutlet var titleLabel: UILabel!
   
   override func awakeFromNib() {
     super.awakeFromNib()
     languageImageView.image = languageImageView.image?.withRenderingMode(.alwaysTemplate)
     starsImageView.image = starsImageView.image?.withRenderingMode(.alwaysTemplate)
-    timeAgoImageView.image = timeAgoImageView.image?.withRenderingMode(.alwaysTemplate)
+    fromNowImageView.image = fromNowImageView.image?.withRenderingMode(.alwaysTemplate)
     setSecondaryColors()
   }
   
@@ -92,13 +92,10 @@ extension SearchListCell {
     } else {
       starsStackView.isHidden = true
     }
-    if let timeAgo = model.pushedAt {
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-      dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-      timeAgoLabel.text = dateFormatter.date(from: timeAgo)?.timeAgo()
+    if let fromNow = model.fromNow {
+      fromNowLabel.text = fromNow
     } else {
-      timeAgoStackView.isHidden = true
+      fromNowStackView.isHidden = true
     }
   }
   
@@ -107,8 +104,8 @@ extension SearchListCell {
     languageLabel.textColor = secondaryColor
     starsImageView.tintColor = secondaryColor
     starsLabel.textColor = secondaryColor
-    timeAgoImageView.tintColor = secondaryColor
-    timeAgoLabel.textColor = secondaryColor
+    fromNowImageView.tintColor = secondaryColor
+    fromNowLabel.textColor = secondaryColor
   }
   
 }
@@ -118,7 +115,7 @@ extension SearchListCell {
   override func prepareForReuse() {
     languageStackView.isHidden = false
     starsStackView.isHidden = false
-    timeAgoImageView.isHidden = false
+    fromNowImageView.isHidden = false
   }
   
 }

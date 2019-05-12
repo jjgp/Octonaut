@@ -51,11 +51,11 @@ extension SearchList {
     refreshControl?.endRefreshing()
   }
   
-  @objc func setResults(_ results: [String: Any]?) {
-    guard let nodes = JSON(results)?.search?.edges?.arrayOfJSON?.compactMap({ $0.node }) else {
+  @objc func setResults(_ results: [Any]?) {
+    guard let models = JSON(results)?.arrayOfJSON?.compactMap({ SearchListCellModel(json: $0) }) else {
       return
     }
-    models = nodes.compactMap { SearchListCellModel(json: $0) }
+    self.models = models
   }
   
 }

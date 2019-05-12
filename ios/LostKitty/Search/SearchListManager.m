@@ -17,6 +17,6 @@ RCT_EXPORT_VIEW_PROPERTY(onEndReached, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRefresh, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(primaryColor, NSString)
 RCT_EXPORT_VIEW_PROPERTY(secondaryColor, NSString)
-RCT_EXPORT_VIEW_PROPERTY(results, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(results, NSArray)
 
 @end

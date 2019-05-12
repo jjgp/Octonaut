@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -12,6 +13,16 @@ import Colors from '../common/colors';
 const NATIVE_COMPONENT_NAME = 'SearchList';
 const NativeSearchList = requireNativeComponent(NATIVE_COMPONENT_NAME);
 
+const resultsReducer = results => {
+  if (typeof results === 'undefined') return;
+  return results.search.edges.map(edge => {
+    const node = { ...edge.node };
+    const date = new Date(node.pushedAt);
+    node.fromNow = moment(date).fromNow();
+    return node;
+  });
+};
+
 const SearchList = props => {
   // TODO: likely can refactor this to useEffect with cancelation.
   const nativeComponentRef = useRef();
@@ -23,7 +34,7 @@ const SearchList = props => {
       []
     );
   }, [nativeComponentRef]);
-  const { count, relay } = props;
+  const { count, relay, results } = props;
   const onEndReached = useCallback(() => {
     relay.loadMore(count, error => {
       error && console.log(error);
@@ -43,7 +54,7 @@ const SearchList = props => {
         onEndReached={onEndReached}
         onRefresh={onRefresh}
         ref={nativeComponentRef}
-        results={props.results}
+        results={resultsReducer(results)}
         secondaryColor={Colors.gray}
         style={{ flex: 1 }}
       />
