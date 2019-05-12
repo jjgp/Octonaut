@@ -96,22 +96,13 @@ extension SearchList: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchListCell.reuseIdentifier) as! SearchListCell
     let result = results[indexPath.row]
-    cell.title.text = result.nameWithOwner
-    cell.summary.text = result.description
+    cell.setResult(result)
     return cell
   }
   
 }
 
 extension SearchList: UITableViewDelegate {
-  
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    // Attribution: https://stackoverflow.com/a/31454471
-    let offset = scrollView.contentOffset.y + scrollView.frame.size.height
-    if (offset >= scrollView.contentSize.height - 1) {
-      onEndReached?([:])
-    }
-  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     defer { tableView.deselectRow(at: indexPath, animated: true) }
@@ -120,6 +111,51 @@ extension SearchList: UITableViewDelegate {
       "id": results[indexPath.row].id ?? "",
       "row": row
       ])
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+      onEndReached?([:])
+      let spinner = UIActivityIndicatorView(style: .gray)
+      spinner.startAnimating()
+      spinner.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 44)
+      tableFooterView = spinner
+      tableFooterView?.isHidden = false
+    }
+  }
+  
+}
+
+extension SearchListCell {
+  
+  fileprivate func setResult(_ result: SearchListNode) {
+    titleLabel.text = result.nameWithOwner
+    summaryLabel.text = result.description
+    if let (name, color) = result.language {
+      languageLabel.text = name
+      languageImageView.tintColor = UIColor(hex: color)
+    } else {
+      languageStackView.isHidden = true
+    }
+    if let stargazers = result.stargazers.map({ String($0) }) {
+      starsLabel.text = stargazers
+    } else {
+      starsStackView.isHidden = true
+    }
+    if let timeAgo = result.pushedAt {
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+      dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+      timeAgoLabel.text = dateFormatter.date(from: timeAgo)?.timeAgo()
+    } else {
+      timeAgoStackView.isHidden = true
+    }
+  }
+  
+  override func prepareForReuse() {
+    languageStackView.isHidden = false
+    starsStackView.isHidden = false
+    timeAgoImageView.isHidden = false
   }
   
 }

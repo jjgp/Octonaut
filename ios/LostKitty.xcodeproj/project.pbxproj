@@ -33,6 +33,8 @@
 		D24312EE2285F74600017C66 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24312EC2285F74600017C66 /* SearchListCell.swift */; };
 		D24312EF2285F74600017C66 /* SearchListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24312ED2285F74600017C66 /* SearchListCell.xib */; };
 		D28402AF227DFAAE00977A43 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */; };
+		D2D054AC2287B4A400E68BF2 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D054AB2287B4A400E68BF2 /* UIColor+Hex.swift */; };
+		D2D054DA2287C55D00E68BF2 /* Date+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D054D92287C55D00E68BF2 /* Date+TimeAgo.swift */; };
 		D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */; };
 		D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F9B2284CF210092B9B5 /* SearchList.swift */; };
 		E9ECA73D79284399BE749A3F /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1432CBD37449908A8A49DD /* libRNGestureHandler.a */; };
@@ -395,6 +397,8 @@
 		D24312EC2285F74600017C66 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		D24312ED2285F74600017C66 /* SearchListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchListCell.xib; sourceTree = "<group>"; };
 		D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		D2D054AB2287B4A400E68BF2 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		D2D054D92287C55D00E68BF2 /* Date+TimeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeAgo.swift"; sourceTree = "<group>"; };
 		D2E33F6C2284CC810092B9B5 /* LostKitty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LostKitty-Bridging-Header.h"; path = "LostKitty/LostKitty-Bridging-Header.h"; sourceTree = "<group>"; };
 		D2E33F6D2284CC820092B9B5 /* SearchListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListManager.swift; sourceTree = "<group>"; };
 		D2E33F9B2284CF210092B9B5 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
@@ -674,7 +678,9 @@
 		D2213DE62285258B00BE187F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D2D054D92287C55D00E68BF2 /* Date+TimeAgo.swift */,
 				D2213E13228525A000BE187F /* JSON.swift */,
+				D2D054AB2287B4A400E68BF2 /* UIColor+Hex.swift */,
 			);
 			name = Utility;
 			path = LostKitty/Utility;
@@ -1221,11 +1227,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2E33F6E2284CC820092B9B5 /* SearchListManager.swift in Sources */,
+				D2D054AC2287B4A400E68BF2 /* UIColor+Hex.swift in Sources */,
 				D2424FFB22836C75007FAC4D /* SearchListManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				D2213E14228525A000BE187F /* JSON.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				D24312EE2285F74600017C66 /* SearchListCell.swift in Sources */,
+				D2D054DA2287C55D00E68BF2 /* Date+TimeAgo.swift in Sources */,
 				D2E33F9C2284CF210092B9B5 /* SearchList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
