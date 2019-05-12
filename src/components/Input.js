@@ -31,9 +31,9 @@ const Input = React.forwardRef((props, ref) => {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.lightGray,
     borderRadius: 5,
-    color: Colors.grey,
+    color: Colors.gray,
     fontFamily: 'System',
     fontSize: 16,
     height: 45,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomWidth: 1.5,
-    borderColor: Colors.grey,
+    borderColor: Colors.gray,
     borderRadius: 5,
   },
   inputHighlighted: {

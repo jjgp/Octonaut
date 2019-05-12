@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   touchableDisabled: {
-    backgroundColor: Colors.grey,
+    backgroundColor: Colors.gray,
   },
   touchableText: {
     alignSelf: 'center',

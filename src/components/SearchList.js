@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import { createPaginationContainer, graphql } from 'react-relay';
+import Colors from '../common/colors';
 
 const NATIVE_COMPONENT_NAME = 'SearchList';
 const NativeSearchList = requireNativeComponent(NATIVE_COMPONENT_NAME);
@@ -43,6 +44,7 @@ const SearchList = props => {
         onRefresh={onRefresh}
         ref={nativeComponentRef}
         results={props.results}
+        secondaryColor={Colors.gray}
         style={{ flex: 1 }}
       />
     </View>
@@ -53,7 +55,9 @@ SearchList.propTypes = {
   hasMore: PropTypes.bool,
   onEndReached: PropTypes.func,
   onRefresh: PropTypes.func,
+  primaryColor: PropTypes.string,
   results: PropTypes.object,
+  secondaryColor: PropTypes.string,
 };
 
 export default createPaginationContainer(

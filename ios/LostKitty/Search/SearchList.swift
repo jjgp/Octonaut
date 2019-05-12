@@ -8,29 +8,7 @@
 
 import UIKit
 
-fileprivate struct SearchListNode {
-  
-  let description: String?
-  let forkCount: Int?
-  let id: String?
-  let language: (name: String, color: String)?
-  let nameWithOwner: String?
-  let pushedAt: String?
-  let stargazers: Int?
-  let topics: [String]?
-  
-  init(json: JSON) {
-    description = json.description?.stringValue
-    forkCount = json.forkCount?.intValue
-    id = json.id?.stringValue
-    language = json.languages?.nodes?.arrayOfJSON?.first.flatMap { ($0.name?.stringValue, $0.color?.stringValue) as? (String, String) }
-    nameWithOwner = json.nameWithOwner?.stringValue
-    pushedAt = json.pushedAt?.stringValue
-    stargazers = json.stargazers?.totalCount?.intValue
-    topics = json.repositoryTopics?.nodes?.arrayOfJSON?.compactMap { $0.topic?.stringValue }
-  }
-  
-}
+
 
 @objc(SearchList)
 class SearchList: UITableView {
@@ -39,7 +17,9 @@ class SearchList: UITableView {
   @objc var onDidSelect: RCTDirectEventBlock?
   @objc var onEndReached: RCTDirectEventBlock?
   @objc var onRefresh: RCTDirectEventBlock?
-  private var results = [SearchListNode]() {
+  @objc var primaryColor: String?
+  @objc var secondaryColor: String?
+  private var models = [SearchListCellModel]() {
     didSet {
       reloadData()
     }
@@ -75,7 +55,7 @@ extension SearchList {
     guard let nodes = JSON(results)?.search?.edges?.arrayOfJSON?.compactMap({ $0.node }) else {
       return
     }
-    self.results = nodes.compactMap { SearchListNode(json: $0) }
+    models = nodes.compactMap { SearchListCellModel(json: $0) }
   }
   
 }
@@ -91,13 +71,18 @@ extension SearchList {
 extension SearchList: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return results.count
+    return models.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SearchListCell.reuseIdentifier) as! SearchListCell
-    let result = results[indexPath.row]
-    cell.setResult(result)
+    if let primaryColor = primaryColor.flatMap({ UIColor(hex: $0) }) {
+      cell.primaryColor = primaryColor
+    }
+    if let secondaryColor = secondaryColor.flatMap({ UIColor(hex: $0) }) {
+      cell.secondaryColor = secondaryColor
+    }
+    cell.setModel(models[indexPath.row])
     return cell
   }
   
@@ -109,54 +94,24 @@ extension SearchList: UITableViewDelegate {
     defer { tableView.deselectRow(at: indexPath, animated: true) }
     let row = indexPath.row
     onDidSelect?([
-      "id": results[indexPath.row].id ?? "",
+      "id": models[indexPath.row].id ?? "",
       "row": row
       ])
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    if hasMore, indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
-      onEndReached?([:])
-      let spinner = UIActivityIndicatorView(style: .gray)
-      spinner.startAnimating()
-      spinner.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 44)
-      tableFooterView = spinner
-      tableFooterView?.isHidden = false
+    if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+      if hasMore {
+        onEndReached?([:])
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: 44))
+        activityIndicator.style = .gray
+        activityIndicator.startAnimating()
+        tableFooterView = activityIndicator
+        tableFooterView?.isHidden = false
+      } else {
+        tableFooterView = nil
+      }
     }
-  }
-  
-}
-
-extension SearchListCell {
-  
-  fileprivate func setResult(_ result: SearchListNode) {
-    titleLabel.text = result.nameWithOwner
-    summaryLabel.text = result.description
-    if let (name, color) = result.language {
-      languageLabel.text = name
-      languageImageView.tintColor = UIColor(hex: color)
-    } else {
-      languageStackView.isHidden = true
-    }
-    if let stargazers = result.stargazers.map({ String($0) }) {
-      starsLabel.text = stargazers
-    } else {
-      starsStackView.isHidden = true
-    }
-    if let timeAgo = result.pushedAt {
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-      dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-      timeAgoLabel.text = dateFormatter.date(from: timeAgo)?.timeAgo()
-    } else {
-      timeAgoStackView.isHidden = true
-    }
-  }
-  
-  override func prepareForReuse() {
-    languageStackView.isHidden = false
-    starsStackView.isHidden = false
-    timeAgoImageView.isHidden = false
   }
   
 }

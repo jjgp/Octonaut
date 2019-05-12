@@ -10,7 +10,12 @@ import UIKit
 
 extension UIColor {
 
-  /// Attribution: https://www.hackingwithswift.com/example-code/uicolor/how-to-convert-a-hex-color-to-a-uicolor
+  /// Attribution: https://www.hackingwithswift.com/example-code/uicolor/how-to-convert-a-hex-color-to-a-uicolor.
+  /// Creates a UIColor from a hexadecimal string.
+  ///
+  /// - Parameters:
+  ///   - hex: a 6 character hexadecimal string preceded by a single hash character
+  ///   - alpha: transparency
   public convenience init?(hex: String, alpha: CGFloat = 1) {
     let r, g, b: CGFloat
     let start = hex.index(hex.startIndex, offsetBy: hex.hasPrefix("#") ? 1 : 0)
