@@ -35,6 +35,7 @@ fileprivate struct SearchListNode {
 @objc(SearchList)
 class SearchList: UITableView {
   
+  @objc var hasMore = false
   @objc var onDidSelect: RCTDirectEventBlock?
   @objc var onEndReached: RCTDirectEventBlock?
   @objc var onRefresh: RCTDirectEventBlock?
@@ -114,7 +115,7 @@ extension SearchList: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+    if hasMore, indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
       onEndReached?([:])
       let spinner = UIActivityIndicatorView(style: .gray)
       spinner.startAnimating()

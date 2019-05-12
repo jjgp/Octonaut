@@ -38,6 +38,7 @@ const SearchList = props => {
   return (
     <View style={[{ flex: 1 }, props.style]}>
       <NativeSearchList
+        hasMore={relay.hasMore()}
         onEndReached={onEndReached}
         onRefresh={onRefresh}
         ref={nativeComponentRef}
@@ -49,6 +50,7 @@ const SearchList = props => {
 };
 
 SearchList.propTypes = {
+  hasMore: PropTypes.bool,
   onEndReached: PropTypes.func,
   onRefresh: PropTypes.func,
   results: PropTypes.object,
