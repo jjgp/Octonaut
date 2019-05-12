@@ -24,7 +24,6 @@ const resultsReducer = results => {
 };
 
 const SearchList = props => {
-  // TODO: likely can refactor this to useEffect with cancelation.
   const nativeComponentRef = useRef();
   const endRefreshing = useCallback(() => {
     UIManager.dispatchViewManagerCommand(
@@ -35,17 +34,17 @@ const SearchList = props => {
     );
   }, [nativeComponentRef]);
   const { count, relay, results } = props;
+  const disposable = useRef(null);
   const onEndReached = useCallback(() => {
-    relay.loadMore(count, error => {
-      error && console.log(error);
-    });
-  }, [count, relay]);
+    disposable.current && disposable.current.dispose();
+    disposable.current = relay.loadMore(count, _ => {});
+  }, [count, disposable, relay]);
   const onRefresh = useCallback(() => {
-    relay.refetchConnection(count, error => {
+    disposable.current && disposable.current.dispose();
+    disposable.current = relay.refetchConnection(count, _ => {
       endRefreshing();
-      error && console.log(error);
     });
-  }, [count, endRefreshing, relay]);
+  }, [count, disposable, endRefreshing, relay]);
 
   return (
     <View style={[{ flex: 1 }, props.style]}>

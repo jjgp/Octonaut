@@ -48,7 +48,9 @@ class SearchList: UITableView {
 extension SearchList {
   
   func endRefreshing() {
-    refreshControl?.endRefreshing()
+    if refreshControl?.isRefreshing == true {    
+      refreshControl?.endRefreshing()
+    }
   }
   
   @objc func setResults(_ results: [Any]?) {
@@ -63,6 +65,7 @@ extension SearchList {
 extension SearchList {
   
   @objc func refreshValueChanged() {
+    tableFooterView = nil
     onRefresh?([:])
   }
   
@@ -102,6 +105,7 @@ extension SearchList: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
       if hasMore {
+        endRefreshing()
         onEndReached?([:])
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: 44))
         activityIndicator.style = .gray

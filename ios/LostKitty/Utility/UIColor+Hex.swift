@@ -15,7 +15,7 @@ extension UIColor {
   ///
   /// - Parameters:
   ///   - hex: a 6 character hexadecimal string preceded by a single hash character
-  ///   - alpha: transparency
+  ///   - alpha: transparency value between (0, 1)
   public convenience init?(hex: String, alpha: CGFloat = 1) {
     let r, g, b: CGFloat
     let start = hex.index(hex.startIndex, offsetBy: hex.hasPrefix("#") ? 1 : 0)
