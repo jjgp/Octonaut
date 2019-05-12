@@ -29,7 +29,7 @@ const SearchList = props => {
     });
   }, [count, relay]);
   const onRefresh = useCallback(() => {
-    relay.loadMore(count, error => {
+    relay.refetchConnection(count, error => {
       endRefreshing();
       error && console.log(error);
     });

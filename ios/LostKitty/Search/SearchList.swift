@@ -46,6 +46,7 @@ class SearchList: UITableView {
   
   override init(frame: CGRect, style: UITableView.Style) {
     super.init(frame: frame, style: style)
+    estimatedRowHeight = 75
     dataSource = self
     delegate = self
     refreshControl = UIRefreshControl()
@@ -53,6 +54,7 @@ class SearchList: UITableView {
                               action: #selector(refreshValueChanged),
                               for: .valueChanged)
     register(SearchListCell.nib(), forCellReuseIdentifier: SearchListCell.reuseIdentifier)
+    rowHeight = UITableView.automaticDimension
     tableFooterView = UIView(frame: .zero)
   }
   
@@ -86,10 +88,6 @@ extension SearchList {
 }
 
 extension SearchList: UITableViewDataSource {
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 75
-  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return results.count
