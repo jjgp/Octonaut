@@ -1,5 +1,5 @@
 //
-//  SearchList.swift
+//  RepositoryList.swift
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/9/19.
@@ -9,7 +9,7 @@
 import UIKit
 
 @objc(SearchList)
-class SearchList: UITableView {
+class RepositoryList: UITableView {
   
   @objc var hasMore = false
   @objc var onDidSelect: RCTDirectEventBlock?
@@ -17,7 +17,7 @@ class SearchList: UITableView {
   @objc var onRefresh: RCTDirectEventBlock?
   @objc var primaryColor: String?
   @objc var secondaryColor: String?
-  private var models = [SearchListCellModel]() {
+  private var models = [RepositoryListCellModel]() {
     didSet {
       reloadData()
     }
@@ -32,7 +32,7 @@ class SearchList: UITableView {
     refreshControl?.addTarget(self,
                               action: #selector(refreshValueChanged),
                               for: .valueChanged)
-    register(SearchListCell.nib(), forCellReuseIdentifier: SearchListCell.reuseIdentifier)
+    register(RepositoryListCell.nib(), forCellReuseIdentifier: RepositoryListCell.reuseIdentifier)
     rowHeight = UITableView.automaticDimension
     tableFooterView = UIView(frame: .zero)
   }
@@ -43,7 +43,7 @@ class SearchList: UITableView {
   
 }
 
-extension SearchList {
+extension RepositoryList {
   
   func endRefreshing() {
     if refreshControl?.isRefreshing == true {    
@@ -51,8 +51,8 @@ extension SearchList {
     }
   }
   
-  @objc func setResults(_ results: [Any]?) {
-    guard let models = JSON(results)?.arrayOfJSON?.compactMap({ SearchListCellModel(json: $0) }) else {
+  @objc func setRepositories(_ repositories: [Any]?) {
+    guard let models = JSON(repositories)?.arrayOfJSON?.compactMap({ RepositoryListCellModel(json: $0) }) else {
       return
     }
     self.models = models
@@ -60,7 +60,7 @@ extension SearchList {
   
 }
 
-extension SearchList {
+extension RepositoryList {
   
   @objc func refreshValueChanged() {
     tableFooterView = nil
@@ -69,14 +69,14 @@ extension SearchList {
   
 }
 
-extension SearchList: UITableViewDataSource {
+extension RepositoryList: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return models.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SearchListCell.reuseIdentifier) as! SearchListCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryListCell.reuseIdentifier) as! RepositoryListCell
     if let primaryColor = primaryColor.flatMap({ UIColor(hex: $0) }) {
       cell.primaryColor = primaryColor
     }
@@ -89,7 +89,7 @@ extension SearchList: UITableViewDataSource {
   
 }
 
-extension SearchList: UITableViewDelegate {
+extension RepositoryList: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     defer { tableView.deselectRow(at: indexPath, animated: true) }

@@ -1,5 +1,5 @@
 //
-//  SearchListCell.swift
+//  RepositoryListCell.swift
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/10/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SearchListCellModel {
+struct RepositoryListCellModel {
   
   let description: String?
   let forkCount: Int?
@@ -32,7 +32,7 @@ struct SearchListCellModel {
   
 }
 
-class SearchListCell: UITableViewCell {
+class RepositoryListCell: UITableViewCell {
   
   @IBOutlet var languageStackView: UIStackView!
   @IBOutlet var languageImageView: UIImageView!
@@ -66,9 +66,9 @@ class SearchListCell: UITableViewCell {
   
 }
 
-extension SearchListCell {
+extension RepositoryListCell {
   
-  static let reuseIdentifier = "SearchListCell"
+  static let reuseIdentifier = "RepositoryListCell"
   
   static func nib() -> UINib {
     return UINib(nibName: reuseIdentifier, bundle: nil)
@@ -76,9 +76,9 @@ extension SearchListCell {
   
 }
 
-extension SearchListCell {
+extension RepositoryListCell {
   
-  func setModel(_ model: SearchListCellModel) {
+  func setModel(_ model: RepositoryListCellModel) {
     titleLabel.text = model.nameWithOwner
     summaryLabel.text = model.description
     if let (name, color) = model.language {
@@ -110,7 +110,7 @@ extension SearchListCell {
   
 }
 
-extension SearchListCell {
+extension RepositoryListCell {
   
   override func prepareForReuse() {
     languageStackView.isHidden = false

@@ -8,14 +8,14 @@ import {
   View,
 } from 'react-native';
 import { createPaginationContainer, graphql } from 'react-relay';
-import Colors from '../common/colors';
+import Colors from '../../common/colors';
 
-const NATIVE_COMPONENT_NAME = 'SearchList';
-const NativeSearchList = requireNativeComponent(NATIVE_COMPONENT_NAME);
+const NATIVE_COMPONENT_NAME = 'RepositoryList';
+const NativeRepositoryList = requireNativeComponent(NATIVE_COMPONENT_NAME);
 
-const resultsReducer = results => {
-  if (typeof results === 'undefined') return;
-  return results.search.edges.map(edge => {
+const repositoriesReducer = repositories => {
+  if (typeof repositories === 'undefined') return;
+  return repositories.search.edges.map(edge => {
     const node = { ...edge.node };
     const date = new Date(node.pushedAt);
     node.fromNow = moment(date).fromNow();
@@ -23,7 +23,7 @@ const resultsReducer = results => {
   });
 };
 
-const SearchList = props => {
+const RepositoryList = props => {
   const nativeComponentRef = useRef();
   const endRefreshing = useCallback(() => {
     UIManager.dispatchViewManagerCommand(
@@ -33,7 +33,7 @@ const SearchList = props => {
       []
     );
   }, [nativeComponentRef]);
-  const { count, relay, results } = props;
+  const { count, relay, repositories } = props;
   const disposable = useRef(null);
   const onEndReached = useCallback(() => {
     disposable.current && disposable.current.dispose();
@@ -48,12 +48,12 @@ const SearchList = props => {
 
   return (
     <View style={[{ flex: 1 }, props.style]}>
-      <NativeSearchList
+      <NativeRepositoryList
         hasMore={relay.hasMore()}
         onEndReached={onEndReached}
         onRefresh={onRefresh}
         ref={nativeComponentRef}
-        results={resultsReducer(results)}
+        repositories={repositoriesReducer(repositories)}
         secondaryColor={Colors.gray}
         style={{ flex: 1 }}
       />
@@ -61,20 +61,20 @@ const SearchList = props => {
   );
 };
 
-SearchList.propTypes = {
+RepositoryList.propTypes = {
   hasMore: PropTypes.bool,
   onEndReached: PropTypes.func,
   onRefresh: PropTypes.func,
   primaryColor: PropTypes.string,
-  results: PropTypes.object,
+  repositories: PropTypes.object,
   secondaryColor: PropTypes.string,
 };
 
 export default createPaginationContainer(
-  SearchList,
+  RepositoryList,
   {
-    results: graphql`
-      fragment SearchList_results on Query
+    repositories: graphql`
+      fragment RepositoryList_repositories on Query
         @argumentDefinitions(
           count: { type: "Int" }
           cursor: { type: "String" }
@@ -82,7 +82,7 @@ export default createPaginationContainer(
           type: { type: "SearchType!" }
         ) {
         search(first: $count, after: $cursor, query: $query, type: $type)
-          @connection(key: "SearchList_search") {
+          @connection(key: "RepositoryList_search") {
           edges {
             node {
               ... on Repository {
@@ -122,7 +122,7 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props) {
-      return props.results && props.results.search;
+      return props.repositories && props.repositories.search;
     },
     getVariables(_, { count, cursor }, { query, type }) {
       return {
@@ -133,13 +133,13 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query SearchListForwardQuery(
+      query RepositoryListForwardQuery(
         $count: Int
         $cursor: String
         $query: String!
         $type: SearchType!
       ) {
-        ...SearchList_results
+        ...RepositoryList_repositories
           @arguments(count: $count, cursor: $cursor, query: $query, type: $type)
       }
     `,

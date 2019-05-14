@@ -8,11 +8,11 @@ import {
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../api/v4/environment';
 import Colors from '../common/colors';
-import SearchList from '../components/SearchList';
+import RepositoryList from '../components/Search/RepositoryList';
 
 const COUNT = 50;
 
-const Search = props => {
+const Search = () => {
   let [search, setSearch] = useState('react');
   const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
@@ -30,7 +30,7 @@ const Search = props => {
             render={({ error, props }) => {
               if (!props) return renderActivityIndicator();
               if (error) return <Text>{error}</Text>;
-              return <SearchList count={COUNT} results={props} />;
+              return <RepositoryList count={COUNT} repositories={props} />;
             }}
             variables={{ count: COUNT, query: search, type: 'REPOSITORY' }}
           />
@@ -46,7 +46,8 @@ Search.navigationOptions = {
 
 const query = graphql`
   query SearchQuery($count: Int!, $query: String!, $type: SearchType!) {
-    ...SearchList_results @arguments(count: $count, query: $query, type: $type)
+    ...RepositoryList_repositories
+      @arguments(count: $count, query: $query, type: $type)
   }
 `;
 

@@ -1,5 +1,5 @@
 //
-//  SearchListManager.swift
+//  RepositoryListManager.swift
 //  LostKitty
 //
 //  Created by Jason Prasad on 5/9/19.
@@ -8,26 +8,26 @@
 
 import UIKit
 
-@objc(SearchListManager)
-class SearchListManager: RCTViewManager {}
+@objc(RepositoryListManager)
+class RepositoryListManager: RCTViewManager {}
 
-extension SearchListManager {
+extension RepositoryListManager {
   
   static override func requiresMainQueueSetup() -> Bool {
     return true
   }
   
   override func view() -> UIView! {
-    return SearchList()
+    return RepositoryList()
   }
   
 }
 
-extension SearchListManager {
+extension RepositoryListManager {
   
   @objc func endRefreshing(_ reactTag: NSNumber) {
     bridge.uiManager.addUIBlock { uiManager, viewRegistry  in
-      (viewRegistry?[reactTag] as? SearchList)?.endRefreshing()
+      (viewRegistry?[reactTag] as? RepositoryList)?.endRefreshing()
     }
   }
   
