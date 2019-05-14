@@ -24,6 +24,7 @@
     "react-native-keychain": "^3.1.2",
     "react-native-screens": "^1.0.0-alpha.22",
     "react-navigation": "^3.9.1",
+    "react-navigation-hooks": "^1.0.0-alpha.2",
     "react-relay": "^4.0.0"
   },
   "devDependencies": {
