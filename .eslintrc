@@ -9,6 +9,7 @@
     "react",
     "react-native"
   ],
+  "root": true,
   "rules": {
     "react/jsx-sort-props": [2, {
       "ignoreCase": true
