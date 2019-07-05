@@ -6,33 +6,22 @@ import {
   View,
 } from 'react-native';
 import { graphql, QueryRenderer } from 'react-relay';
-import Colors from '../common/colors';
-import SearchResults from '../components/SearchResults';
-import SearchBar from '../components/SearchBar';
-import UserBadge from '../components/UserBadge';
 import environment from '../api/v4/environment';
+import Colors from '../common/colors';
+import RepositoryList from '../components/Search/RepositoryList';
 
-const Search = props => {
+const COUNT = 50;
+
+const Search = () => {
   let [search, setSearch] = useState('react');
-  const { navigation } = props;
-  const onPress = () => navigation.navigate('Settings');
-  const onSubmit = search => setSearch(search);
   const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
-  const renderBarView = () => (
-    <View style={styles.barView}>
-      <SearchBar onSubmit={onSubmit} />
-      <View style={{ width: 10 }} />
-      <UserBadge {...props} onPress={onPress} />
+      <ActivityIndicator />
     </View>
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGrey }}>
-      {renderBarView()}
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       {search ? (
         <View style={styles.searchView}>
           <QueryRenderer
@@ -41,9 +30,9 @@ const Search = props => {
             render={({ error, props }) => {
               if (!props) return renderActivityIndicator();
               if (error) return <Text>{error}</Text>;
-              return <SearchResults navigation={navigation} results={props} />;
+              return <RepositoryList count={COUNT} repositories={props} />;
             }}
-            variables={{ query: search, type: 'REPOSITORY' }}
+            variables={{ count: COUNT, query: search, type: 'REPOSITORY' }}
           />
         </View>
       ) : null}
@@ -56,24 +45,19 @@ Search.navigationOptions = {
 };
 
 const query = graphql`
-  query SearchQuery($cursor: String, $query: String!, $type: SearchType!) {
-    ...SearchResults_results @arguments(query: $query, type: $type)
+  query SearchQuery($count: Int!, $query: String!, $type: SearchType!) {
+    ...RepositoryList_repositories
+      @arguments(count: $count, query: $query, type: $type)
   }
 `;
 
 const styles = StyleSheet.create({
-  barView: {
-    backgroundColor: Colors.white,
-    flexDirection: 'row',
-    height: 55,
-    padding: 10,
-  },
   indicatorView: {
     flex: 1,
     justifyContent: 'center',
   },
   searchView: {
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.white,
     flex: 1,
     paddingTop: 2,
   },

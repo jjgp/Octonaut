@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
 import Colors from '../common/colors';
 
+// Attribution: https://medium.com/@kelleyannerose/react-native-activityindicator-for-a-quick-easy-loading-animation-593c06c044dc
 const InProgress = () => (
   <Modal animationType="none" transparent={true} visible={true}>
     <View style={styles.modalContainer}>

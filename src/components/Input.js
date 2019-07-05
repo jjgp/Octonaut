@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { StyleSheet, TextInput } from 'react-native';
 import Colors from '../common/colors';
@@ -6,8 +6,8 @@ import Colors from '../common/colors';
 const Input = React.forwardRef((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const { containerStyle, inputStyle, ...rest } = props;
-  const onBlur = () => setIsFocused(false);
-  const onFocus = () => setIsFocused(true);
+  const onBlur = useCallback(() => setIsFocused(false), []);
+  const onFocus = useCallback(() => setIsFocused(true), []);
 
   return (
     <View
@@ -31,9 +31,9 @@ const Input = React.forwardRef((props, ref) => {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.lightGray,
     borderRadius: 5,
-    color: Colors.grey,
+    color: Colors.gray,
     fontFamily: 'System',
     fontSize: 16,
     height: 45,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomWidth: 1.5,
-    borderColor: Colors.grey,
+    borderColor: Colors.gray,
     borderRadius: 5,
   },
   inputHighlighted: {

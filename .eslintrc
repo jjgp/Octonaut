@@ -1,14 +1,6 @@
 {
-  "extends": [
-    "plugin:prettier/recommended",
-    "plugin:react-native/all"
-  ],
-  "parser": "babel-eslint",
-  "plugins": [
-    "prettier",
-    "react",
-    "react-native"
-  ],
+  "extends": "@react-native-community",
+  "root": true,
   "rules": {
     "react/jsx-sort-props": [2, {
       "ignoreCase": true
