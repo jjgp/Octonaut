@@ -19,7 +19,6 @@
 		D2424FFB22836C75007FAC4D /* RepositoryListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2424FFA22836C75007FAC4D /* RepositoryListManager.m */; };
 		D24312EE2285F74600017C66 /* RepositoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24312EC2285F74600017C66 /* RepositoryListCell.swift */; };
 		D24312EF2285F74600017C66 /* RepositoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24312ED2285F74600017C66 /* RepositoryListCell.xib */; };
-		D28402AF227DFAAE00977A43 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28402AE227DFAAE00977A43 /* JavaScriptCore.framework */; };
 		D2D054AC2287B4A400E68BF2 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D054AB2287B4A400E68BF2 /* UIColor+Hex.swift */; };
 		D2E33F6E2284CC820092B9B5 /* RepositoryListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F6D2284CC820092B9B5 /* RepositoryListManager.swift */; };
 		D2E33F9C2284CF210092B9B5 /* RepositoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E33F9B2284CF210092B9B5 /* RepositoryList.swift */; };
