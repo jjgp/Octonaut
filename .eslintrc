@@ -1,22 +1,10 @@
 {
-  "extends": [
-    "plugin:prettier/recommended",
-    "plugin:react-native/all"
-  ],
-  "parser": "babel-eslint",
-  "plugins": [
-    "prettier",
-    "react",
-    "react-hooks",
-    "react-native"
-  ],
+  "extends": "@react-native-community",
   "root": true,
   "rules": {
     "react/jsx-sort-props": [2, {
       "ignoreCase": true
     }],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "react-native/no-color-literals": 0,
     "react-native/no-inline-styles": 0
   }
