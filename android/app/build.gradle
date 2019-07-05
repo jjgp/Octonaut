@@ -164,9 +164,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-gesture-handler')
-    implementation project(':react-native-device-info')
-    implementation project(':react-native-keychain')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

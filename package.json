@@ -5,7 +5,7 @@
   "scripts": {
     "adb:reverse": "adb reverse tcp:8081 tcp:8081",
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator 'iPhone Xʀ (12.2)'",
+    "ios": "react-native run-ios --simulator 'iPhone Xʀ (13.0)'",
     "prettier": "prettier --write '{,!(node_modules)/**/}*.{js,json}'",
     "relay": "relay-compiler --src ./src --schema ./schema/github.graphql",
     "relay:devtools": "relay-devtools",
