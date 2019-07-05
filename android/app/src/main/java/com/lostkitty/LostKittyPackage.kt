@@ -6,7 +6,7 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
-import com.lostkitty.search.RepositoryListManager
+import com.lostkitty.search.SearchListManager
 
 class LostKittyPackage: ReactPackage {
 
@@ -16,7 +16,7 @@ class LostKittyPackage: ReactPackage {
 
     override fun createViewManagers(reactContext: ReactApplicationContext): MutableList<ViewManager<out View, out ReactShadowNode<*>>> {
         return mutableListOf(
-                RepositoryListManager()
+                SearchListManager()
         )
     }
 
