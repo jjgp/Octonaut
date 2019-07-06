@@ -56,9 +56,6 @@ buck-out/
 #
 *.jsbundle
 
-# CocoaPods
-Pods/
-
 # Relay
 #
 __generated__/
