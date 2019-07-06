@@ -1,0 +1,20 @@
+# Xcode
+#
+build/
+*.xcassets
+
+# Android/IntelliJ
+#
+build/
+.idea
+
+# node.js
+#
+node_modules/
+
+# CocoaPods
+Pods/
+
+# Relay
+#
+__generated__/
