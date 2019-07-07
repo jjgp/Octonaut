@@ -1,17 +1,13 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useReducer, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../common/colors';
 import Input from './Input';
 
-const BasicLogin = props => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [code, setCode] = useState('');
-  const isValid = username.length > 0 && password.length > 0;
-  const onChangeUsername = useCallback(username => setUsername(username), []);
-  const onChangePassword = useCallback(password => setPassword(password), []);
-  const onChangeCode = useCallback(code => setCode(code), []);
-  const onPress = () => props.onSubmit(username, password, code);
+const initialState = { code: '', password: '', username: '' };
+
+const reducer = (state, action) => ({ ...state, ...action });
+
+const UsernameAndPassword = props => {
   const passwordInputRef = useRef();
   const onUsernameSubmitEditting = useCallback(
     () => passwordInputRef.current.focus(),
@@ -19,15 +15,14 @@ const BasicLogin = props => {
   );
 
   return (
-    <View style={styles.loginContainer}>
-      <Text style={styles.signinText}>Sign in into your GitHub account</Text>
+    <>
       <Input
         autoCapitalize={'none'}
         autoCorrect={false}
         blurOnSubmit={false}
         containerStyle={{ marginBottom: 20 }}
         editable={!props.requires2FA}
-        onChangeText={onChangeUsername}
+        onChangeText={props.onUsernameChangeText}
         onSubmitEditing={onUsernameSubmitEditting}
         placeholder={'Username'}
         returnKeyType={'next'}
@@ -36,19 +31,38 @@ const BasicLogin = props => {
       <Input
         containerStyle={{ marginBottom: 20 }}
         editable={!props.requires2FA}
-        onChangeText={onChangePassword}
+        onChangeText={props.onPasswordChangeText}
         placeholder={'Password'}
         ref={passwordInputRef}
         returnKeyType={'done'}
         secureTextEntry
         selectTextOnFocus={true}
       />
+    </>
+  );
+};
+
+const BasicLogin = props => {
+  const [{ code, password, username }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
+  const isValid = username.length > 0 && password.length > 0;
+  const onPress = () => props.onSubmit(username, password, code);
+
+  return (
+    <View style={styles.loginContainer}>
+      <Text style={styles.signinText}>Sign in into your GitHub account</Text>
+      <UsernameAndPassword
+        onPasswordChangeText={text => dispatch({ password: text })}
+        onUsernameChangeText={text => dispatch({ username: text })}
+        requires2FA={props.requires2FA}
+      />
       {props.requires2FA && (
         <Input
           containerStyle={{ marginBottom: 20 }}
-          onChangeText={onChangeCode}
+          onChangeText={text => dispatch({ code: text })}
           placeholder={'2FA Code'}
-          ref={passwordInputRef}
           returnKeyType={'done'}
           secureTextEntry
           selectTextOnFocus={true}
