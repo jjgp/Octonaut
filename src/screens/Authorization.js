@@ -10,7 +10,7 @@ import { getOrCreateAuthorization } from '../api/authorization';
 import BasicLogin from '../components/BasicLogin';
 import InProgress from '../components/InProgress';
 
-const Authorization = props => {
+const Authorization = () => {
   const [inProgress, setInProgress] = useState(false);
   const [requires2FA, setRequires2FA] = useState(false);
   const { navigate } = useNavigation();

@@ -14,7 +14,9 @@ const NATIVE_COMPONENT_NAME = 'RepositoryList';
 const NativeRepositoryList = requireNativeComponent(NATIVE_COMPONENT_NAME);
 
 const repositoriesReducer = repositories => {
-  if (typeof repositories === 'undefined') return;
+  if (typeof repositories === 'undefined') {
+    return;
+  }
   return repositories.search.edges.map(edge => {
     const node = { ...edge.node };
     const date = new Date(node.pushedAt);
