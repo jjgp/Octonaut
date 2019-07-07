@@ -3,11 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../common/colors';
 import Input from './Input';
 
-const initialState = { code: '', password: '', username: '' };
-
 const reducer = (state, action) => ({ ...state, ...action });
 
-const UsernameAndPassword = props => {
+const UsernameAndPasswordInput = props => {
   const passwordInputRef = useRef();
   const onUsernameSubmitEditting = useCallback(
     () => passwordInputRef.current.focus(),
@@ -42,32 +40,39 @@ const UsernameAndPassword = props => {
   );
 };
 
+const CodeInput = props =>
+  props.isRequired ? (
+    <Input
+      containerStyle={{ marginBottom: 20 }}
+      onChangeText={props.onCodeChangeText}
+      placeholder={'2FA Code'}
+      returnKeyType={'done'}
+      secureTextEntry
+      selectTextOnFocus={true}
+    />
+  ) : null;
+
 const BasicLogin = props => {
-  const [{ code, password, username }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ code, password, username }, dispatch] = useReducer(reducer, {
+    code: '',
+    password: '',
+    username: '',
+  });
   const isValid = username.length > 0 && password.length > 0;
   const onPress = () => props.onSubmit(username, password, code);
 
   return (
     <View style={styles.loginContainer}>
       <Text style={styles.signinText}>Sign in into your GitHub account</Text>
-      <UsernameAndPassword
+      <UsernameAndPasswordInput
         onPasswordChangeText={text => dispatch({ password: text })}
         onUsernameChangeText={text => dispatch({ username: text })}
         requires2FA={props.requires2FA}
       />
-      {props.requires2FA && (
-        <Input
-          containerStyle={{ marginBottom: 20 }}
-          onChangeText={text => dispatch({ code: text })}
-          placeholder={'2FA Code'}
-          returnKeyType={'done'}
-          secureTextEntry
-          selectTextOnFocus={true}
-        />
-      )}
+      <CodeInput
+        isRequired={props.requires2FA}
+        onCodeChangeText={text => dispatch({ code: text })}
+      />
       <TouchableOpacity
         disabled={!isValid}
         onPress={onPress}
