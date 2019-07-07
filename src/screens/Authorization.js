@@ -52,7 +52,7 @@ const Authorization = () => {
       >
         <BasicLogin onSubmit={onSubmit} requires2FA={requires2FA} />
       </KeyboardAvoidingView>
-      {inProgress && <InProgress />}
+      <InProgress isHidden={!inProgress} />
     </ScrollView>
   );
 };
