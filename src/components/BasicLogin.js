@@ -3,8 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../common/colors';
 import Input from './Input';
 
-const reducer = (state, action) => ({ ...state, ...action });
-
 const UsernameAndPasswordInput = props => {
   const passwordInputRef = useRef();
   const onUsernameSubmitEditting = useCallback(
@@ -44,6 +42,7 @@ const CodeInput = props =>
   props.isRequired ? (
     <Input
       containerStyle={{ marginBottom: 20 }}
+      keyboardType={'numeric'}
       onChangeText={props.onCodeChangeText}
       placeholder={'2FA Code'}
       returnKeyType={'done'}
@@ -53,12 +52,18 @@ const CodeInput = props =>
   ) : null;
 
 const BasicLogin = props => {
-  const [{ code, password, username }, dispatch] = useReducer(reducer, {
-    code: '',
-    password: '',
-    username: '',
-  });
-  const isValid = username.length > 0 && password.length > 0;
+  const [{ code, password, username }, dispatch] = useReducer(
+    (state, action) => ({ ...state, ...action }),
+    {
+      code: '',
+      password: '',
+      username: '',
+    }
+  );
+  const isValid =
+    username.length > 0 &&
+    password.length > 0 &&
+    (!props.requires2FA || code.length > 0);
   const onPress = () => props.onSubmit(username, password, code);
 
   return (
