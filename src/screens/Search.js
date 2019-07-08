@@ -14,7 +14,7 @@ import RepositoryList from '../components/Search/RepositoryList';
 const COUNT = 50;
 
 const Search = () => {
-  const [search, _] = useState('react');
+  const [search] = useState('react');
   const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
       <ActivityIndicator />
@@ -22,7 +22,7 @@ const Search = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+    <SafeAreaView style={styles.safeAreaView}>
       {search ? (
         <View style={styles.searchView}>
           <QueryRenderer
@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
   indicatorView: {
     flex: 1,
     justifyContent: 'center',
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: Colors.white,
   },
   searchView: {
     backgroundColor: Colors.white,

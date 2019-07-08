@@ -3,6 +3,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,7 +14,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { getOrCreateAuthorization } from '../api/authorization';
 import Colors from '../common/colors';
 import Input from '../components/Input';
-import PopoverText from '../components/PopoverText';
+// import ToasterOven from '../components/ToasterOven';
 
 const UsernameAndPasswordInput = props => {
   const passwordInputRef = useRef();
@@ -85,7 +86,7 @@ const basicLoginReducer = (state, action) => {
   }
 };
 
-const BasicLogin = props => {
+const useBasicLoginHooks = onAuthorizationComplete => {
   const [state, dispatch] = useReducer(
     basicLoginReducer,
     basicLoginInitialState
@@ -105,22 +106,37 @@ const BasicLogin = props => {
       } catch (error) {
         dispatch({
           type: 'error',
-          message: 'sorry, please try again later...',
+          message: 'Sorry, please try again later...',
         });
       }
 
       if (response.ok) {
-        props.onAuthorizationComplete();
+        onAuthorizationComplete();
       } else if (!state.requiresCode && response.headers.has('x-github-otp')) {
         dispatch({ requiresCode: true });
       } else {
         const { message } = await response.json();
+        // TODO: need an error mapper or bury this in ../api to do some of the following...
         // Two-factor authentication failed.
         // Incorrect username or password.
         message && dispatch({ type: 'error', message: message.toLowerCase() });
       }
     })();
-  }, [props, state.code, state.password, state.requiresCode, state.username]);
+  }, [
+    onAuthorizationComplete,
+    state.code,
+    state.password,
+    state.requiresCode,
+    state.username,
+  ]);
+
+  return [state, dispatch, onPress];
+};
+
+const BasicLogin = props => {
+  const [state, dispatch, onPress] = useBasicLoginHooks(
+    props.onAuthorizationComplete
+  );
   const isValid =
     state.username.length > 0 &&
     state.password.length > 0 &&
@@ -150,7 +166,6 @@ const BasicLogin = props => {
           {state.inProgress ? 'Signing in...' : 'Sign in to GitHub'}
         </Text>
       </TouchableOpacity>
-      <PopoverText>Incorrect username or password.</PopoverText>
     </View>
   );
 };
@@ -162,23 +177,25 @@ const Authorization = () => {
   ]);
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.basicLoginContainer}
-      keyboardShouldPersistTaps="handled"
-    >
-      <KeyboardAvoidingView
-        {...Platform.select({
-          android: {
-            enabled: false,
-          },
-          ios: {
-            behavior: 'padding',
-          },
-        })}
+    <SafeAreaView style={styles.safeAreaView}>
+      <ScrollView
+        contentContainerStyle={styles.basicLoginContainer}
+        keyboardShouldPersistTaps="handled"
       >
-        <BasicLogin onAuthorizationComplete={onAuthorizationComplete} />
-      </KeyboardAvoidingView>
-    </ScrollView>
+        <KeyboardAvoidingView
+          {...Platform.select({
+            android: {
+              enabled: false,
+            },
+            ios: {
+              behavior: 'padding',
+            },
+          })}
+        >
+          <BasicLogin onAuthorizationComplete={onAuthorizationComplete} />
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -190,6 +207,10 @@ const styles = StyleSheet.create({
   loginContainer: {
     marginVertical: 10,
     padding: 10,
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: Colors.white,
   },
   touchable: {
     backgroundColor: Colors.blue,

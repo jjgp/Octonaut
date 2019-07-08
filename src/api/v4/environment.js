@@ -18,7 +18,9 @@ const fetchQuery = async (operation, variables) => {
   return response.json();
 };
 
-if (__DEV__) installRelayDevTools();
+if (__DEV__) {
+  installRelayDevTools();
+}
 
 const environment = new Environment({
   network: Network.create(fetchQuery),
