@@ -19,21 +19,16 @@ const setExistingEntryInKeychain = async id => {
 };
 
 export const getOrCreateAuthorization = async (username, password, code) => {
-  let headers = new Headers();
+  let headers = new global.Headers();
   headers.append('Authorization', basicAuthorization(username, password));
   headers.append('Content-Type', 'application/json');
   code && headers.append('X-GitHub-OTP', code);
-
   const body = {
     scopes: ['user', 'repo', 'gist', 'notifications', 'read:org'],
     client_secret: Configuration.GH_CLIENT_SECRET,
     fingerprint: DeviceInfo.getUniqueID(),
   };
-
-  const url = `https://api.github.com/authorizations/clients/${
-    Configuration.GH_CLIENT_ID
-  }`;
-
+  const url = `https://api.github.com/authorizations/clients/${Configuration.GH_CLIENT_ID}`;
   const response = await fetch(url, {
     method: 'PUT',
     headers: headers,

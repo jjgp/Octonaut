@@ -4,11 +4,13 @@ import Launch from './Launch';
 import Repository from './Repository';
 import Search from './Search';
 
-export default (screens = () => ({
+const screens = () => ({
   Authorization,
   Landing: createStackNavigator(
     { Search, Repository },
     { initialRouteName: 'Search' }
   ),
   Launch,
-}));
+});
+
+export default screens;

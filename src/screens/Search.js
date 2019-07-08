@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -13,7 +14,7 @@ import RepositoryList from '../components/Search/RepositoryList';
 const COUNT = 50;
 
 const Search = () => {
-  let [search, setSearch] = useState('react');
+  const [search, _] = useState('react');
   const renderActivityIndicator = () => (
     <View style={styles.indicatorView}>
       <ActivityIndicator />
@@ -28,8 +29,12 @@ const Search = () => {
             environment={environment}
             query={query}
             render={({ error, props }) => {
-              if (!props) return renderActivityIndicator();
-              if (error) return <Text>{error}</Text>;
+              if (!props) {
+                return renderActivityIndicator();
+              }
+              if (error) {
+                return <Text>{error}</Text>;
+              }
               return <RepositoryList count={COUNT} repositories={props} />;
             }}
             variables={{ count: COUNT, query: search, type: 'REPOSITORY' }}
