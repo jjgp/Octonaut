@@ -64,7 +64,6 @@ const CodeInput = props =>
 
 const basicLoginInitialState = {
   code: '',
-  message: '',
   inProgress: false,
   password: '',
   requiresCode: false,
@@ -74,8 +73,6 @@ const basicLoginInitialState = {
 const basicLoginReducer = (state, action) => {
   const { type, ...rest } = action;
   switch (type) {
-    case 'error':
-      return { ...state, ...rest, inProgress: false };
     case 'progress':
       return { ...state, ...rest, message: '' };
     case 'password':
