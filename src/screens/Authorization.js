@@ -14,6 +14,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { getOrCreateAuthorization } from '../api/authorization';
 import Colors from '../common/colors';
 import Input from '../components/Input';
+import Octoscii from '../components/Octoscii';
 import ToasterOven, { useToasterOven } from '../components/ToasterOven';
 
 const UsernameAndPasswordInput = props => {
@@ -176,6 +177,7 @@ const Authorization = () => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ToasterOven style={{ flex: 1 }}>
+        <Octoscii />
         <ScrollView
           contentContainerStyle={styles.basicLoginContainer}
           keyboardShouldPersistTaps="handled"
