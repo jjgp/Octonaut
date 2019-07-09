@@ -1,36 +1,25 @@
-import React from 'react';
-import {
-  Dimensions,
-  Modal,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Colors from '../common/colors';
 
-class ToasterOven extends React.Component {
-  state = {
-    modalVisible: true,
-  };
+const ToasterOvenContext = React.createContext(undefined);
 
-  closeModal = () => this.setState({ modalVisible: false });
+export const useToasterOven = () => useContext(ToasterOvenContext);
 
-  render = () => (
-    <Modal
-      onRequestClose={() => this.closeModal()}
-      supportedOrientations={['portrait', 'landscape']}
-      transparent={true}
-      visible={this.state.modalVisible}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
+const ToasterOven = props => {
+  const [content, setContent] = useState(null);
+
+  return (
+    <ToasterOvenContext.Provider value={setContent}>
+      <View {...props} />
+      {content == null ? null : (
         <View style={styles.errorView}>
-          <Text style={styles.errorText}>{this.props.children}</Text>
+          <Text style={styles.errorText}>{content}</Text>
         </View>
-      </SafeAreaView>
-    </Modal>
+      )}
+    </ToasterOvenContext.Provider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   errorView: {
@@ -38,11 +27,13 @@ const styles = StyleSheet.create({
     borderColor: Colors.darkRed,
     borderRadius: 5,
     borderWidth: 1,
-    bottom: 0,
-    marginHorizontal: 10,
+    top: 50,
+    left: 10,
+    right: 10,
     minHeight: 45,
     justifyContent: 'center',
     padding: 10,
+    position: 'absolute',
   },
   errorText: {
     color: Colors.darkRed,
@@ -51,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PopoverText;
+export default ToasterOven;

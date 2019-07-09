@@ -14,7 +14,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { getOrCreateAuthorization } from '../api/authorization';
 import Colors from '../common/colors';
 import Input from '../components/Input';
-// import ToasterOven from '../components/ToasterOven';
+import ToasterOven, { useToasterOven } from '../components/ToasterOven';
 
 const UsernameAndPasswordInput = props => {
   const passwordInputRef = useRef();
@@ -87,6 +87,7 @@ const basicLoginReducer = (state, action) => {
 };
 
 const useBasicLoginHooks = onAuthorizationComplete => {
+  const popOver = useToasterOven();
   const [state, dispatch] = useReducer(
     basicLoginReducer,
     basicLoginInitialState
@@ -104,10 +105,8 @@ const useBasicLoginHooks = onAuthorizationComplete => {
         );
         dispatch({ type: 'progress', inProgress: false });
       } catch (error) {
-        dispatch({
-          type: 'error',
-          message: 'Sorry, please try again later...',
-        });
+        dispatch({ type: 'progress', inProgress: false });
+        popOver('Sorry, please try again later...');
       }
 
       if (response.ok) {
@@ -119,11 +118,12 @@ const useBasicLoginHooks = onAuthorizationComplete => {
         // TODO: need an error mapper or bury this in ../api to do some of the following...
         // Two-factor authentication failed.
         // Incorrect username or password.
-        message && dispatch({ type: 'error', message: message.toLowerCase() });
+        message && popOver(message);
       }
     })();
   }, [
     onAuthorizationComplete,
+    popOver,
     state.code,
     state.password,
     state.requiresCode,
@@ -178,23 +178,25 @@ const Authorization = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView
-        contentContainerStyle={styles.basicLoginContainer}
-        keyboardShouldPersistTaps="handled"
-      >
-        <KeyboardAvoidingView
-          {...Platform.select({
-            android: {
-              enabled: false,
-            },
-            ios: {
-              behavior: 'padding',
-            },
-          })}
+      <ToasterOven style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={styles.basicLoginContainer}
+          keyboardShouldPersistTaps="handled"
         >
-          <BasicLogin onAuthorizationComplete={onAuthorizationComplete} />
-        </KeyboardAvoidingView>
-      </ScrollView>
+          <KeyboardAvoidingView
+            {...Platform.select({
+              android: {
+                enabled: false,
+              },
+              ios: {
+                behavior: 'padding',
+              },
+            })}
+          >
+            <BasicLogin onAuthorizationComplete={onAuthorizationComplete} />
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </ToasterOven>
     </SafeAreaView>
   );
 };
