@@ -42,8 +42,7 @@
     "prettier": "^1.17.0",
     "react-test-renderer": "16.8.6",
     "relay-compiler": "^4.0.0",
-    "relay-devtools": "^1.4.0",
-    "ws": ">=3.3.1"
+    "relay-devtools": "^1.4.0"
   },
   "husky": {
     "hooks": {
