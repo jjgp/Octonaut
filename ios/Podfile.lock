@@ -113,10 +113,10 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
-  - RNDeviceInfo (from `/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-device-info`)
-  - RNGestureHandler (from `/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-gesture-handler`)
-  - RNKeychain (from `/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-keychain`)
-  - RNScreens (from `/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-screens`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -167,13 +167,13 @@ EXTERNAL SOURCES:
   React-RCTWebSocket:
     :path: "../node_modules/react-native/Libraries/WebSocket"
   RNDeviceInfo:
-    :path: "/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-device-info"
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
-    :path: "/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-gesture-handler"
+    :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
-    :path: "/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-keychain"
+    :path: "../node_modules/react-native-keychain"
   RNScreens:
-    :path: "/Users/jasonprasad/workspace/LostKitty/node_modules/react-native-screens"
+    :path: "../node_modules/react-native-screens"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
