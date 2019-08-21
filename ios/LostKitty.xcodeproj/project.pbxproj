@@ -151,6 +151,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B7AC71DC2308E4B5005541EB /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				D2E33F9B2284CF210092B9B5 /* RepositoryList.swift */,
+				D24312EC2285F74600017C66 /* RepositoryListCell.swift */,
+				D24312ED2285F74600017C66 /* RepositoryListCell.xib */,
+				D2424FFA22836C75007FAC4D /* RepositoryListManager.m */,
+				D2E33F6D2284CC820092B9B5 /* RepositoryListManager.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		D2213DE62285258B00BE187F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,11 +176,7 @@
 		D2424FF822836C62007FAC4D /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				D2E33F9B2284CF210092B9B5 /* RepositoryList.swift */,
-				D24312EC2285F74600017C66 /* RepositoryListCell.swift */,
-				D24312ED2285F74600017C66 /* RepositoryListCell.xib */,
-				D2424FFA22836C75007FAC4D /* RepositoryListManager.m */,
-				D2E33F6D2284CC820092B9B5 /* RepositoryListManager.swift */,
+				B7AC71DC2308E4B5005541EB /* Repository */,
 			);
 			name = Search;
 			path = LostKitty/Search;
